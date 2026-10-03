@@ -57,7 +57,7 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 50px; padding: 10px 28px; border-radius: 999px;
   font-family: var(--font-body); font-weight: 600; font-size: 17px;
-  text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+  text-decoration: none; border: 1.5px solid transparent; cursor: pointer; white-space: nowrap;
 }
 .btn svg { width: 19px; height: 19px; flex: none; }
 .btn-primary { background: var(--ink); color: var(--paper); }
@@ -73,7 +73,7 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
 .header-row { display: flex; align-items: center; gap: 14px; padding: 10px 20px; max-width: var(--max); margin: 0 auto; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); margin-inline-end: auto; }
 .brand img { width: 44px; height: 46px; object-fit: cover; border-radius: 10px; }
-.brand-name { font-family: var(--font-display); font-size: 24px; line-height: 1; }
+.brand-name { font-family: var(--font-display); font-size: 24px; line-height: 1; white-space: nowrap; }
 .main-nav { display: none; gap: 4px; }
 .main-nav a { padding: 6px 10px; text-decoration: none; color: var(--ink); font-size: 15px; white-space: nowrap; border-bottom: 1px solid transparent; }
 .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--rose); border-bottom-color: var(--rose); }
@@ -95,6 +95,7 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
 
 /* ===== الافتتاحية ===== */
 .hero { display: grid; gap: 28px; align-items: center; padding-top: 28px; padding-bottom: 36px; }
+.hero .slogan { font-family: var(--font-display); color: var(--rose); font-size: clamp(22px, 3.4vw, 28px); line-height: 1.6; margin-bottom: .35em; }
 .hero h1 { margin-bottom: .35em; }
 .hero-photo img { aspect-ratio: 4 / 3; }
 @media (min-width: 900px) {
@@ -219,9 +220,7 @@ table.prices a { color: var(--ink); text-decoration: none; }
 
 /* ===== الختام والفوتر ===== */
 .closing { text-align: center; padding: 56px 0 52px; border-top: 1px solid var(--line); }
-.closing .slogan { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.5; margin-bottom: .5em; }
-.closing .slogan::before, .closing .slogan::after { content: ""; display: block; width: 56px; height: 1px; background: var(--rose); margin: 0 auto 18px; }
-.closing .slogan::after { margin: 18px auto 0; }
+.closing-title { font-family: var(--font-display); font-size: clamp(26px, 4.4vw, 34px); line-height: 1.5; margin-bottom: .3em; }
 .closing p { color: var(--muted); }
 .closing .btn { margin-top: 6px; }
 .site-footer { border-top: 1px solid var(--line); font-size: 15px; }

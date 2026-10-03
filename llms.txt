@@ -10,7 +10,7 @@ Salma Gifts is an online gift shop in Jordan making personalized engagement and 
 - بكج البرواز (صينية + برواز بصمات): 20
 - البكج الأساسي (صينية + كتاب توقيع وبصمات + رسالة العمر + حبر): 22
 - البكج الشامل (الأساسي + فناجين + قصاصات): 30
-- كتاب / دفتر توقيع لحاله: 9
+- كتاب / دفتر توقيع منفرد: 9
 - صندوق المهر (حسب التوفر): 18
 - صينية التخرج بالاسم والتخصص: 13
 - التوصيل لأي محافظة: 2
@@ -22,7 +22,7 @@ Salma Gifts is an online gift shop in Jordan making personalized engagement and 
 
 ## الصفحات
 - [الرئيسية](https://salmagifts.com/)
-- [مسكات العرايس](https://salmagifts.com/masakat-arayes/)
+- [مسكات العرائس](https://salmagifts.com/masakat-arayes/)
 - [صواني الخطوبة](https://salmagifts.com/sawani-khotoba/)
 - [بكجات كتب الكتاب](https://salmagifts.com/bakjat-katb-ktab/)
 - [صندوق المهر](https://salmagifts.com/sandouq-mahr/)
