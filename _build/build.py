@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "2"  # غيّره لما تعدّل style.css عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "3"  # غيّره لما تعدّل style.css عشان المتصفحات تجيب النسخة الجديدة
 
 # =====================================================================
 # الأسعار — المصدر الوحيد. غيّر الرقم هون بس.
@@ -171,8 +171,8 @@ def img(src, alt, cls="", lazy=True, w=720, h=900):
 def cta(label="راسلونا للحجز", cls="btn btn-primary", event="cta"):
     return f'<a class="{cls}" href="{IG_DM}" target="_blank" rel="noopener" data-event="{event}">{IG_ICON}<span>{label}</span></a>'
 
-def arch(src, alt, lazy=True, cls=""):
-    return f'<figure class="arch {cls}">{img(src, alt, lazy=lazy, w=640, h=768)}</figure>'
+def photo(src, alt, lazy=True, cls=""):
+    return f'<figure class="photo {cls}">{img(src, alt, lazy=lazy)}</figure>'
 
 def layout(key, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
     path = PAGES[key]["path"] if key in PAGES else "/404.html"
@@ -244,8 +244,7 @@ def layout(key, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <section class="closing">
   <div class="container narrow">
     <p class="slogan">لتبقى ذكرياتكم الجميلة، خالدة.</p>
-    <p>مناسبتكم قريبة؟ ابعتولنا الأسماء والتاريخ، ومنجهزلكم طلبكم خلال يومين.</p>
-    {cta("راسلونا على إنستغرام", "btn btn-primary", "cta_closing")}
+        {cta("راسلونا على إنستغرام", "btn btn-primary", "cta_closing")}
   </div>
 </section>
 
@@ -288,10 +287,10 @@ def related(exclude):
 
 def promise_list():
     return f"""<ul class="promise">
-  <li><b>معاينة قبل الدفع</b><span>بتشوفوا الطلب عند الاستلام، وإذا ما عجبكم بترجعوه وبتدفعوا التوصيل بس.</span></li>
-  <li><b>الدفع عند الاستلام</b><span>كاش أو كليك مع المندوب، بدون أي دفع مسبق.</span></li>
-  <li><b>جاهز خلال يومين</b><span>الأفضل تحجزوا قبل المناسبة بثلاثة أيام على الأقل.</span></li>
-  <li><b>توصيل لكل الأردن</b><span>أجرة التوصيل {DELIVERY} دينار لأي محافظة.</span></li>
+  <li><b>معاينة قبل الدفع</b><span>وإذا ما عجبكم بترجعوه وبتدفعوا التوصيل بس.</span></li>
+  <li><b>الدفع عند الاستلام</b><span>كاش أو كليك.</span></li>
+  <li><b>جاهز خلال يومين</b><span>احجزوا قبل المناسبة بثلاثة أيام.</span></li>
+  <li><b>توصيل {DELIVERY} دينار</b><span>لأي محافظة بالأردن.</span></li>
 </ul>"""
 
 def gallery(items, cols=3):
@@ -310,7 +309,7 @@ def product_hero(key, h1, lead, k, image, alt, note=None, extra=""):
     {extra}
     <div class="actions">{cta("راسلونا للحجز", "btn btn-primary", "cta_product")}</div>
   </div>
-  {arch(image, alt, lazy=False)}
+  {photo(image, alt, lazy=False)}
 </section>"""
     return html_, sch
 
@@ -328,92 +327,80 @@ def includes(items):
 # الرئيسية
 # =====================================================================
 def build_home():
-    rows = [
-        ("masakat", "مسكة العروس", "ورد صناعي ناعم بموديلات وألوان متعددة، بتنعمل لكل عروس لحالها.", "masaka", "masaka-arous-1.webp", "مسكة عروس بيضاء من هدايا سلمى"),
-        ("sawani", "صينية الخطوبة والدبل", "مراية بأسمائكم وتاريخ يومكم، مع علب الخواتم واللولو والدانتيل.", "saniya", "saniyet-khotoba-1.webp", "صينية خطوبة بالأسماء من هدايا سلمى"),
-        ("bakjat", "بكجات كتب الكتاب", "الصينية مع كتاب التوقيع والبصمات أو البرواز، كل شي بطلب واحد.", "bakj_berwaz", "bakj-katb-ktab-2.webp", "بكج كتب كتاب من هدايا سلمى"),
-        ("mahr", "صندوق المهر", "صندوق فاخر بكامل زينته، لتقديم المهر للعروس بطريقة بتنحفظ بالصور.", "mahr", "sandouq-mahr-1.webp", "صندوق مهر من هدايا سلمى"),
-        ("grad", "هدية التخرج", "صينية باسم الخريج أو الخريجة والتخصص.", "takharroj", "hadiyet-takharroj-1.webp", "صينية تخرج بالاسم من هدايا سلمى"),
+    cards = [
+        ("masakat", "مسكة العروس", "masaka", "masaka-arous-1.webp", "مسكة عروس بيضاء من هدايا سلمى"),
+        ("sawani", "صينية الخطوبة والدبل", "saniya", "saniyet-khotoba-1.webp", "صينية خطوبة بالأسماء من هدايا سلمى"),
+        ("bakjat", "البكج الأساسي لكتب الكتاب", "bakj_asasi", "bakj-katb-ktab-2.webp", "البكج الأساسي لكتب الكتاب من هدايا سلمى"),
+        ("bakjat", "بكج البرواز", "bakj_berwaz", "bakj-berwaz-1.webp", "بكج البرواز من هدايا سلمى"),
+        ("mahr", "صندوق المهر", "mahr", "sandouq-mahr-1.webp", "صندوق مهر من هدايا سلمى"),
+        ("grad", "هدية التخرج", "takharroj", "hadiyet-takharroj-1.webp", "صينية تخرج بالاسم من هدايا سلمى"),
     ]
-    def from_(k): return "تبدأ من " if k == "bakj_berwaz" else ""
-    items = "".join(f"""<li><a class="row" href="{PAGES[pg]['path']}">
-  {img(im, alt, cls="row-img", w=720, h=900)}
-  <span class="row-text"><b>{E(n)}</b><span>{E(d)}</span></span>
-  <span class="row-price">{from_(k)}{P[k]} دينار</span>
-</a></li>""" for pg, n, d, k, im, alt in rows)
-    steps = [("اختاروا الموديل", "من صور الموقع أو صفحتنا على إنستغرام، أو ابعتولنا صورة موديل عاجبكم."),
-             ("ابعتولنا التفاصيل", "أسماء العروسين والتاريخ، اسم المستلم ورقم هاتفه، والمحافظة والمنطقة."),
-             ("استلموا وعاينوا", "منجهز الطلب خلال يومين ومنوصله لعندكم، وبتدفعوا بعد ما تشوفوه.")]
+    grid = "".join(f"""<a class="card" href="{PAGES[pg]['path']}">
+  {img(im, alt)}
+  <span class="card-name">{E(n)}</span>
+  <span class="card-price">{P[k]} دينار</span>
+</a>""" for pg, n, k, im, alt in cards)
+    steps = [("اختاروا الموديل", "من الموقع أو إنستغرام، أو ابعتوا صورة."),
+             ("ابعتوا الأسماء والتاريخ", "مع العنوان ورقم الهاتف."),
+             ("استلموا وعاينوا", "خلال يومين، وادفعوا عند الاستلام.")]
     st = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in steps)
     body = f"""
 <!-- ===== الافتتاحية ===== -->
 <section class="hero container">
   <div class="hero-text">
-    <p class="kicker">هدايا الخطوبة وكتب الكتاب بالأردن</p>
-    <h1>مسكات عرايس وصواني خطوبة، بتتجهز لكم قطعة قطعة</h1>
-    <p class="lead">كل مسكة وكل صينية عنا بتنعمل لحالها، بأسمائكم وتاريخ يومكم. هدفنا تكون عندكم أحلى جودة بأنسب سعر، وتوصلكم لباب البيت بأي محافظة.</p>
+    <h1>مسكات عرايس وصواني خطوبة بأسمائكم</h1>
+    <p class="lead">كل قطعة بتتجهز لحالها، بأحلى جودة وبأسعار معقولة، وبتوصلكم لأي محافظة بالأردن.</p>
     <div class="actions">
       {cta("راسلونا للحجز", "btn btn-primary", "cta_hero")}
-      <a class="btn btn-quiet" href="#collection">شوفوا شو منجهز</a>
+      <a class="btn btn-quiet" href="#collection">شوفوا المنتجات</a>
     </div>
-    <p class="hero-note">معاينة قبل الدفع، والدفع عند الاستلام.</p>
   </div>
-  {arch("hero-masaka-arous.webp", "مسكة عروس تيوليب بيضاء مع لولو، من تجهيز هدايا سلمى", lazy=False, cls="hero-arch")}
+  {photo("hero-masaka-arous.webp", "مسكة عروس تيوليب بيضاء مع لولو، من تجهيز هدايا سلمى", lazy=False, cls="hero-photo")}
 </section>
 
-<!-- ===== قصتنا ===== -->
-<section class="section story"><div class="container narrow">
-  <h2>مش مجرد طلب، هاي ذكرى بتضل معكم</h2>
-  <p>منعرف إنه يوم الخطوبة وكتب الكتاب بيصير مرة بالعمر، وإنه التفاصيل الصغيرة هي اللي بتنحفظ بالصور: المسكة بإيد العروس، والصينية اللي عليها الأسماء، والكتاب اللي بيوقّع عليه الأهل.</p>
-  <p>عشان هيك ما منشتغل بالجملة. كل قطعة بتتجهز بالورشة لحالها، بالأسماء والتاريخ والعبارة اللي بتختاروها، ومنراجعها قبل ما تطلع. وبنفس الوقت منحافظ على أسعار معقولة، لأنه الفرحة ما لازم تكلّف فوق الطاقة.</p>
-  <p>لحد اليوم جهزنا أكثر من 600 طلب لعرسان وخريجين من كل محافظات الأردن، وكل طلب كان إله قصته.</p>
-</div></section>
+<!-- ===== شريط الثقة ===== -->
+<section class="trust"><ul class="container">
+  <li><b>+600</b><span>طلب جهزناه</span></li>
+  <li><b>معاينة</b><span>قبل الدفع</span></li>
+  <li><b>الدفع</b><span>عند الاستلام</span></li>
+  <li><b>توصيل</b><span>لكل المحافظات</span></li>
+</ul></section>
 
-<!-- ===== منتجاتنا ===== -->
+<!-- ===== المنتجات ===== -->
 <section class="section" id="collection"><div class="container">
-  <h2>شو منجهزلكم</h2>
-  <ul class="rows">{items}</ul>
-  <p class="aside-link"><a href="{PAGES['tawseel']['path']}">كل الأسعار والإضافات</a></p>
+  <div class="section-head"><h2>منتجاتنا</h2><a href="{PAGES['tawseel']['path']}">كل الأسعار</a></div>
+  <div class="cards">{grid}</div>
 </div></section>
 
-<!-- ===== وعدنا ===== -->
-<section class="section tint"><div class="container">
-  <h2>بتطمنوا معنا</h2>
-  {promise_list()}
+<!-- ===== قصتنا ===== -->
+<section class="section tint"><div class="container story">
+  <h2>كل قطعة بتتجهز لحالها</h2>
+  <p>ما منشتغل بالجملة. كل مسكة وكل صينية بتتجهز بالورشة بأسمائكم وتاريخ يومكم، ومنراجعها قبل ما تطلع. هدفنا أحلى جودة بأنسب سعر، لأنه الفرحة ما لازم تكلّف فوق الطاقة.</p>
 </div></section>
 
 <!-- ===== كيف تطلبوا ===== -->
-<section class="section"><div class="container narrow">
+<section class="section"><div class="container">
   <h2>كيف تطلبوا</h2>
   <ol class="steps">{st}</ol>
-</div></section>
-
-<!-- ===== من شغلنا ===== -->
-<section class="section"><div class="container">
-  <h2>من شغلنا</h2>
-  {gallery([("masaka-arous-calla.webp", "مسكة عروس كالا بيضاء", "مسكة كالا"),
-            ("saniyet-khotoba-2.webp", "صينية دبل بالأسماء والتاريخ", "صينية دبل بالأسماء"),
-            ("bakj-katb-ktab-1.webp", "كتاب عقد زواج وتوقيع بالأسماء", "كتاب التوقيع والبصمات")])}
-  <p class="aside-link"><a href="{IG}" target="_blank" rel="noopener">موديلات أكثر على إنستغرام</a></p>
+  <div class="actions">{cta("ابعتوا رسالة على إنستغرام", "btn btn-primary", "cta_steps")}</div>
 </div></section>
 
 <!-- ===== أسئلة ===== -->
 <section class="section"><div class="container narrow">
-  <h2>أسئلة بتتكرر</h2>
-  {faq_html(FAQ[:5])}
-  <p class="aside-link"><a href="{PAGES['faq']['path']}">كل الأسئلة</a></p>
+  <div class="section-head"><h2>أسئلة بتتكرر</h2><a href="{PAGES['faq']['path']}">كل الأسئلة</a></div>
+  {faq_html(FAQ[:4])}
 </div></section>
 """
     title = "هدايا سلمى | مسكات عرايس وصواني خطوبة وبكجات كتب كتاب في الأردن"
     desc = f"مسكة عروس {P['masaka']} دينار، صينية خطوبة {P['saniya']} دينار، وبكجات كتب كتاب بأسمائكم، بتتجهز قطعة قطعة. معاينة ودفع عند الاستلام وتوصيل لكل الأردن."
-    write("/", layout("home", title, desc, body, [faq_schema(FAQ[:5])]))
+    write("/", layout("home", title, desc, body, [faq_schema(FAQ[:4])]))
 
 # =====================================================================
 # مسكات العرايس
 # =====================================================================
 def build_masakat():
     head, bsch = product_hero("masakat", "مسكات عرايس في الأردن",
-        "مسكة العروس عنا ورد صناعي عالي الجودة، من 20 لـ25 وردة، بتتجهز لكل عروس لحالها. موديلاتها بتنفع لكتب الكتاب والخطوبة والعرس، وما بتذبل، فبتضل ذكرى من يومكم.",
+        "ورد صناعي عالي الجودة، من 20 لـ25 وردة، بموديلات بتنفع لكتب الكتاب والخطوبة والعرس، وما بتذبل.",
         "masaka", "masaka-arous-calla.webp", "مسكة عروس كالا بيضاء من هدايا سلمى")
     models = [("masaka-arous-1.webp", "مسكة ورد أبيض مع جبسوفيل", "ورد أبيض وجبسوفيل"),
               ("masaka-arous-trend.webp", "مسكة تيوليب مع لولو", "تيوليب مع لولو"),
@@ -423,14 +410,14 @@ def build_masakat():
               ("masaka-arous-2.webp", "مسكات كالا بقاعدة لولو", "كالا بقاعدة لولو")]
     faqs = [FAQ[0], FAQ[1], FAQ[2], FAQ[7], FAQ[9]]
     body = head + section("موديلات المسكات", gallery([(i, a + "، من هدايا سلمى", c) for i, a, c in models]),
-        intro="هاي بعض الموديلات اللي بنجهزها، وكلها بنفس السعر. عاجبكم موديل مش هون؟ ابعتولنا صورته ومنأكدلكم إذا بنقدر نعمله.") + f"""
+        intro="كلها بنفس السعر. عاجبكم موديل مش هون؟ ابعتولنا صورته.") + f"""
 <section class="section tint"><div class="container split">
   <div>
     <h2>تعليقة بأسمائكم</h2>
     <p>إذا حابين، منضيف على المسكة تعليقة أكريليك عليها اسم العريس والعروس وتاريخ المناسبة.</p>
     <p class="p-price"><b>+{P['taliqa']} دينار</b><span>مسكة مع تعليقة وتوصيل: {P['masaka'] + P['taliqa'] + DELIVERY} دينار</span></p>
   </div>
-  {arch("masaka-arous-4.webp", "مسكة عروس تيوليب مع تعليقة أكريليك، من هدايا سلمى", cls="small")}
+  {photo("masaka-arous-4.webp", "مسكة عروس تيوليب مع تعليقة أكريليك، من هدايا سلمى", cls="small")}
 </div></section>
 {section("قبل ما تحجزوا", promise_list())}
 <section class="section"><div class="container narrow">
@@ -451,7 +438,7 @@ def build_masakat():
 # =====================================================================
 def build_sawani():
     head, bsch = product_hero("sawani", "صواني خطوبة ودبل بالأسماء",
-        "مراية مزيّنة بأسماء العروسين وتاريخ المناسبة، مع آية أو عبارة من اختياركم. بتيجي معها علبتين للخواتم وعليهم أحرفكم، وشبر لولو ودانتيل بين الخواتم، وطبقة حماية من الكسر.",
+        "مراية بأسمائكم وتاريخ المناسبة، مع علبتين للخواتم بأحرفكم ولولو ودانتيل.",
         "saniya", "saniyet-khotoba-1.webp", "صينية خطوبة مراية بالأسماء مع علب الدبل، من هدايا سلمى")
     faqs = [FAQ[3], FAQ[5], FAQ[6], FAQ[7], FAQ[9]]
     adds = f"""<table class="prices"><tbody>
@@ -508,10 +495,10 @@ def build_bakjat():
 <section class="p-hero container">
   <div class="p-hero-text">
     <h1>بكجات كتب الكتاب: شو بتشمل وكم سعرها</h1>
-    <p class="lead">كل اللي بتحتاجوه لكتب الكتاب بطلب واحد، وبأسمائكم وتاريخ يومكم. عنا ثلاث بكجات بأسعار من {P['bakj_berwaz']} لـ{P['bakj_shamel']} دينار، والتوصيل {DELIVERY} دينار لأي محافظة.</p>
+    <p class="lead">كل اللي بتحتاجوه لكتب الكتاب بطلب واحد، بأسمائكم وتاريخ يومكم. من {P['bakj_berwaz']} لـ{P['bakj_shamel']} دينار.</p>
     <div class="actions">{cta("راسلونا للحجز", "btn btn-primary", "cta_product")}</div>
   </div>
-  {arch("bakj-katb-ktab-2.webp", "البكج الأساسي لكتب الكتاب: صينية دبل وكتاب توقيع وبصمات، من هدايا سلمى", lazy=False)}
+  {photo("bakj-katb-ktab-2.webp", "البكج الأساسي لكتب الكتاب: صينية دبل وكتاب توقيع وبصمات، من هدايا سلمى", lazy=False)}
 </section>
 <section class="section"><div class="container">
   <h2>اختاروا البكج</h2>
@@ -540,7 +527,7 @@ def build_bakjat():
 # =====================================================================
 def build_mahr():
     head, bsch = product_hero("mahr", "صندوق المهر: أحلى طريقة لتقديم المهر للعروس",
-        "بدل ما يتقدّم المهر بظرف، صندوق مرتب ومزيّن بكامل زينته وإكسسواراته، بيخلّي اللحظة أحلى بالصور وبيضل ذكرى عند العروس. منقدر نضيف عليه أسماء العروسين أو عبارة.",
+        "صندوق فاخر بكامل زينته لتقديم المهر للعروس، وفينا نضيف عليه الأسماء أو عبارة.",
         "mahr", "sandouq-mahr-1.webp", "صندوق مهر خشبي فاخر لتقديم المهر للعروس، من هدايا سلمى",
         extra='<p class="tag">الكمية محدودة، راسلونا نتأكد من التوفر</p>')
     faqs = [("قديش سعر صندوق المهر؟", f"{P['mahr']} دينار، و{withdel('mahr')} مع التوصيل لكل محافظات الأردن. الكمية محدودة، فراسلونا نتأكد من التوفر."),
@@ -564,7 +551,7 @@ def build_mahr():
 # =====================================================================
 def build_grad():
     head, bsch = product_hero("grad", "هدايا تخرج بالاسم: صينية التخرج",
-        f"صينية باسم الخريج أو الخريجة والتخصص، مع ورد وزينة، هدية بتفرح بالحفلة وبتطلع حلوة بالصور. فيكم تضيفوا ستاند أسود بسعر {P['stand']} دينار.",
+        "صينية باسم الخريج أو الخريجة والتخصص، مع ورد وزينة.",
         "takharroj", "hadiyet-takharroj-1.webp", "صينية تخرج باسم الخريجة والتخصص، من هدايا سلمى")
     faqs = [FAQ[12], FAQ[6], FAQ[7], FAQ[8], FAQ[9]]
     body = head + f"""

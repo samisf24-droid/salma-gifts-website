@@ -34,7 +34,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--paper); color: var(--ink);
-  font-family: var(--font-body); font-size: 18px; line-height: 1.95;
+  font-family: var(--font-body); font-size: 17px; line-height: 1.85;
   overflow-x: hidden; padding-bottom: 76px;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -88,50 +88,59 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
 }
 @media (max-width: 420px) { .header-cta { display: none; } }
 
-/* ===== إطار القوس (العنصر المميز) ===== */
-.arch { margin: 0; position: relative; }
-.arch img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; border-radius: 999px 999px 18px 18px; }
-.arch::after { content: ""; position: absolute; inset: -10px; border: 1px solid var(--rose); border-radius: 999px 999px 26px 26px; opacity: .5; pointer-events: none; }
-.arch.small { max-width: 300px; }
+/* ===== الصور: مستطيلة بزوايا ناعمة ===== */
+.photo { margin: 0; }
+.photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
+.photo.small { max-width: 320px; }
 
 /* ===== الافتتاحية ===== */
-.hero { display: grid; gap: 40px; align-items: center; padding-top: 44px; padding-bottom: 56px; }
-.hero .kicker { color: var(--rose); font-size: 16px; margin-bottom: .4em; }
-.hero h1 { margin-bottom: .45em; }
-.hero-arch { width: min(340px, 82%); justify-self: center; }
-.hero-note { font-size: 15px; color: var(--muted); margin-top: 14px; }
+.hero { display: grid; gap: 28px; align-items: center; padding-top: 28px; padding-bottom: 36px; }
+.hero h1 { margin-bottom: .35em; }
+.hero-photo img { aspect-ratio: 4 / 3; }
 @media (min-width: 900px) {
-  .hero { grid-template-columns: 1.25fr 1fr; gap: 72px; padding-top: 72px; padding-bottom: 88px; }
-  .hero-arch { width: min(380px, 100%); }
+  .hero { grid-template-columns: 1fr 1fr; gap: 64px; padding-top: 56px; padding-bottom: 64px; }
+  .hero-photo img { aspect-ratio: 1 / 1; }
 }
 
+/* شريط الثقة */
+.trust { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+.trust ul { list-style: none; margin: 0 auto; padding-top: 18px; padding-bottom: 18px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 20px; text-align: center; }
+.trust li { display: flex; flex-direction: column; line-height: 1.5; }
+.trust b { font-size: 19px; font-weight: 600; }
+.trust span { font-size: 14px; color: var(--muted); }
+@media (min-width: 760px) { .trust ul { grid-template-columns: repeat(4, 1fr); } }
+
+/* شبكة المنتجات */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.section-head h2 { margin: 0; }
+.section-head a { font-size: 16px; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 16px; }
+.card { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); }
+.card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; margin-bottom: 10px; transition: opacity .2s; }
+.card:hover img { opacity: .9; }
+.card-name { font-size: 17px; font-weight: 600; line-height: 1.5; }
+.card-price { font-size: 16px; color: var(--rose); }
+@media (min-width: 760px) { .cards { grid-template-columns: repeat(3, 1fr); gap: 36px 28px; } .card-name { font-size: 19px; } }
+
+/* قصتنا: قصيرة بالنص */
+.story { text-align: center; }
+.story p { max-width: 34em; margin-inline: auto; font-size: 18px; color: var(--muted); }
+
+/* الخطوات: تسلسل حقيقي */
+.steps { list-style: none; margin: 0 0 24px; padding: 0; counter-reset: s; display: grid; gap: 18px; }
+.steps li { counter-increment: s; display: flex; flex-direction: column; padding-top: 14px; border-top: 1px solid var(--line); }
+.steps li::before { content: counter(s); color: var(--rose); font-size: 15px; margin-bottom: 2px; }
+.steps b { font-size: 18px; font-weight: 600; }
+.steps span { color: var(--muted); font-size: 16px; }
+@media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+
 /* ===== الأقسام ===== */
-.section { padding: 56px 0; }
+.section { padding: 48px 0; }
 .section + .section { border-top: 1px solid var(--line); }
 .section.tint { background: var(--blush); border-top: 0; }
 .section.tint + .section { border-top: 0; }
 .section-intro { color: var(--muted); max-width: 40em; }
 .aside-link { margin: 22px 0 0; font-size: 16px; }
-
-/* قصتنا */
-.story p { font-size: 19px; }
-.story h2 { text-wrap: balance; }
-
-/* قائمة المنتجات (زي قائمة بدعوة عرس، مش كروت) */
-.rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.rows li { border-bottom: 1px solid var(--line); }
-.row { display: grid; grid-template-columns: 76px 1fr auto; gap: 18px; align-items: center; padding: 18px 0; text-decoration: none; color: var(--ink); }
-.row:hover .row-text b { color: var(--rose); }
-.row-img { width: 76px; height: 92px; object-fit: cover; border-radius: 999px 999px 10px 10px; }
-.row-text { display: flex; flex-direction: column; }
-.row-text b { font-size: 20px; font-weight: 600; }
-.row-text span { font-size: 16px; color: var(--muted); line-height: 1.7; }
-.row-price { font-size: 17px; color: var(--rose); white-space: nowrap; font-weight: 600; }
-@media (max-width: 560px) {
-  .row { grid-template-columns: 64px 1fr; gap: 14px; }
-  .row-img { width: 64px; height: 78px; }
-  .row-price { grid-column: 2; margin-top: -6px; }
-}
 
 /* الوعد */
 .promise { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px 40px; }
@@ -139,14 +148,6 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
 .promise b { font-size: 19px; font-weight: 600; }
 .promise span { color: var(--muted); font-size: 16px; line-height: 1.8; }
 @media (min-width: 760px) { .promise { grid-template-columns: 1fr 1fr; } }
-
-/* الخطوات: تسلسل حقيقي، فمرقّمة */
-.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
-.steps li { counter-increment: s; position: relative; padding: 0 58px 26px 0; display: flex; flex-direction: column; }
-.steps li::before { content: counter(s); position: absolute; right: 0; top: 2px; width: 40px; height: 40px; border: 1px solid var(--rose); border-radius: 999px; color: var(--rose); display: flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; }
-.steps li:not(:last-child)::after { content: ""; position: absolute; right: 19.5px; top: 46px; bottom: 6px; width: 1px; background: var(--line); }
-.steps b { font-size: 19px; font-weight: 600; }
-.steps span { color: var(--muted); font-size: 16px; }
 
 /* المعرض: صور قليلة بنفس المقاس، بدون مربعات فاضية */
 .gallery { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
@@ -168,14 +169,13 @@ h3 { font-family: var(--font-body); font-size: 21px; line-height: 1.5; }
 .breadcrumb li + li::before { content: "/"; margin-inline-end: 8px; color: var(--line); }
 .breadcrumb a { text-decoration: none; }
 .p-hero { display: grid; gap: 36px; align-items: center; padding-top: 18px; padding-bottom: 52px; }
-.p-hero .arch { width: min(320px, 80%); justify-self: center; }
+.p-hero .photo { width: 100%; }
 .p-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 6px 0 14px; }
 .p-price b { font-size: 28px; font-weight: 700; color: var(--rose); }
 .p-price span { font-size: 15px; color: var(--muted); }
 .tag { display: inline-block; font-family: var(--font-small); font-size: 14px; color: var(--rose); border: 1px solid var(--rose); border-radius: 999px; padding: 2px 14px; margin-bottom: 10px; }
 @media (min-width: 900px) {
-  .p-hero { grid-template-columns: 1.3fr 1fr; gap: 72px; padding-top: 28px; padding-bottom: 72px; }
-  .p-hero .arch { width: min(340px, 100%); }
+  .p-hero { grid-template-columns: 1fr 1fr; gap: 72px; padding-top: 28px; padding-bottom: 72px; }
 }
 .split { display: grid; gap: 36px; align-items: center; }
 @media (min-width: 820px) { .split { grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: start; } }
@@ -218,7 +218,7 @@ table.prices a { color: var(--ink); text-decoration: none; }
 .chips a:hover { border-color: var(--rose); color: var(--rose); }
 
 /* ===== الختام والفوتر ===== */
-.closing { text-align: center; padding: 72px 0 64px; border-top: 1px solid var(--line); }
+.closing { text-align: center; padding: 56px 0 52px; border-top: 1px solid var(--line); }
 .closing .slogan { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.5; margin-bottom: .5em; }
 .closing .slogan::before, .closing .slogan::after { content: ""; display: block; width: 56px; height: 1px; background: var(--rose); margin: 0 auto 18px; }
 .closing .slogan::after { margin: 18px auto 0; }
@@ -238,5 +238,5 @@ table.prices a { color: var(--ink); text-decoration: none; }
 @media (min-width: 1080px) { .sticky-cta { display: none; } body { padding-bottom: 0; } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .btn, .chips a, .main-nav a, .row-text b { transition: background .2s, color .2s, border-color .2s; }
+  .btn, .chips a, .main-nav a { transition: background .2s, color .2s, border-color .2s; }
 }
