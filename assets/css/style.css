@@ -1,0 +1,203 @@
+/* =====================================================================
+   هدايا سلمى — ملف التصميم الوحيد للموقع
+   الألوان والخطوط كلها متغيرات هون. غيّر القيمة مرة وحدة بتتغير بكل الصفحات.
+   ===================================================================== */
+/* ===== الخطوط (مستضافة على الموقع نفسه — أسرع وما بتعتمد على جوجل) ===== */
+@font-face { font-family: 'Aref Ruqaa'; font-style: normal; font-weight: 700; font-display: swap; src: url('/assets/fonts/aref-ruqaa-700-arabic.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: 'Aref Ruqaa'; font-style: normal; font-weight: 700; font-display: swap; src: url('/assets/fonts/aref-ruqaa-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'El Messiri'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/el-messiri-arabic.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: 'El Messiri'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/el-messiri-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Tajawal'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/assets/fonts/tajawal-500-arabic.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: 'Tajawal'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/assets/fonts/tajawal-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  --bg: #FBF7F0;          /* الخلفية الكريمية */
+  --surface: #F4ECDF;     /* خلفية الأقسام الثانوية */
+  --card: rgba(255, 252, 246, .94);
+  --text: #3B2A1C;        /* النص البني الغامق */
+  --muted: #6B5A4C;       /* النص الثانوي */
+  --gold: #C9A266;        /* الذهبي */
+  --gold-dark: #A8813F;   /* الذهبي الغامق للروابط */
+  --blush: #F3E3DC;       /* الوردي الفاتح من اللوجو */
+  --line: rgba(59, 42, 28, .16);
+  --grad-gold: linear-gradient(135deg, #E9D3A2, #C9A266);
+  --shadow-card: 0 16px 40px rgba(60, 40, 20, .16);
+  --shadow-soft: 0 6px 16px rgba(60, 40, 20, .12);
+  --radius: 24px;
+  --font-heading: "Aref Ruqaa", "El Messiri", serif;
+  --font-body: "El Messiri", "Tajawal", system-ui, sans-serif;
+  --font-small: "Tajawal", system-ui, sans-serif;
+  --max: 1160px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.8;
+  overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gold-dark); }
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.35; margin: 0 0 .5em; color: var(--text); }
+h1 { font-size: clamp(32px, 7vw, 50px); text-wrap: balance; }
+h2 { font-size: clamp(26px, 5vw, 36px); }
+h3 { font-size: 24px; }
+p { margin: 0 0 1em; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+.small { font-family: var(--font-small); font-size: 14px; color: var(--muted); }
+.skip { position: absolute; right: -9999px; }
+.skip:focus { right: 16px; top: 8px; z-index: 99; background: #fff; padding: 8px 12px; }
+
+/* ===== الأزرار ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 10px 26px; border-radius: 999px;
+  font-family: var(--font-body); font-weight: 700; font-size: 17px;
+  text-decoration: none; color: var(--text); border: 2px solid transparent;
+  transition: filter .15s, background .15s; cursor: pointer;
+}
+.btn-gold { background: var(--grad-gold); box-shadow: var(--shadow-soft); }
+.btn-gold:hover { filter: brightness(1.05); }
+.btn-outline { background: #FFFCF6; border-color: var(--gold); }
+.btn-outline:hover { background: #F8EFDD; }
+.btn-block { width: 100%; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* ===== الهيدر ===== */
+.site-header { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1.5px solid var(--line); }
+.header-row { display: flex; align-items: center; gap: 12px; padding: 8px 16px; max-width: var(--max); margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); margin-inline-end: auto; }
+.brand img { width: 46px; height: 48px; object-fit: cover; border-radius: 8px; }
+.brand-name { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name b { font-family: var(--font-heading); font-size: 22px; }
+.brand-name span { direction: ltr; font-size: 10px; letter-spacing: 4px; color: var(--gold-dark); font-family: var(--font-small); }
+.main-nav { display: none; gap: 2px; }
+.main-nav a { padding: 6px 9px; text-decoration: none; color: var(--text); font-size: 15px; border-bottom: 2px solid transparent; white-space: nowrap; }
+.main-nav a:hover, .main-nav a[aria-current="page"] { border-bottom-color: var(--gold); color: var(--gold-dark); }
+.header-cta { min-height: 42px; padding: 6px 16px; font-size: 15px; }
+.menu-btn { width: 44px; height: 44px; border-radius: 999px; border: 1.5px solid var(--gold); background: none; color: var(--text); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.mobile-nav { display: none; border-top: 1.5px solid var(--line); background: var(--bg); }
+.mobile-nav.open { display: block; }
+.mobile-nav a { display: block; padding: 14px 18px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: 17px; }
+.mobile-nav a[aria-current="page"] { color: var(--gold-dark); font-weight: 700; }
+@media (min-width: 1100px) {
+  .main-nav { display: flex; }
+  .menu-btn, .mobile-nav, .mobile-nav.open { display: none; }
+}
+@media (max-width: 420px) { .header-cta { display: none; } }
+
+/* ===== الهيرو ===== */
+.hero { position: relative; min-height: 620px; display: flex; align-items: center; justify-content: center; padding: 64px 16px; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ""; position: absolute; inset: 14px; border: 1.5px solid rgba(255,255,255,.85); border-radius: 10px; pointer-events: none; }
+.hero-card {
+  position: relative; z-index: 1; width: min(540px, 100%); background: var(--card);
+  border: 1.5px solid var(--gold); border-radius: 30px; box-shadow: var(--shadow-card);
+  padding: 28px 22px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.eyebrow { direction: ltr; font-family: var(--font-small); font-size: 12px; letter-spacing: 8px; color: var(--gold-dark); }
+.hero-card h1 { font-size: clamp(30px, 8vw, 46px); margin: 0; }
+.hero-sub { margin: 0; font-size: 17px; color: var(--muted); }
+.divider { display: flex; align-items: center; gap: 10px; width: 160px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--gold)); }
+.divider::after { background: linear-gradient(to right, transparent, var(--gold)); }
+.divider span { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+.promises { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-weight: 700; font-size: 16px; }
+.promises li { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.promises li::before { content: ""; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); flex: none; }
+.price-pill { background: var(--grad-gold); border-radius: 999px; padding: 8px 26px; box-shadow: var(--shadow-soft); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.price-pill b { font-size: 36px; line-height: 1.1; }
+.price-pill strong { font-size: 22px; }
+.price-pill span { font-family: var(--font-small); font-size: 14px; color: var(--muted); }
+.hero-links { font-family: var(--font-small); font-size: 14px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ===== الأقسام ===== */
+.section { padding: 44px 0; border-bottom: 1.5px solid var(--line); }
+.section:last-of-type { border-bottom: 0; }
+.section-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.section-head h2 { margin: 0; margin-inline-end: auto; }
+.lead { font-size: 18px; max-width: 42em; }
+
+/* شبكة البطاقات بإطار ذهبي */
+.grid { display: grid; gap: 0; background: var(--bg); border: 1.5px solid var(--gold); border-radius: var(--radius); overflow: hidden; }
+.grid-cards { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+.grid-thumbs { grid-template-columns: repeat(auto-fill, minmax(min(170px, 46%), 1fr)); }
+.grid-steps { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); list-style: none; margin: 0; padding: 0; }
+.grid-info { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.grid > * { background: var(--bg); box-shadow: 0 0 0 .75px var(--line); }
+
+.card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+a.card:hover { background: #FFF8EC; }
+.card-img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; background: var(--surface); }
+.card-body { padding: 14px 16px 18px; border-top: 1.5px solid var(--line); display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card-title { font-family: var(--font-heading); font-size: 24px; line-height: 1.3; margin: 0; }
+.price { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.price b { font-size: 21px; color: var(--gold-dark); }
+.price span { font-family: var(--font-small); font-size: 14px; color: var(--muted); }
+.card-body p { margin: 0; font-size: 16px; }
+.card-body .btn { margin-top: auto; }
+.contents { list-style: none; margin: 4px 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.contents li { font-family: var(--font-small); font-size: 14px; background: #FFFCF6; border: 1px solid var(--gold); border-radius: 999px; padding: 2px 12px; }
+.badge { align-self: flex-start; font-family: var(--font-small); font-size: 13px; background: var(--blush); border-radius: 999px; padding: 2px 12px; }
+
+.thumb { margin: 0; display: flex; flex-direction: column; }
+.thumb img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
+.thumb figcaption { padding: 8px 12px; font-family: var(--font-small); font-size: 14px; border-top: 1.5px solid var(--line); }
+
+.step { padding: 22px 18px; display: flex; flex-direction: column; gap: 4px; }
+.step-n { font-family: var(--font-body); font-weight: 700; font-size: 40px; line-height: 1; color: var(--gold-dark); }
+.step b { font-size: 19px; }
+.step span { font-size: 16px; color: var(--muted); }
+
+.info { padding: 22px 18px; }
+.info h2, .info h3 { font-size: 26px; margin-bottom: 8px; }
+.info ul { margin: 0; padding-inline-start: 20px; display: flex; flex-direction: column; gap: 4px; }
+
+table.prices { width: 100%; border-collapse: collapse; font-size: 16px; }
+table.prices th, table.prices td { text-align: right; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.prices th { font-family: var(--font-small); font-size: 14px; color: var(--muted); font-weight: 500; }
+table.prices td:nth-child(2), table.prices td:nth-child(3) { white-space: nowrap; font-weight: 700; }
+
+/* ===== الأسئلة ===== */
+.faq { border-top: 1.5px solid var(--line); }
+.faq details { border-bottom: 1.5px solid var(--line); }
+.faq summary { list-style: none; display: flex; gap: 12px; align-items: center; padding: 16px 0; font-weight: 700; font-size: 18px; cursor: pointer; min-height: 52px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; margin-inline-start: auto; font-size: 24px; color: var(--gold-dark); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { margin: 0 0 16px; max-width: 44em; }
+
+/* ===== المسار ===== */
+.breadcrumb { font-family: var(--font-small); font-size: 14px; color: var(--muted); padding: 18px 0 6px; }
+.breadcrumb ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.breadcrumb li + li::before { content: "/"; margin-inline-end: 6px; color: var(--gold); }
+.breadcrumb a { text-decoration: none; }
+
+.page-head { padding-top: 6px; padding-bottom: 28px; }
+.page-head .lead { margin-bottom: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.chips a { font-family: var(--font-small); font-size: 15px; text-decoration: none; color: var(--text); border: 1.5px solid var(--gold); border-radius: 999px; padding: 6px 16px; background: #FFFCF6; }
+.chips a:hover { background: #F8EFDD; }
+
+/* ===== الشريط الذهبي والفوتر ===== */
+.cta-band { background: var(--grad-gold); margin-top: 8px; }
+.cta-band .container { padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.cta-band h2 { margin: 0; }
+.cta-band .btn { background: #FFFCF6; }
+.site-footer { border-top: 1.5px solid var(--line); }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 22px; padding: 28px 16px; max-width: var(--max); margin: 0 auto; font-size: 15px; }
+.footer-grid b { font-family: var(--font-heading); font-size: 22px; }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.footer-grid a { text-decoration: none; }
+.copy { text-align: center; padding: 12px 16px 20px; font-family: var(--font-small); font-size: 13px; color: var(--muted); }
+
+/* ===== زر الطلب الثابت على الموبايل ===== */
+.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1.5px solid var(--line); }
+body { padding-bottom: 72px; }
+@media (min-width: 1100px) { .sticky-cta { display: none; } body { padding-bottom: 0; } }
+
+@media (min-width: 900px) {
+  .hero { min-height: 680px; }
+  .hero-card { padding: 36px 34px; }
+}
