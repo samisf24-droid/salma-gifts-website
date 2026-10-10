@@ -1,5 +1,8 @@
 exclude:
   - README.md
+  - PRODUCT.md
+  - DESIGN.md
   - _build
+  - .impeccable
 include:
   - 31a0eb74dd56471c9516e310dcf4bb08.txt

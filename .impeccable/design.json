@@ -1,0 +1,30 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-10-10T22:57:07.611668Z",
+ "title": "Design System: هدايا سلمى",
+ "extensions": {
+  "shadows": {
+   "soft": "0 14px 34px -18px rgba(70,48,22,.35)"
+  },
+  "motion": {
+   "ease-out": "cubic-bezier(.22,1,.36,1)",
+   "kashida-step": "80ms",
+   "mirror-sweep": "1.3s"
+  },
+  "breakpoints": {
+   "md": "760px",
+   "lg": "900px",
+   "nav": "1100px"
+  },
+  "narrative": {
+   "northStar": "Your names, on the tray.",
+   "rules": [
+    "No Fog Rule",
+    "Gold Is Line, Not Field"
+   ],
+   "notCanonized": [
+    "CSS-drawn mirror tray: interim until a real empty-tray photo is supplied"
+   ]
+  }
+ }
+}
