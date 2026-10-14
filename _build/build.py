@@ -20,6 +20,7 @@ DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
 VERSION = "5"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
+GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 
 # =====================================================================
 # الأسعار — المصدر الوحيد. غيّر الرقم هون بس.
@@ -247,6 +248,8 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
             g["offers"]["url"] = canonical
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
     extra_preload = '\n<link rel="preload" href="/assets/fonts/amiri-700-arabic.woff2" as="font" type="font/woff2" crossorigin>' if key == "home" else ""
+    ga = (f'\n<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
+          f'\n<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","{GA_ID}");</script>') if GA_ID else ""
     robots = '<meta name="robots" content="noindex">' if key == "404" else '<meta name="robots" content="index, follow, max-image-preview:large">'
     return f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -271,7 +274,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/el-messiri-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/aref-ruqaa-700-arabic.woff2" as="font" type="font/woff2" crossorigin>{extra_preload}
-<link rel="stylesheet" href="/assets/css/style.css?v={VERSION}">
+<link rel="stylesheet" href="/assets/css/style.css?v={VERSION}">{ga}
 <script type="application/ld+json">
 {ld}
 </script>

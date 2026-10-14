@@ -11,6 +11,14 @@
     });
   }
 
+  // قياس الضغط على أزرار الحجز (Google Analytics) — كل زر إله اسم بـ data-event
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-event]');
+    if (el && typeof window.gtag === 'function') {
+      window.gtag('event', 'book_click', { button: el.getAttribute('data-event'), page: location.pathname });
+    }
+  });
+
   var toastEl = document.querySelector('.toast');
   var toastTimer;
   function toast(msg) {
