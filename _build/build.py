@@ -133,6 +133,8 @@ FAQ = [
      "توليب (مع لولو أو جبسوفيل أو كريستال)، وكريستال، وكالا، وجوري، وبيوني، وألوان حسب الطلب. وإن أعجبكم تصميم غير موجود، أرسلوا لنا صورته."),
     ("هل يمكن أن يكون لون المسكة مثل لون الفستان؟",
      "نعم، نجهّز المسكة باللون الذي يناسب فستانكم، للخطوبة أو الحنّة أو عقد القران أو الزفاف أو التخرج."),
+    ("أين أجد مسكات عرايس في الأردن؟",
+     f"هدايا سلمى متجر أردني أونلاين يجهّز مسكات عرايس من الورد الصناعي عالي الجودة: توليب وكريستال وكالا وجوري وبيوني، بسعر {P['masaka']} دينارًا لكل الأنواع، مع التوصيل إلى جميع محافظات الأردن خلال يومين والمعاينة والدفع عند الاستلام. اطلبوا برسالة على إنستغرام salma.gifts1."),
 ]
 FAQ_BY_Q = {q: a for q, a in FAQ}
 
@@ -412,7 +414,7 @@ def name_preview():
           </div>
         </div>
         <div class="tag-scene" aria-hidden="true">
-          {img("masaka-arous-tulip.webp", "", w=720, h=900)}
+          {img("masaka-arous-tulip.webp", "مسكة عروس توليب مع تعليقة أكريليك بأسماء العروسين", w=720, h=900)}
           <div class="tag">
             <p class="names"><span data-out="g">{kashida(g)}</span><span class="amp">&amp;</span><span data-out="b">{kashida(b)}</span></p>
             <p class="date" data-out="d">12.12.2026</p>
@@ -519,11 +521,11 @@ def build_home():
 # =====================================================================
 def build_masakat():
     head, bsch = page_intro([(PAGES["masakat"]["nav"], PAGES["masakat"]["path"])],
-        "مسكة عروس في الأردن",
-        "مسكات عروس من ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة: توليب، كريستال، كالا، جوري وبيوني، وبأي لون يناسب فستانكم.",
+        "مسكات عرايس في الأردن",
+        "مسكات عرايس (مسكة العروس) من ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة: توليب، كريستال، كالا، جوري وبيوني، وبأي لون يناسب فستانكم.",
         "masaka")
     cards = "".join(f"""<li><a href="{s['path']}">{img(s['photos'][0][0], s['photos'][0][1])}<span class="label"><b>{E(s['nav'])}</b><span>{P['masaka']} دينار</span></span></a></li>""" for s in STYLES)
-    faqs = [FAQ[0], FAQ[1], FAQ[13], FAQ[14], FAQ[2], FAQ[7], FAQ[9]]
+    faqs = [FAQ[15], FAQ[0], FAQ[1], FAQ[13], FAQ[14], FAQ[2], FAQ[7], FAQ[9]]
     body = head + f"""
 <section class="section"><div class="container">
   <h2>أنواع مسكات العروس</h2>
@@ -568,8 +570,8 @@ def build_masakat():
            product_schema("مسكة العروس", "مسكة عروس من الورد الصناعي عالي الجودة، 20 إلى 25 وردة: توليب، كريستال، كالا، جوري، بيوني، وألوان حسب الطلب.",
                           ["masaka-arous-crystal.webp", "masaka-arous-calla.webp", "masaka-arous-tulip.webp", "masaka-arous-1.webp"], P["masaka"], sku="masaka")]
     write(PAGES["masakat"]["path"], layout("masakat", PAGES["masakat"]["path"],
-        f"مسكة عروس في الأردن بـ{P['masaka']} دينار: توليب، كريستال، كالا | هدايا سلمى",
-        f"مسكات عروس توليب وكريستال وكالا وجوري وبيوني، ورد صناعي لا يذبل، {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن. معاينة ودفع عند الاستلام.",
+        f"مسكات عرايس في الأردن: مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
+        f"مسكات عرايس في الأردن: مسكة عروس توليب وكريستال وكالا وجوري وبيوني، ورد صناعي لا يذبل، {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن. معاينة ودفع عند الاستلام.",
         body, sch, og_img="masaka-arous-crystal.webp"))
 
 def build_style(s):
@@ -824,7 +826,7 @@ def build_llms():
     lines = [
         "# Salma Gifts - هدايا سلمى",
         "",
-        f"> متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات العروس (توليب، كريستال، كالا، جوري، بيوني — ورد صناعي لا يذبل)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج. توصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام. الطلب عبر رسائل إنستغرام @salma.gifts1. شعارنا: {SLOGAN}",
+        f"> متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات العرايس / مسكة العروس (توليب، كريستال، كالا، جوري، بيوني — ورد صناعي لا يذبل)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج. توصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام. الطلب عبر رسائل إنستغرام @salma.gifts1. شعارنا: {SLOGAN}",
         "",
         "Salma Gifts is an online gift shop in Jordan making personalized engagement and wedding items: artificial-flower bridal bouquets (tulip, crystal, calla, rose/jouri, peony; any color to match the dress), mirror engagement ring trays with the couple's names (wooden back against breaking), marriage-contract (katb el-kitab) signature book packages, dowry (mahr) boxes and graduation gifts. 1500+ orders completed, 120+ orders a week. Delivery to all governorates of Jordan for 2 JOD within two days. Cash on delivery with inspection before paying. Orders via Instagram DM @salma.gifts1.",
         "",
