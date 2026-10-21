@@ -386,3 +386,10 @@ table.prices a:hover { color: var(--gold-text); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* صورة صينية حقيقية بجانب المعاينة */
+.real-inset { position: absolute; left: -8px; bottom: -6px; width: 31%; margin: 0; z-index: 2; transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
+.real-inset img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 3px solid var(--surface, #FFFDF9); box-shadow: 0 14px 34px -18px rgba(70,48,22,.45); }
+.real-inset figcaption { position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--surface, #FFFDF9); color: var(--gold-text, #8A6428); font: 600 11px/1 Tajawal, "El Messiri", sans-serif; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--line, #E8DCC6); }
+.stage[data-mode="tag"] .real-inset { opacity: 0; transform: scale(.94); pointer-events: none; }
+@media (min-width: 900px) { .real-inset { left: -24px; bottom: -10px; width: 30%; } .real-inset figcaption { font-size: 12px; } }

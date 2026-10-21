@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "6"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "7"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -423,6 +423,7 @@ def name_preview():
             <p class="date" data-out="d">12.12.2026</p>
           </div>
         </div>
+        <figure class="real-inset">{img("saniyet-khotoba-real.webp", "صينية دبل خطوبة حقيقية من طلبات هدايا سلمى بالأسماء والتاريخ وعلب الخواتم", w=600, h=600)}<figcaption>من طلباتنا</figcaption></figure>
         <div class="tag-scene" aria-hidden="true">
           {img("masaka-arous-tulip.webp", "مسكة عروس توليب مع تعليقة أكريليك بأسماء العروسين", w=720, h=900)}
           <div class="tag">
