@@ -18,9 +18,10 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "5"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "6"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
+CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
 
 # =====================================================================
 # الأسعار — المصدر الوحيد. غيّر الرقم هون بس.
@@ -256,6 +257,11 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
     extra_preload = '\n<link rel="preload" href="/assets/fonts/amiri-700-arabic.woff2" as="font" type="font/woff2" crossorigin>' if key == "home" else ""
     ga = (f'\n<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
           f'\n<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","{GA_ID}");</script>') if GA_ID else ""
+    if CLARITY_ID:
+        ga += ('\n<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};'
+               't=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;'
+               'y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})'
+               f'(window,document,"clarity","script","{CLARITY_ID}");</script>')
     robots = '<meta name="robots" content="noindex">' if key == "404" else '<meta name="robots" content="index, follow, max-image-preview:large">'
     return f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
