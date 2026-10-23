@@ -103,6 +103,12 @@
     }, 250);
   }
 
+  // الكبس على الصينية بيفتح خانة الاسم (بدل ما تكون كبسة ميتة)
+  stage.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('a')) return;
+    var target = !groomIn.value ? groomIn : (!brideIn.value ? brideIn : groomIn);
+    target.focus();
+  });
   var typing;
   groomIn.addEventListener('input', function () { clearTimeout(typing); typing = setTimeout(function () { render('g'); }, 120); });
   brideIn.addEventListener('input', function () { clearTimeout(typing); typing = setTimeout(function () { render('b'); }, 120); });
