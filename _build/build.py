@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "9"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "10"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -441,13 +441,13 @@ def page_intro(trail, h1, lead, k=None, note=None, extra=""):
 def name_preview():
     g, b = "سيف", "نور"
     return f"""
-<section class="hero">
+<section class="section maker-sec" id="asmaa">
   <div class="container hero-inner">
-    <h1>مسكات عروس وصواني خطوبة <span>بأسمائكم</span></h1>
-    <p class="slogan">{SLOGAN}</p>
+    <h2>اكتبي أسماءكم على <span>تعليقة المسكة</span></h2>
+    <p class="section-intro">تعليقة من الأكريليك بأسماء العريس والعروس وتاريخ المناسبة: +{P['taliqa']} دينار.</p>
 
     <form class="maker" id="maker" action="{IG_DM}" target="_blank" novalidate>
-      <div class="stage" data-mode="tray">
+      <div class="stage" data-mode="tag">
         <div class="tray" aria-hidden="true">
           <svg class="pearls" viewBox="0 0 200 200"><circle cx="100" cy="100" r="95.5"/><circle class="pearl-shine" cx="100" cy="100" r="95.5"/></svg>
           <div class="mirror">
@@ -474,8 +474,8 @@ def name_preview():
 
       <fieldset class="choice">
         <legend class="sr">ماذا تريدون بهذه الأسماء؟</legend>
-        <label><input type="radio" name="item" value="tray" checked data-price="{P['saniya']}" data-label="صينية خطوبة بالأسماء"><span>صينية خطوبة <b>{P['saniya']} دينار</b></span></label>
-        <label><input type="radio" name="item" value="tag" data-price="{P['masaka'] + P['taliqa']}" data-label="مسكة عروس مع تعليقة بالأسماء"><span>مسكة مع تعليقة <b>{P['masaka'] + P['taliqa']} دينار</b></span></label>
+        <label><input type="radio" name="item" value="tag" checked data-price="{P['masaka'] + P['taliqa']}" data-label="مسكة عروس مع تعليقة بالأسماء"><span>مسكة مع تعليقة <b>{P['masaka'] + P['taliqa']} دينار</b></span></label>
+        <label><input type="radio" name="item" value="tray" data-price="{P['saniya']}" data-label="صينية خطوبة بالأسماء"><span>صينية خطوبة <b>{P['saniya']} دينار</b></span></label>
       </fieldset>
 
       <button class="btn btn-primary btn-lg" type="submit" data-event="cta_maker">{IG_ICON}<span>احجزوا بهذه الأسماء</span></button>
@@ -491,6 +491,31 @@ def name_preview():
 # =====================================================================
 # الرئيسية
 # =====================================================================
+def bouquet_hero():
+    slides = "".join(f'''<li class="mslide">
+  <a class="mphoto" href="{model_path(m)}">{img(model_img(m), m["h1"] + " — صورة حقيقية من هدايا سلمى", lazy=(i > 1), w=m["w"], h=m["h"])}</a>
+  <div class="minfo">
+    <span class="mnum">{i + 1}/{len(MODELS)}</span>
+    <h3><a href="{model_path(m)}">{E(m["name"])}</a></h3>
+    <p>{E(m["lead"])}</p>
+    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(m["name"])}">{IG_ICON}<span>احجزي هذا الموديل</span></a>
+  </div>
+</li>''' for i, m in enumerate(MODELS))
+    return f"""
+<section class="hero bq-hero">
+  <div class="container">
+    <h1>مسكات عرايس <span>بـ{P['masaka']} دينار</span></h1>
+    <p class="slogan">{SLOGAN}</p>
+    <p class="hero-sub">{len(MODELS)} موديلات بصور حقيقية من شغلنا، ورد صناعي لا يذبل · توصيل لكل المحافظات · معاينة ودفع عند الاستلام</p>
+    <div class="mcar" data-carousel>
+      <button class="mnav prev" type="button" aria-label="الموديل السابق">{ARROW}</button>
+      <ul class="mtrack">{slides}</ul>
+      <button class="mnav next" type="button" aria-label="الموديل التالي">{ARROW}</button>
+    </div>
+    <p class="hero-more"><a class="btn btn-quiet" href="{MODELS_PATH}">شوفي كل الموديلات</a></p>
+  </div>
+</section>"""
+
 def style_rail():
     items = [(s["path"], s["name"], s["photos"][0][0], s["photos"][0][1]) for s in STYLES]
     items.append((PAGES["masakat"]["path"] + "#peony", "بيوني", PEONY[0], PEONY[1]))
@@ -512,7 +537,6 @@ def menu_list(rows):
 def build_home():
     rows = [
         (PAGES["sawani"]["path"], "صينية الخطوبة والدبل", "مرآة بأسمائكم بظهر خشبي، مع علب الخواتم", "saniya", "saniyet-khotoba-1.webp"),
-        (PAGES["masakat"]["path"], "مسكة العروس", "توليب، كريستال، كالا، جوري، بيوني", "masaka", "masaka-arous-crystal.webp"),
         (PAGES["bakjat"]["path"], "البكج الأساسي لكتب الكتاب", "صينية وكتاب توقيع وبصمات ورسالة العمر", "bakj_asasi", "bakj-katb-ktab-2.webp"),
         (PAGES["bakjat"]["path"], "بكج البرواز", "صينية وبرواز بصمات بالأسماء", "bakj_berwaz", "bakj-berwaz-1.webp"),
         (PAGES["bakjat"]["path"], "البكج الشامل", "الأساسي مع الفناجين والقصاصات", "bakj_shamel", "bakj-berwaz-3.webp"),
@@ -524,16 +548,16 @@ def build_home():
              ("أرسلوا الرسالة", "مع العنوان ورقم الهاتف."),
              ("استلموا وعاينوا", "خلال يومين، وادفعوا عند الاستلام.")]
     st = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in steps)
-    faqs = [FAQ[0], FAQ[1], FAQ[3], FAQ[9]]
-    body = name_preview() + f"""
-<section class="section styles" id="masakat"><div class="container">
-  <div class="section-head"><h2>مسكة العروس، بالشكل الذي تحبينه</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
-  <p class="section-intro">ورد صناعي لا يذبل، من 20 إلى 25 وردة. كل الأنواع بسعر واحد: {P['masaka']} دينارًا.</p>
+    faqs = [FAQ[17], FAQ[1], FAQ[2], FAQ[14], FAQ[9]]
+    body = bouquet_hero() + f"""
+<section class="section styles tint" id="masakat"><div class="container">
+  <div class="section-head"><h2>اختاري حسب نوع الورد</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
+  <p class="section-intro">ورد صناعي لا يذبل، من 20 إلى 25 وردة. كل الأنواع بسعر واحد: {P['masaka']} دينارًا، وبأي لون يناسب فستانك.</p>
   {style_rail()}
 </div></section>
-
+""" + name_preview() + f"""
 <section class="section"><div class="container narrow-wide">
-  <div class="section-head"><h2>كل ما نجهّزه</h2><a href="{PAGES['tawseel']['path']}">الأسعار والتوصيل {ARROW}</a></div>
+  <div class="section-head"><h2>منتجات ثانية للخطوبة وكتب الكتاب</h2><a href="{PAGES['tawseel']['path']}">الأسعار والتوصيل {ARROW}</a></div>
   {menu_list(rows)}
 </div></section>
 
@@ -557,8 +581,8 @@ def build_home():
   {faq_html(faqs)}
 </div></section>
 """
-    title = "مسكة عروس وصينية خطوبة بالأسماء في الأردن | هدايا سلمى"
-    desc = f"مسكة عروس {P['masaka']} دينار (توليب، كريستال، كالا، جوري، بيوني)، صينية خطوبة مرآة بالأسماء {P['saniya']} دينار، وبكجات كتب كتاب. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
+    title = f"مسكات عرايس في الأردن بـ{P['masaka']} دينار: موديلات مسكة عروس بصور حقيقية | هدايا سلمى"
+    desc = f"مسكات عرايس ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، المسكة التركية وغيرها، مع تعليقة بأسمائكم. وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
     write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)]))
 
 # =====================================================================

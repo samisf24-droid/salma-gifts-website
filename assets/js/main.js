@@ -57,6 +57,30 @@
     });
   }
 
+  // كاروسيل الموديلات: أزرار سابق/تالي + نسخ اسم الموديل قبل فتح إنستغرام
+  document.querySelectorAll('[data-carousel]').forEach(function (car) {
+    var track = car.querySelector('.mtrack');
+    var step = function (dir) {
+      var slide = track.querySelector('.mslide');
+      var w = slide ? slide.getBoundingClientRect().width + 14 : 300;
+      track.scrollBy({ left: dir * w, behavior: 'smooth' });
+    };
+    var prev = car.querySelector('.prev'), next = car.querySelector('.next');
+    // RTL: السابق = يمين = scrollBy موجب
+    if (prev) prev.addEventListener('click', function () { step(1); });
+    if (next) next.addEventListener('click', function () { step(-1); });
+  });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-model]');
+    if (!b) return;
+    var msg = 'مرحبًا، أودّ حجز مسكة عروس موديل «' + b.getAttribute('data-model') + '» (18 دينار)\nمن موقع salmagifts.com';
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).then(function () { toast('نسخنا اسم الموديل. الصقيه في رسالة إنستغرام.'); }, function () {});
+      }
+    } catch (err) {}
+  });
+
   var form = document.getElementById('maker');
   if (!form) return;
 
@@ -165,11 +189,13 @@
     lines.push('من موقع salmagifts.com');
     var msg = lines.join('\n');
     var fallback = function () { toast('اكتبوا لنا الأسماء والتاريخ في رسالة إنستغرام.'); };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(msg).then(function () {
-        toast('نسخنا تفاصيل طلبكم. الصقوها في رسالة إنستغرام وأرسلوها.');
-      }, fallback);
-    } else { fallback(); }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).then(function () {
+          toast('نسخنا تفاصيل طلبكم. الصقوها في رسالة إنستغرام وأرسلوها.');
+        }, fallback);
+      } else { fallback(); }
+    } catch (err) { fallback(); }
     var win = window.open(form.action, '_blank');
     if (win) { try { win.opener = null; } catch (err) {} }
     else { setTimeout(function () { window.location.href = form.action; }, 900); }
@@ -180,9 +206,8 @@
   var heroBtn = form.querySelector('button[type=submit]');
   if (sticky && heroBtn && 'IntersectionObserver' in window) {
     // الزر الثابت يظهر بس بعد ما زر الأسماء يطلع من فوق الشاشة
-    sticky.classList.add('away');
     new IntersectionObserver(function (es) {
-      es.forEach(function (en) { sticky.classList.toggle('away', en.isIntersecting || en.boundingClientRect.top > 0); });
+      es.forEach(function (en) { sticky.classList.toggle('away', en.isIntersecting); });
     }).observe(heroBtn);
   }
   shine();
