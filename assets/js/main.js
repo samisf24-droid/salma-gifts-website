@@ -32,6 +32,31 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 6000);
   }
 
+  // تكبير صور المنتجات (الناس كانت تكبس عالصور وما يصير إشي — Clarity: dead clicks)
+  var zoomImgs = document.querySelectorAll('.mosaic img, figure.photo img');
+  if (zoomImgs.length) {
+    var box = document.createElement('div');
+    box.className = 'zoom';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', 'صورة مكبّرة، اكبسوا للإغلاق');
+    box.innerHTML = '<img alt=""><button type="button" aria-label="إغلاق">×</button>';
+    document.body.appendChild(box);
+    var bigImg = box.querySelector('img');
+    var close = function () { box.classList.remove('open'); document.body.style.overflow = ''; };
+    box.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    zoomImgs.forEach(function (im) {
+      im.style.cursor = 'zoom-in';
+      im.addEventListener('click', function (e) {
+        if (im.closest('a')) return;
+        e.preventDefault();
+        bigImg.src = im.currentSrc || im.src; bigImg.alt = im.alt;
+        box.classList.add('open'); document.body.style.overflow = 'hidden';
+        if (typeof window.clarity === 'function') window.clarity('event', 'photo_zoom');
+      });
+    });
+  }
+
   var form = document.getElementById('maker');
   if (!form) return;
 

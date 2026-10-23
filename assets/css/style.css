@@ -395,3 +395,9 @@ table.prices a:hover { color: var(--gold-text); }
 @media (min-width: 900px) { .real-inset { left: -24px; bottom: -10px; width: 30%; } .real-inset .cap { font-size: 12px; } }
 
 .stage { cursor: text; }
+
+/* تكبير الصور */
+.zoom { position: fixed; inset: 0; z-index: 90; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(251,247,240,.97); cursor: zoom-out; }
+.zoom.open { display: flex; }
+.zoom img { max-width: 100%; max-height: 100%; border-radius: 20px; box-shadow: var(--shadow-soft, 0 14px 34px -18px rgba(70,48,22,.35)); }
+.zoom button { position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line, #E8DCC6); background: var(--surface, #FFFDF9); color: var(--ink, #3B2A1C); font-size: 26px; line-height: 1; cursor: pointer; }
