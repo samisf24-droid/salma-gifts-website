@@ -429,3 +429,5 @@ table.prices a:hover { color: var(--gold-text); }
   .mnav.prev svg { transform: scaleX(-1); }
 }
 .maker-sec h2 span { color: var(--gold-deep); }
+
+.trust-badge{display:inline-block;margin:0 auto 10px;padding:6px 16px;border:1px solid var(--gold-deep);border-radius:999px;color:var(--gold-deep);font-size:14px;font-weight:600;background:rgba(255,255,255,.6)}

@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "11"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "12"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -534,6 +534,7 @@ def bouquet_hero():
     return f"""
 <section class="hero bq-hero">
   <div class="container">
+    <p class="trust-badge">أول موقع أردني مختص بمسكات العرايس</p>
     <h1>مسكات عرايس <span>بـ{P['masaka']} دينار</span></h1>
     <p class="slogan">{SLOGAN}</p>
     <p class="hero-sub">{len(MODELS)} موديل بصور حقيقية من شغلنا، ورد صناعي لا يذبل · توصيل لكل المحافظات · معاينة ودفع عند الاستلام</p>
