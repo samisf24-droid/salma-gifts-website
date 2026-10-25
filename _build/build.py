@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "12"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "13"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -158,10 +158,12 @@ MODELS = [
      "lead": 'توليب أبيض صغير ينسدل على شكل قوس، مع خيوط لولو وفيونكة من التل الأبيض.',
      "inc": ['توليب أبيض صغير منسدل على شكل قوس', 'خيوط لولو', 'فيونكة من التل الأبيض']},
 ]
+for _i, _m in enumerate(MODELS):
+    _m["n"] = _i + 1  # رقم الموديل الثابت (نفس رقم الريلز والرسائل)
 def model_path(m): return MODELS_PATH + m["slug"] + "/"
 def model_img(m): return "model-" + m["slug"] + ".webp"
 def model_cards(items):
-    return "".join(f'''<li><a href="{model_path(m)}">{img(model_img(m), m["h1"] + " من هدايا سلمى", w=m["w"], h=m["h"])}<span class="label"><b>{E(m["name"])}</b><span>{P['masaka']} دينار</span></span></a></li>''' for m in items)
+    return "".join(f'''<li><a href="{model_path(m)}">{img(model_img(m), m["h1"] + " من هدايا سلمى", w=m["w"], h=m["h"])}<span class="label"><b><i class="no">{m["n"]}</i> {E(m["name"])}</b><span>{P['masaka']} دينار</span></span></a></li>''' for m in items)
 PEONY = ("masaka-arous-1.webp", "مسكة عروس بيوني أبيض مع جبسوفيل", "بيوني أبيض مع جبسوفيل")
 
 # =====================================================================
@@ -525,10 +527,10 @@ def bouquet_hero():
     slides = "".join(f'''<li class="mslide">
   <a class="mphoto" href="{model_path(m)}">{img(model_img(m), m["h1"] + " — صورة حقيقية من هدايا سلمى", lazy=(i > 1), w=m["w"], h=m["h"])}</a>
   <div class="minfo">
-    <span class="mnum">{i + 1}/{len(MODELS)}</span>
+    <span class="mnum">موديل {m["n"]}</span>
     <h3><a href="{model_path(m)}">{E(m["name"])}</a></h3>
     <p>{E(m["lead"])}</p>
-    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(m["name"])}">{IG_ICON}<span>احجزي هذا الموديل</span></a>
+    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(m["name"])}" data-n="{m["n"]}">{IG_ICON}<span>احجزي موديل {m["n"]}</span></a>
   </div>
 </li>''' for i, m in enumerate(MODELS))
     return f"""
@@ -537,7 +539,13 @@ def bouquet_hero():
     <p class="trust-badge">أول موقع أردني مختص بمسكات العرايس</p>
     <h1>مسكات عرايس <span>بـ{P['masaka']} دينار</span></h1>
     <p class="slogan">{SLOGAN}</p>
-    <p class="hero-sub">{len(MODELS)} موديل بصور حقيقية من شغلنا، ورد صناعي لا يذبل · توصيل لكل المحافظات · معاينة ودفع عند الاستلام</p>
+    <ul class="hero-facts">
+      <li><b>{P['masaka']} دينار</b><span>كل الموديلات</span></li>
+      <li><b>تعليقة بأسمائكم</b><span>+{P['taliqa']} دينار</span></li>
+      <li><b>توصيل خلال يومين</b><span>لكل المحافظات</span></li>
+      <li><b>معاينة قبل الدفع</b><span>والدفع عند الاستلام</span></li>
+    </ul>
+    <p class="hero-sub">{len(MODELS)} موديل بصور حقيقية من شغلنا، ورد صناعي لا يذبل. اختاري الموديل وابعتيلنا رقمه برسالة.</p>
     <div class="mcar" data-carousel>
       <button class="mnav prev" type="button" aria-label="الموديل السابق">{ARROW}</button>
       <ul class="mtrack">{slides}</ul>
@@ -607,6 +615,7 @@ def build_home():
   <ol class="steps">{st}</ol>
 </div></section>
 
+""" + articles_block() + f"""
 <section class="section"><div class="container narrow">
   <div class="section-head"><h2>أسئلة متكررة</h2><a href="{PAGES['faq']['path']}">كل الأسئلة {ARROW}</a></div>
   {faq_html(faqs)}
@@ -963,10 +972,10 @@ def build_model(m):
         st = {"path": PAGES["masakat"]["path"] + ("#peony" if m["style"] == "peony" else ""),
               "nav": "مسكة عروس بيوني" if m["style"] == "peony" else "مسكات العروس"}
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("موديلات المسكات", MODELS_PATH), (m["name"], model_path(m))]
-    head, bsch = page_intro(trail, m["h1"], m["lead"], "masaka")
+    head, bsch = page_intro(trail, m["h1"], m["lead"], "masaka", extra=f'<p class="model-no">موديل رقم {m["n"]} من {len(MODELS)}</p>')
     faqs = [(f"كم سعر {m['h1']}؟", f"سعرها {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. والتعليقة بالأسماء والتاريخ +{P['taliqa']} دينار."),
             ("هل يمكن تغيير لون الموديل؟", "نعم، نجهّز الموديل نفسه بلون يناسب فستانكم، للزفاف أو الخطوبة أو الحنّة أو كتب الكتاب. أرسلوا لنا اللون مع الطلب."),
-            ("كيف أطلب هذا الموديل؟", f"أرسلوا لنا رسالة على إنستغرام salma.gifts1 فيها اسم الموديل «{m['name']}» أو صورته، وتاريخ المناسبة، ونؤكد لكم الطلب."),
+            ("كيف أطلب هذا الموديل؟", f"أرسلوا لنا رسالة على إنستغرام salma.gifts1 فيها «موديل رقم {m['n']}» أو اسمه «{m['name']}»، وتاريخ المناسبة، ونؤكد لكم الطلب."),
             FAQ[7], FAQ[9]]
     others = [x for x in MODELS if x is not m][:4]
     body = head + f"""
@@ -996,8 +1005,158 @@ def build_model(m):
         f"{m['h1']}: {m['lead']} {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن، معاينة ودفع عند الاستلام.",
         body, sch, og_img=model_img(m)))
 
+# =====================================================================
+# مقالات للعروس — بتجاوب على أسئلة بتنبحث (وبتربط على الموديلات)
+# =====================================================================
+MAQALAT_PATH = "/maqalat/"
+def M(slug): return next(m for m in MODELS if m["slug"] == slug)
+def mlink(slug):
+    m = M(slug)
+    return f'<a href="{model_path(m)}">موديل {m["n"]}: {E(m["name"])}</a>'
+
+def _art_dress():
+    groups = [
+        ("فستان منفوش (برنسيس)", "مسكة دائرية ممتلئة توازن حجم الفستان. المسكة الصغيرة تضيع أمام الفستان المنفوش.", ["jouri-abyad", "toulib-lulu", "kala-toulib-crystal"]),
+        ("فستان ضيق أو حورية (ميرميد)", "مسكة منسدلة طويلة تكمّل خط الفستان من فوق لتحت.", ["turkish-qaws", "qaws-toulib", "kala-classic-strass"]),
+        ("فستان ساتان بسيط بدون تطريز", "مسكة بخطوط نظيفة وبدون تفاصيل كثيرة، فالبساطة هنا هي الفخامة.", ["toulib-classic", "kala-classic-strass", "kala-gypsophila"]),
+        ("فستان دانتيل أو ستايل بوهو", "مسكة ناعمة فيها جبسوفيل أو بيوني، تشبه نعومة الدانتيل.", ["peony-boho", "toulib-gypsophila", "jouri-zahri-toulib"]),
+        ("فستان مطرّز بالكريستال أو لامع", "مسكة فيها كريستال أو ستراس، حتى تكون اللمعة متناسقة بين الفستان والمسكة.", ["toulib-crystal", "kala-toulib-crystal", "toulib-lulu"]),
+        ("فستان خطوبة أو حنّة ملوّن", "هنا المسكة الملوّنة أجمل من البيضاء، أو مسكة بيضاء فيها لمسة من لون الفستان.", ["kala-jouri-azraq", "zahri-naem", "kala-zahr-wardi"]),
+    ]
+    blocks = "".join(f"<h3>{E(t)}</h3>\n<p>{E(d)} موديلات مناسبة: " + "، ".join(mlink(x) for x in xs) + ".</p>" for t, d, xs in groups)
+    picks = [M(x) for x in ["jouri-abyad", "turkish-qaws", "toulib-classic", "peony-boho", "toulib-crystal", "kala-jouri-azraq"]]
+    return f"""
+<p>المسكة تظهر في كل صورة من صور يومك، فاختيارها مهم مثل اختيار الفستان. وأسهل طريقة للاختيار أن تبدئي من الفستان نفسه: قَصّته، وتفاصيله، ولونه.</p>
+<h2>ثلاثة أسئلة قبل أن تختاري</h2>
+<ol>
+<li><b>ما قَصّة الفستان؟</b> منفوش، ضيق، أو بسيط. القصّة تحدد شكل المسكة: دائرية أو منسدلة أو بسيطة.</li>
+<li><b>ما تفاصيل الفستان؟</b> دانتيل، كريستال، أو ساتان سادة. التفاصيل تحدد الإكسسوارات: لولو، كريستال، جبسوفيل، أو بدون.</li>
+<li><b>ما المناسبة؟</b> الزفاف غالبًا بالأبيض، أما الخطوبة والحنّة وكتب الكتاب فتحتمل الألوان.</li>
+</ol>
+<h2>المسكة المناسبة لكل نوع فستان</h2>
+{blocks}
+<h2>اللون: أبيض مع أبيض؟</h2>
+<p>الأبيض درجات: أبيض ناصع، وأوف وايت، وعاجي. إذا كان فستانك أوف وايت، فمسكة بورد أبيض دافئ أو مع جبسوفيل تكون متناسقة أكثر. ونجهّز أي موديل باللون الذي يناسب فستانك.</p>
+<h2>الحجم حسب طولك</h2>
+<p>العروس الناعمة أو القصيرة تناسبها مسكة متوسطة الحجم حتى لا تغطيها. والعروس الطويلة تحتمل المسكة المنسدلة على شكل قوس.</p>
+<h2>المسكة بعد المناسبة</h2>
+<p>إذا كانت المسكة من ورد صناعي عالي الجودة، فهي لا تذبل وتبقى ذكرى في البيت، ويمكن إضافة تعليقة عليها بأسمائكم وتاريخ المناسبة (+{P['taliqa']} دينار).</p>
+<p>إذا ما عرفتي أي موديل يناسبك، أرسلي لنا صورة الفستان برسالة على إنستغرام ونساعدك تختاري.</p>
+<ul class="rail rail-grid">{model_cards(picks)}</ul>"""
+
+def _art_tulip_calla():
+    tul = [m for m in MODELS if "toulib" in m["slug"]]
+    cal = [m for m in MODELS if "kala" in m["slug"] or m["slug"] == "turkish-qaws"]
+    rows = [("الشكل", "وردة على شكل كأس مغلق، ناعمة ودائرية", "وردة طويلة على شكل قمع، بخطوط نظيفة"),
+            ("الإحساس", "رقيقة وأنثوية وعصرية", "أنيقة وكلاسيكية وفخمة"),
+            ("الفستان المناسب", "المنفوش والدانتيل والبوهو", "الضيق والحورية والساتان البسيط"),
+            ("شكل المسكة", "دائرية ممتلئة، أو منسدلة كالقوس", "طويلة بسيقان ظاهرة، أو منسدلة"),
+            ("مع الإكسسوارات", "تبرز مع اللولو والكريستال والتول", "تبرز مع الستراس والجبسوفيل"),
+            ("عدد الموديلات عندنا", f"{len(tul)} موديلات", f"{len(cal)} موديلات"),
+            ("السعر عندنا", f"{P['masaka']} دينار", f"{P['masaka']} دينار")]
+    tr = "".join(f"<tr><th>{a}</th><td>{b}</td><td>{c}</td></tr>" for a, b, c in rows)
+    return f"""
+<p>التوليب والكالا أكثر نوعين تسأل عنهما العرايس. الاثنان جميلان، والفرق بينهما في الشكل والإحساس، لا في الجودة.</p>
+<h2>الفرق باختصار</h2>
+<div class="table-wrap"><table class="cmp"><thead><tr><th></th><th>توليب</th><th>كالا</th></tr></thead><tbody>{tr}</tbody></table></div>
+<h2>اختاري التوليب إذا…</h2>
+<ul><li>فستانك منفوش أو فيه دانتيل.</li><li>تحبين المسكة الناعمة الدائرية.</li><li>تريدين لولو أو كريستال حول الورد.</li></ul>
+<h2>اختاري الكالا إذا…</h2>
+<ul><li>فستانك ضيق أو ساتان بسيط.</li><li>تحبين المسكة الطويلة ذات الخطوط النظيفة.</li><li>تريدين مسكة منسدلة لافتة مثل {mlink("turkish-qaws")}.</li></ul>
+<h2>ولو حابة الاثنين؟</h2>
+<p>في موديلات تجمعهما: {mlink("kala-toulib-crystal")}، و{mlink("jouri-zahri-toulib")} وفيه توليب وكالا حول الجوري.</p>
+<h2>موديلات التوليب</h2>
+<ul class="rail rail-grid">{model_cards(tul)}</ul>
+<h2>موديلات الكالا</h2>
+<ul class="rail rail-grid">{model_cards(cal)}</ul>"""
+
+def _art_price():
+    return f"""
+<p>سعر مسكة العروس في الأردن يختلف كثيرًا من محل لمحل، وأكثر شيء يؤثر عليه هو نوع الورد: طبيعي أو صناعي. هذه الأشياء التي تحدد السعر، وكيف تقارنين قبل أن تحجزي.</p>
+<h2>ما الذي يحدد سعر المسكة؟</h2>
+<ol>
+<li><b>طبيعي أو صناعي:</b> الورد الطبيعي يُجهَّز يوم المناسبة ويذبل بعدها بأيام، وسعره يتغير حسب الموسم. الصناعي عالي الجودة يُجهَّز مسبقًا ويبقى ذكرى.</li>
+<li><b>عدد الورد وحجم المسكة:</b> المسكة الممتلئة أو المنسدلة تحتاج وردًا أكثر.</li>
+<li><b>الإكسسوارات:</b> اللولو، والكريستال، والستراس على المسكة، والتول والدانتيل.</li>
+<li><b>الإضافات:</b> مثل تعليقة بالأسماء والتاريخ.</li>
+<li><b>التوصيل:</b> هل السعر شامل التوصيل لمحافظتك أم لا.</li>
+</ol>
+<h2>سعر مسكة العروس عند هدايا سلمى</h2>
+<div class="table-wrap"><table class="cmp"><tbody>
+<tr><th>المسكة، كل الموديلات ({len(MODELS)} موديل)</th><td>{P['masaka']} دينار</td></tr>
+<tr><th>مع التوصيل لأي محافظة</th><td>{withdel('masaka')} دينار</td></tr>
+<tr><th>تعليقة بأسماء العروسين والتاريخ</th><td>+{P['taliqa']} دينار</td></tr>
+</tbody></table></div>
+<p>ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، وبأي لون يناسب الفستان. السعر واحد سواء كانت المسكة توليب أو كالا أو جوري أو بيوني أو كريستال.</p>
+<h2>قبل أن تحجزي من أي مكان، تأكدي من:</h2>
+<ul>
+<li><b>صور حقيقية</b> من شغلهم، لا صور من الإنترنت.</li>
+<li><b>المعاينة قبل الدفع</b>، والدفع عند الاستلام.</li>
+<li><b>مدة التجهيز</b>، واحجزي قبل المناسبة بثلاثة أيام على الأقل.</li>
+<li><b>السعر النهائي</b> مع التوصيل والإضافات.</li>
+</ul>
+<p><a class="btn btn-quiet" href="{MODELS_PATH}">شوفي كل الموديلات بصور حقيقية</a></p>"""
+
+ARTICLES = [
+    {"slug": "ikhtiyar-maskat-al-arous", "title": "كيف تختارين مسكة العروس حسب فستانك؟",
+     "desc": "دليل اختيار مسكة العروس حسب قَصّة الفستان وتفاصيله ولونه وطولك: منفوش، حورية، ساتان، دانتيل، كريستال، وفساتين الخطوبة الملوّنة، مع موديلات حقيقية.",
+     "img": "model-turkish-qaws.webp", "body": _art_dress,
+     "faq": [("ما أنسب مسكة لفستان منفوش؟", "مسكة دائرية ممتلئة مثل الجوري الأبيض الكلاسيك أو توليب اللولو، لأنها توازن حجم الفستان."),
+             ("ما أنسب مسكة لفستان ضيق (حورية)؟", "مسكة منسدلة طويلة مثل المسكة التركية (القوس) أو قوس التوليب، لأنها تكمّل خط الفستان.")]},
+    {"slug": "maskat-tulip-aw-kala", "title": "مسكة توليب ولا كالا؟ الفرق وأيهما يناسبك",
+     "desc": "مقارنة بين مسكة العروس التوليب والكالا: الشكل، والإحساس، والفستان المناسب لكل واحدة، مع موديلات حقيقية من الاثنين بسعر 18 دينار.",
+     "img": "model-kala-toulib-crystal.webp", "body": _art_tulip_calla,
+     "faq": [("أيهما أجمل: مسكة التوليب أو الكالا؟", "الاثنتان جميلتان. التوليب أنعم وأنسب للفستان المنفوش والدانتيل، والكالا أكثر أناقة وأنسب للفستان الضيق والساتان."),
+             ("هل يوجد مسكة تجمع التوليب والكالا؟", "نعم، مثل موديل كالا وتوليب بالكريستال، وموديل جوري زهري وتوليب.")]},
+    {"slug": "sier-maskat-al-arous-fi-al-urdun", "title": "كم سعر مسكة العروس في الأردن؟",
+     "desc": f"ما الذي يحدد سعر مسكة العروس في الأردن: ورد طبيعي أو صناعي، الحجم، الإكسسوارات والتوصيل. وسعر المسكة عند هدايا سلمى {P['masaka']} دينار لكل الموديلات.",
+     "img": "model-toulib-lulu.webp", "body": _art_price,
+     "faq": [FAQ[1], ("هل مسكة الورد الصناعي أفضل من الطبيعي؟", "الصناعي عالي الجودة لا يذبل ويبقى ذكرى بعد المناسبة، ويُجهَّز مسبقًا دون قلق يوم العرس. الطبيعي له رائحة، لكنه يذبل خلال أيام.")]},
+]
+def art_path(a): return MAQALAT_PATH + a["slug"] + "/"
+
+def build_article(a):
+    trail = [("نصائح للعروس", MAQALAT_PATH), (a["title"], art_path(a))]
+    bc, bsch = breadcrumb(trail)
+    others = "".join(f'<li><a href="{art_path(x)}">{E(x["title"])}</a></li>' for x in ARTICLES if x is not a)
+    body = bc + f"""
+<article class="section article"><div class="container narrow">
+  <h1>{E(a["title"])}</h1>
+  <p class="article-meta">هدايا سلمى · متجر أردني مختص بمسكات العرايس</p>
+  {a["body"]()}
+  <div class="actions">{cta("اسألينا برسالة على إنستغرام", "btn btn-primary", "cta_article")}</div>
+  <h2>أسئلة سريعة</h2>
+  {faq_html(a["faq"])}
+  <nav class="related"><p>مقالات أخرى</p><ul>{others}</ul></nav>
+</div></article>"""
+    art = {"@type": "Article", "headline": a["title"], "description": a["desc"], "inLanguage": "ar",
+           "image": SITE + "/assets/img/" + a["img"], "datePublished": "2026-10-25", "dateModified": TODAY,
+           "author": {"@id": STORE_ID}, "publisher": {"@id": STORE_ID}, "mainEntityOfPage": SITE + art_path(a)}
+    write(art_path(a), layout("style-article", art_path(a), f"{a['title']} | هدايا سلمى", a["desc"], body,
+          [bsch, art, faq_schema(a["faq"])], og_img=a["img"]))
+
+def build_articles_index():
+    bc, bsch = breadcrumb([("نصائح للعروس", MAQALAT_PATH)])
+    cards = "".join('<li><a href="' + art_path(a) + '">' + img(a["img"], a["title"], w=900, h=1141)
+                    + '<span class="label"><b>' + E(a["title"]) + '</b></span></a></li>' for a in ARTICLES)
+    body = bc + f"""
+<section class="section"><div class="container">
+  <h1>نصائح للعروس</h1>
+  <p class="section-intro">مقالات قصيرة تساعدك تختاري مسكتك: حسب الفستان، والنوع، والسعر.</p>
+  <ul class="rail rail-grid">{cards}</ul>
+</div></section>"""
+    write(MAQALAT_PATH, layout("style-articles", MAQALAT_PATH, "نصائح للعروس: اختيار مسكة العروس | هدايا سلمى",
+          "مقالات تساعد العروس تختار مسكتها: حسب الفستان، توليب أو كالا، وكم سعر مسكة العروس في الأردن.", body, [bsch]))
+
+def articles_block():
+    lis = "".join(f'<li><a href="{art_path(a)}">{E(a["title"])}</a></li>' for a in ARTICLES)
+    return f"""<section class="section"><div class="container narrow">
+  <div class="section-head"><h2>نصائح للعروس</h2><a href="{MAQALAT_PATH}">كل المقالات {ARROW}</a></div>
+  <ul class="art-list">{lis}</ul>
+</div></section>"""
+
 def all_paths():
-    return [PAGES[k]["path"] for k in ["home"] + NAV_ORDER] + [s["path"] for s in STYLES] + [MODELS_PATH] + [model_path(m) for m in MODELS]
+    return [PAGES[k]["path"] for k in ["home"] + NAV_ORDER] + [s["path"] for s in STYLES] + [MODELS_PATH] + [model_path(m) for m in MODELS] + [MAQALAT_PATH] + [art_path(a) for a in ARTICLES]
 
 def build_sitemap():
     urls = "".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY}</lastmod></url>\n" for p in all_paths())
@@ -1029,7 +1188,10 @@ def build_llms():
         "",
         "",
         f"## موديلات المسكات ({SITE}{MODELS_PATH})",
-    ] + [f"- [{m['h1']}]({SITE}{model_path(m)}): {m['lead']}" for m in MODELS] + [
+    ] + [f"- موديل {m['n']} — [{m['h1']}]({SITE}{model_path(m)}): {m['lead']}" for m in MODELS] + [
+        "",
+        f"## نصائح للعروس ({SITE}{MAQALAT_PATH})",
+    ] + [f"- [{a['title']}]({SITE}{art_path(a)}): {a['desc']}" for a in ARTICLES] + [
         "",
         "## السياسات",
         "- الطلب يجهز ويوصل خلال يومين كحد أقصى، والحجز قبل المناسبة بثلاثة أيام على الأقل.",
@@ -1053,6 +1215,9 @@ if __name__ == "__main__":
     build_models_index()
     for m in MODELS:
         build_model(m)
+    build_articles_index()
+    for a in ARTICLES:
+        build_article(a)
     build_sawani(); build_bakjat(); build_mahr(); build_grad()
     build_tawseel(); build_faq(); build_404(); build_sitemap(); build_llms()
     print("تم بناء الموقع.")

@@ -73,10 +73,11 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-model]');
     if (!b) return;
-    var msg = 'مرحبًا، أودّ حجز مسكة عروس موديل «' + b.getAttribute('data-model') + '» (18 دينار)\nمن موقع salmagifts.com';
+    var n = b.getAttribute('data-n');
+    var msg = 'مرحبًا، أودّ حجز مسكة عروس ' + (n ? 'موديل رقم ' + n + ' ' : 'موديل ') + '«' + b.getAttribute('data-model') + '» (18 دينار)\nمن موقع salmagifts.com';
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(msg).then(function () { toast('نسخنا اسم الموديل. الصقيه في رسالة إنستغرام.'); }, function () {});
+        navigator.clipboard.writeText(msg).then(function () { toast('نسخنا رقم الموديل. الصقيه في رسالة إنستغرام.'); }, function () {});
       }
     } catch (err) {}
   });

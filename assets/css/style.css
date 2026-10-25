@@ -431,3 +431,25 @@ table.prices a:hover { color: var(--gold-text); }
 .maker-sec h2 span { color: var(--gold-deep); }
 
 .trust-badge{display:inline-block;margin:0 auto 10px;padding:6px 16px;border:1px solid var(--gold-deep);border-radius:999px;color:var(--gold-deep);font-size:14px;font-weight:600;background:rgba(255,255,255,.6)}
+
+.hero-facts{list-style:none;padding:0;margin:4px auto 12px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:560px}
+@media(min-width:720px){.hero-facts{grid-template-columns:repeat(4,1fr)}}
+.hero-facts li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:9px 8px;display:flex;flex-direction:column;gap:2px;line-height:1.35}
+.hero-facts b{font-size:15px;color:var(--gold-deep)}
+.hero-facts span{font-size:12.5px;color:var(--muted)}
+.mnum{direction:rtl}
+.label .no{font-style:normal;display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:999px;background:var(--gold-deep);color:#fff;font-size:12px;margin-inline-end:4px;vertical-align:1px}
+.model-no{display:inline-block;margin:0 0 8px;padding:4px 12px;border-radius:999px;background:var(--tint);color:var(--gold-text);font-weight:600;font-size:14px}
+
+.article h1{font-size:clamp(26px,6vw,38px);line-height:1.4;margin:0 0 6px}
+.article .article-meta{color:var(--muted);font-size:14px;margin:0 0 18px}
+.article h2{margin:28px 0 10px}.article h3{margin:18px 0 6px;font-size:18px}
+.article p,.article li{line-height:1.9}.article ol,.article ul:not(.rail){padding-inline-start:22px}
+.article p a:not(.btn),.article li a{color:var(--gold-text);text-decoration:underline;text-underline-offset:3px}
+.table-wrap{overflow-x:auto;margin:10px 0 16px}
+.cmp{width:100%;border-collapse:collapse;font-size:15px;background:var(--surface)}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:start;vertical-align:top}
+.cmp thead th{background:var(--tint);color:var(--gold-text)}
+.art-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.art-list a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);font-weight:600}
+.related ul{padding-inline-start:20px}
