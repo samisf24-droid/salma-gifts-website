@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "13"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "14"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -346,12 +346,12 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}/assets/img/{og_img}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#FBF7F0">
+<meta name="theme-color" content="#F6F0E8">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/el-messiri-arabic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/aref-ruqaa-700-arabic.woff2" as="font" type="font/woff2" crossorigin>{extra_preload}
+{extra_preload}
 <link rel="stylesheet" href="/assets/css/style.css?v={VERSION}">{ga}
 <script type="application/ld+json">
 {ld}
@@ -363,7 +363,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <header class="site-header">
   <div class="header-row">
     <a class="brand" href="/" aria-label="هدايا سلمى - الرئيسية">
-      <img src="/assets/img/logo.webp" alt="شعار هدايا سلمى Salma Gifts" width="40" height="42">
+      <img src="/assets/img/logo.webp" alt="شعار هدايا سلمى Salma Gifts" width="105" height="120">
       <span class="brand-name">هدايا سلمى</span>
     </a>
     <nav class="main-nav" aria-label="القائمة الرئيسية">{nav}</nav>
