@@ -354,6 +354,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <meta property="og:image" content="{SITE}/assets/img/{og_img}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F0E8">
+<meta name="p:domain_verify" content="10f3786eb5995c7295863fef211ec348"/>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
