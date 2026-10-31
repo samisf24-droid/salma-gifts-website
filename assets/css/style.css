@@ -454,3 +454,7 @@ table.prices a:hover { color: var(--gold-text); }
 
 h1,h2,.label b,.brand-name,.footer-brand{font-weight:700}
 .brand img{width:auto;height:42px}
+
+.p-price .was,.hero-offer s{color:var(--muted);font-size:20px;text-decoration-color:#B98787;text-decoration-thickness:2px}
+.p-price .offer{font-style:normal;align-self:center;background:#B98787;color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
+.hero-offer{margin:0 auto 8px;color:var(--ink);font-size:16px}.hero-offer b{color:var(--gold-deep)}

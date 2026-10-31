@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "14"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "15"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -27,7 +27,8 @@ CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، 
 # الأسعار — المصدر الوحيد. غيّر الرقم هون بس.
 # =====================================================================
 PRICES = {
-    "masaka": 18,        # مسكة العروس
+    "masaka": 18,        # مسكة العروس (عرض دائم)
+    "masaka_old": 25,    # سعرها قبل العرض الدائم (قرار سامي 31/10)
     "taliqa": 2,         # تعليقة للمسكة (إضافة)
     "saniya": 15,        # صينية الخطوبة / الدبل
     "bakj_berwaz": 20,   # بكج البرواز
@@ -173,7 +174,7 @@ FAQ = [
     ("من أين أشتري مسكة عروس في الأردن؟",
      f"من هدايا سلمى، حيث نجهّز مسكات العرائس من التوليب والكريستال والكالا والجوري والبيوني بسعر {P['masaka']} دينارًا، ونوصلها إلى جميع محافظات الأردن مقابل {DELIVERY} دينار. يتم الطلب برسالة على إنستغرام salma.gifts1."),
     ("كم سعر مسكة العروس؟",
-     f"سعرها {P['masaka']} دينارًا لجميع الأنواع، و{withdel('masaka')} دينارًا شاملة التوصيل. ويمكن إضافة تعليقة تحمل اسمَي العروسين والتاريخ مقابل {P['taliqa']} دينار."),
+     f"سعرها {P['masaka']} دينارًا بدل {P['masaka_old']} (عرض دائم) لجميع الأنواع، و{withdel('masaka')} دينارًا شاملة التوصيل. ويمكن إضافة تعليقة تحمل اسمَي العروسين والتاريخ مقابل {P['taliqa']} دينار."),
     ("هل ورد المسكة طبيعي أم صناعي؟",
      "ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى دائمة. وتضم كل مسكة ما بين 20 و25 وردة."),
     ("كم سعر صينية الخطوبة؟",
@@ -206,6 +207,12 @@ FAQ = [
      "نعم، تُستخدم لتلبيس الدبل في الخطوبة وفي عقد القران. ولكتب الكتاب يمكن طلبها ضمن بكج مع كتاب التوقيع والبصمات أو برواز البصمات."),
     ("أين أجد مسكات عرايس في الأردن؟",
      f"هدايا سلمى متجر أردني أونلاين يجهّز مسكات عرايس من الورد الصناعي عالي الجودة: توليب وكريستال وكالا وجوري وبيوني، بسعر {P['masaka']} دينارًا لكل الأنواع، مع التوصيل إلى جميع محافظات الأردن خلال يومين والمعاينة والدفع عند الاستلام. اطلبوا برسالة على إنستغرام salma.gifts1."),
+]
+FAQ += [
+    ("وين ألاقي مسكة عروس بأقل من 20 دينار في الأردن؟",
+     f"عند هدايا سلمى، سعر مسكة العروس {P['masaka']} دينارًا بدل {P['masaka_old']} كعرض دائم، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، مع معاينة ودفع عند الاستلام. الطلب برسالة على إنستغرام salma.gifts1."),
+    ("مين عامل عروض على مسكات العرايس في الأردن؟",
+     f"هدايا سلمى عندها عرض دائم على كل موديلات مسكات العرايس: {P['masaka']} دينارًا بدل {P['masaka_old']}، لكل الأنواع (توليب، كالا، جوري، بيوني، كريستال)، والتوصيل لكل المحافظات بـ{DELIVERY} دينار."),
 ]
 FAQ_BY_Q = {q: a for q, a in FAQ}
 
@@ -453,7 +460,9 @@ def includes(items):
 
 def price_line(k, note=None):
     note = note or f"{withdel(k)} دينارًا شاملة التوصيل إلى أي محافظة"
-    return f'<p class="p-price"><b>{P[k]} <small>دينار</small></b><span>{E(note)}</span></p>'
+    old = f'<s class="was">{P["masaka_old"]}</s>' if k == "masaka" else ""
+    tag = '<em class="offer">عرض دائم</em>' if k == "masaka" else ""
+    return f'<p class="p-price">{tag}<b>{P[k]} <small>دينار</small></b>{old}<span>{E(note)}</span></p>'
 
 def page_intro(trail, h1, lead, k=None, note=None, extra=""):
     """رأس صفحة المنتج: العنوان والسعر والزر — الصور تحته مباشرة."""
@@ -538,9 +547,10 @@ def bouquet_hero():
   <div class="container">
     <p class="trust-badge">أول موقع أردني مختص بمسكات العرايس</p>
     <h1>مسكات عرايس <span>بـ{P['masaka']} دينار</span></h1>
+    <p class="hero-offer">عرض دائم: <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s> لكل الموديلات</p>
     <p class="slogan">{SLOGAN}</p>
     <ul class="hero-facts">
-      <li><b>{P['masaka']} دينار</b><span>كل الموديلات</span></li>
+      <li><b>{P['masaka']} دينار</b><span>بدل {P['masaka_old']} · عرض دائم</span></li>
       <li><b>تعليقة بأسمائكم</b><span>+{P['taliqa']} دينار</span></li>
       <li><b>توصيل خلال يومين</b><span>لكل المحافظات</span></li>
       <li><b>معاينة قبل الدفع</b><span>والدفع عند الاستلام</span></li>
@@ -587,7 +597,7 @@ def build_home():
              ("أرسلوا الرسالة", "مع العنوان ورقم الهاتف."),
              ("استلموا وعاينوا", "خلال يومين، وادفعوا عند الاستلام.")]
     st = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in steps)
-    faqs = [FAQ[17], FAQ[1], FAQ[2], FAQ[14], FAQ[9]]
+    faqs = [FAQ[17], FAQ[18], FAQ[1], FAQ[19], FAQ[2], FAQ[14], FAQ[9]]
     body = bouquet_hero() + f"""
 <section class="section styles tint" id="masakat"><div class="container">
   <div class="section-head"><h2>اختاري حسب نوع الورد</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
@@ -634,7 +644,7 @@ def build_masakat():
         "مسكات عرايس (مسكة العروس) من ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة: توليب، كريستال، كالا، جوري وبيوني، وبأي لون يناسب فستانكم.",
         "masaka")
     cards = "".join(f"""<li><a href="{s['path']}">{img(s['photos'][0][0], s['photos'][0][1])}<span class="label"><b>{E(s['nav'])}</b><span>{P['masaka']} دينار</span></span></a></li>""" for s in STYLES)
-    faqs = [FAQ[17], FAQ[0], FAQ[1], FAQ[13], FAQ[14], FAQ[2], FAQ[7], FAQ[9]]
+    faqs = [FAQ[17], FAQ[18], FAQ[19], FAQ[0], FAQ[1], FAQ[13], FAQ[14], FAQ[2], FAQ[7], FAQ[9]]
     body = head + f"""
 <section class="section"><div class="container">
   <h2>أنواع مسكات العروس</h2>
@@ -1083,7 +1093,7 @@ def _art_price():
 </ol>
 <h2>سعر مسكة العروس عند هدايا سلمى</h2>
 <div class="table-wrap"><table class="cmp"><tbody>
-<tr><th>المسكة، كل الموديلات ({len(MODELS)} موديل)</th><td>{P['masaka']} دينار</td></tr>
+<tr><th>المسكة، كل الموديلات ({len(MODELS)} موديل)</th><td>{P['masaka']} دينار بدل {P['masaka_old']} (عرض دائم)</td></tr>
 <tr><th>مع التوصيل لأي محافظة</th><td>{withdel('masaka')} دينار</td></tr>
 <tr><th>تعليقة بأسماء العروسين والتاريخ</th><td>+{P['taliqa']} دينار</td></tr>
 </tbody></table></div>
@@ -1111,7 +1121,7 @@ ARTICLES = [
     {"slug": "sier-maskat-al-arous-fi-al-urdun", "title": "كم سعر مسكة العروس في الأردن؟",
      "desc": f"ما الذي يحدد سعر مسكة العروس في الأردن: ورد طبيعي أو صناعي، الحجم، الإكسسوارات والتوصيل. وسعر المسكة عند هدايا سلمى {P['masaka']} دينار لكل الموديلات.",
      "img": "model-toulib-lulu.webp", "body": _art_price,
-     "faq": [FAQ[1], ("هل مسكة الورد الصناعي أفضل من الطبيعي؟", "الصناعي عالي الجودة لا يذبل ويبقى ذكرى بعد المناسبة، ويُجهَّز مسبقًا دون قلق يوم العرس. الطبيعي له رائحة، لكنه يذبل خلال أيام.")]},
+     "faq": [FAQ[1], FAQ[18], ("هل مسكة الورد الصناعي أفضل من الطبيعي؟", "الصناعي عالي الجودة لا يذبل ويبقى ذكرى بعد المناسبة، ويُجهَّز مسبقًا دون قلق يوم العرس. الطبيعي له رائحة، لكنه يذبل خلال أيام.")]},
 ]
 def art_path(a): return MAQALAT_PATH + a["slug"] + "/"
 
@@ -1172,7 +1182,7 @@ def build_llms():
         "Salma Gifts is an online gift shop in Jordan making personalized engagement and wedding items: artificial-flower bridal bouquets (tulip, crystal, calla, rose/jouri, peony; any color to match the dress), mirror engagement ring trays with the couple's names (wooden back against breaking), marriage-contract (katb el-kitab) signature book packages, dowry (mahr) boxes and graduation gifts. 1500+ orders completed, 120+ orders a week. Delivery to all governorates of Jordan for 2 JOD within two days. Cash on delivery with inspection before paying. Orders via Instagram DM @salma.gifts1.",
         "",
         "## الأسعار (دينار أردني، بدون التوصيل)",
-        f"- مسكة العروس، كل الأنواع: {P['masaka']} (ورد صناعي عالي الجودة، 20–25 وردة). تعليقة بالأسماء والتاريخ: +{P['taliqa']}",
+        f"- مسكة العروس، كل الأنواع: {P['masaka']} بدل {P['masaka_old']} (عرض دائم) — {withdel('masaka')} مع التوصيل (ورد صناعي عالي الجودة، 20–25 وردة). تعليقة بالأسماء والتاريخ: +{P['taliqa']}",
         f"- صينية الخطوبة / الدبل (مرآة بظهر خشبي، بالأسماء والتاريخ، مع علب الخواتم): {P['saniya']}",
         f"- بكج البرواز (صينية + برواز بصمات): {P['bakj_berwaz']}",
         f"- البكج الأساسي (صينية + كتاب توقيع وبصمات + رسالة العمر + حبر): {P['bakj_asasi']}",
