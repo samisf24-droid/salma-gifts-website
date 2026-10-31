@@ -276,7 +276,7 @@ def bc_page(key):
 STORE_ID = SITE + "/#store"
 STORE = {
     "@type": "OnlineStore", "@id": STORE_ID,
-    "name": "Salma Gifts - هدايا سلمى", "alternateName": ["هدايا سلمى", "Salma Gifts", "سلمى للهدايا"],
+    "name": "Salma Gifts - هدايا سلمى", "alternateName": ["هدايا سلمى", "Salma Gifts", "SalmaGifts", "Salma Gifts Jordan", "سلمى جيفتس", "سلمى للهدايا"],
     "url": SITE + "/", "logo": SITE + "/assets/img/logo-512.png",
     "image": SITE + "/assets/img/og-salma-gifts.jpg",
     "slogan": SLOGAN,
@@ -412,7 +412,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
       <li><a href="{FB}" target="_blank" rel="noopener">فيسبوك</a> · <a href="{MESSENGER}" target="_blank" rel="noopener">ماسنجر</a></li>
     </ul>
   </div>
-  <p class="copy">© {datetime.date.today().year} Salma Gifts - هدايا سلمى، الأردن</p>
+  <p class="copy">© {datetime.date.today().year} Salma Gifts - هدايا سلمى (سلمى جيفتس)، الأردن</p>
 </footer>
 
 <div class="sticky-cta">{cta("احجزوا عبر إنستغرام", "btn btn-primary btn-block", "cta_sticky")}</div>
