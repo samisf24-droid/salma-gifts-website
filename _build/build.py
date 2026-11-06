@@ -632,8 +632,8 @@ def build_home():
   {faq_html(faqs)}
 </div></section>
 """
-    title = f"مسكات عرايس في الأردن بـ{P['masaka']} دينار: موديلات مسكة عروس بصور حقيقية | هدايا سلمى"
-    desc = f"مسكات عرايس ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، المسكة التركية وغيرها، مع تعليقة بأسمائكم. وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
+    title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار: مسكة عروس بصور حقيقية | هدايا سلمى"
+    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، المسكة التركية وغيرها، مع تعليقة بأسمائكم. وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
     write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)]))
 
 # =====================================================================
@@ -641,8 +641,8 @@ def build_home():
 # =====================================================================
 def build_masakat():
     head, bsch = page_intro([(PAGES["masakat"]["nav"], PAGES["masakat"]["path"])],
-        "مسكات عرايس في الأردن",
-        "مسكات عرايس (مسكة العروس) من ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة: توليب، كريستال، كالا، جوري وبيوني، وبأي لون يناسب فستانكم.",
+        "مسكات عروس 2026 في الأردن",
+        "مسكات عروس ومسكات عرايس (مسكة العروس) من ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة: توليب، كريستال، كالا، جوري وبيوني، وبأي لون يناسب فستانكم.",
         "masaka")
     cards = "".join(f"""<li><a href="{s['path']}">{img(s['photos'][0][0], s['photos'][0][1])}<span class="label"><b>{E(s['nav'])}</b><span>{P['masaka']} دينار</span></span></a></li>""" for s in STYLES)
     faqs = [FAQ[17], FAQ[18], FAQ[19], FAQ[0], FAQ[1], FAQ[13], FAQ[14], FAQ[2], FAQ[7], FAQ[9]]
@@ -686,6 +686,12 @@ def build_masakat():
   <figure class="photo">{img("masaka-arous-4.webp", "مسكة عروس توليب مع تعليقة أكريليك بالأسماء")}</figure>
 </div></section>
 
+<section class="section"><div class="container narrow">
+  <h2>أكثر مسكات العروس طلبًا في 2026</h2>
+  <p>العرايس بيسألونا أكثر شي عن: <strong>مسكة عروس توليب أبيض</strong> (<a href="{STYLES[0]['path']}">موديلات التوليب</a>)، <strong>مسكة عروس كريستال</strong>، <strong>مسكة عروس كالا</strong>، <strong>مسكة عروس جوري</strong>، و<strong>مسكة عروس بيوني</strong>. ومنها الناعمة للخطوبة وكتب الكتاب، والفخمة والملكية للزفاف، ومسكات عروس للحنّة بألوان، ومسكات عرايس بالأسماء مع تعليقة أكريليك.</p>
+  <p>وكلها ورد صناعي عالي الجودة شكله طبيعي وما بيذبل، بسعر واحد {P['masaka']} دينار بدل 25 (عرض خاص)، و{withdel('masaka')} مع التوصيل لعمّان والزرقاء وإربد والسلط ومادبا وجرش وعجلون والكرك والعقبة وكل محافظات الأردن.</p>
+</div></section>
+
 {section("قبل الحجز", promise_list(), cls="tint")}
 <section class="section"><div class="container narrow">
   <h2>أسئلة عن مسكات العروس</h2>
@@ -696,8 +702,8 @@ def build_masakat():
            product_schema("مسكة العروس", "مسكة عروس من الورد الصناعي عالي الجودة، 20 إلى 25 وردة: توليب، كريستال، كالا، جوري، بيوني، وألوان حسب الطلب.",
                           ["masaka-arous-crystal.webp", "masaka-arous-calla.webp", "masaka-arous-tulip.webp", "masaka-arous-1.webp"], P["masaka"], sku="masaka")]
     write(PAGES["masakat"]["path"], layout("masakat", PAGES["masakat"]["path"],
-        f"مسكات عرايس في الأردن: مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
-        f"مسكات عرايس في الأردن: مسكة عروس توليب وكريستال وكالا وجوري وبيوني، ورد صناعي لا يذبل، {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن. معاينة ودفع عند الاستلام.",
+        f"مسكات عروس 2026 في الأردن: مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
+        f"مسكات عروس 2026 ومسكات عرايس في الأردن: مسكة عروس توليب أبيض وكريستال وكالا وجوري وبيوني، ورد صناعي لا يذبل، {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن. معاينة ودفع عند الاستلام.",
         body, sch, og_img="masaka-arous-crystal.webp"))
 
 def build_style(s):
@@ -973,8 +979,8 @@ def build_models_index():
         {"@type": "ListItem", "position": i + 1, "url": SITE + model_path(m), "name": m["h1"]} for i, m in enumerate(MODELS)]}
     sch = [bsch, itemlist, faq_schema([FAQ[13], FAQ[1], FAQ[14], FAQ[7]])]
     write(MODELS_PATH, layout("style-models", MODELS_PATH,
-        f"موديلات مسكات عرايس 2026 بصور حقيقية بـ{P['masaka']} دينار | هدايا سلمى",
-        f"موديلات مسكات العرايس بصور حقيقية: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، توليب وجبسوفيل، المسكة التركية وغيرها. كل الموديلات {P['masaka']} دينار مع توصيل لكل الأردن.",
+        f"صور مسكات عروس 2026: {len(MODELS)} موديل بصور حقيقية بـ{P['masaka']} دينار | هدايا سلمى",
+        f"صور مسكات عروس 2026 حقيقية من شغلنا: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، توليب وجبسوفيل، المسكة التركية وغيرها. كل الموديلات {P['masaka']} دينار مع توصيل لكل الأردن.",
         body, sch, og_img=model_img(MODELS[0])))
 
 def build_model(m):
@@ -1178,7 +1184,7 @@ def build_llms():
     lines = [
         "# Salma Gifts - هدايا سلمى",
         "",
-        f"> متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات العرايس / مسكة العروس (توليب، كريستال، كالا، جوري، بيوني — ورد صناعي لا يذبل)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج. توصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام. الطلب عبر رسائل إنستغرام @salma.gifts1. شعارنا: {SLOGAN}",
+        f"> متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات عروس 2026 / مسكات العرايس / مسكة العروس (توليب، كريستال، كالا، جوري، بيوني — ورد صناعي لا يذبل)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج. توصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام. الطلب عبر رسائل إنستغرام @salma.gifts1. شعارنا: {SLOGAN}",
         "",
         "Salma Gifts is an online gift shop in Jordan making personalized engagement and wedding items: artificial-flower bridal bouquets (tulip, crystal, calla, rose/jouri, peony; any color to match the dress), mirror engagement ring trays with the couple's names (wooden back against breaking), marriage-contract (katb el-kitab) signature book packages, dowry (mahr) boxes and graduation gifts. 1500+ orders completed, 120+ orders a week. Delivery to all governorates of Jordan for 2 JOD within two days. Cash on delivery with inspection before paying. Orders via Instagram DM @salma.gifts1.",
         "",
