@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "15"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "16"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -657,6 +657,7 @@ def build_masakat():
   <h2>موديلات المسكات بصور حقيقية</h2>
   <p class="section-intro">كل موديل بصفحة فيها صورته وتفاصيله. اختاروا وأرسلوا لنا اسم الموديل.</p>
   <ul class="rail rail-grid">{model_cards(MODELS)}</ul>
+  <p><a class="btn btn-quiet" href="{SOWAR_PATH}">شوفي صور مسكات عروس 2026</a></p>
 </div></section>
 
 <section class="section" id="peony"><div class="container split">
@@ -968,6 +969,7 @@ def build_models_index():
   <h2>اختاروا موديل مسكتكم</h2>
   <p class="section-intro">ورد صناعي عالي الجودة لا يذبل، وكل موديل يمكن تجهيزه بلون يناسب فستانكم.</p>
   <ul class="rail rail-grid">{model_cards(MODELS)}</ul>
+  <p><a class="btn btn-quiet" href="{SOWAR_PATH}">صور مسكات عروس 2026 (25 صورة)</a></p>
 </div></section>
 {section("قبل الحجز", promise_list(), cls="tint")}
 <section class="section"><div class="container narrow">
@@ -1173,7 +1175,7 @@ def articles_block():
 </div></section>"""
 
 def all_paths():
-    return [PAGES[k]["path"] for k in ["home"] + NAV_ORDER] + [s["path"] for s in STYLES] + [MODELS_PATH] + [model_path(m) for m in MODELS] + [MAQALAT_PATH] + [art_path(a) for a in ARTICLES]
+    return [PAGES[k]["path"] for k in ["home"] + NAV_ORDER] + [s["path"] for s in STYLES] + [MODELS_PATH, SOWAR_PATH] + [model_path(m) for m in MODELS] + [MAQALAT_PATH] + [art_path(a) for a in ARTICLES]
 
 def build_sitemap():
     urls = "".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY}</lastmod></url>\n" for p in all_paths())
@@ -1204,6 +1206,9 @@ def build_llms():
         f"- مسكة عروس بيوني: بيوني أبيض مع جبسوفيل، أو بالوردي حسب الطلب ({SITE}{PAGES['masakat']['path']}#peony)",
         "",
         "",
+        f"## صور مسكات عروس 2026 ({SITE}{SOWAR_PATH})",
+    ] + [f"- {name}" for n, name in SOWAR] + [
+        "",
         f"## موديلات المسكات ({SITE}{MODELS_PATH})",
     ] + [f"- موديل {m['n']} — [{m['h1']}]({SITE}{model_path(m)}): {m['lead']}" for m in MODELS] + [
         "",
@@ -1225,11 +1230,68 @@ def build_llms():
     with open(os.path.join(ROOT, "llms.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
+# =====================================================================
+# صور مسكات عروس 2026 (معرض الصور)
+# =====================================================================
+SOWAR_PATH = "/masakat-arayes/sowar/"
+SOWAR = [
+ ("01","مسكة عروس جوري أبيض مع جبسوفيل وفيونكة دانتيل"),
+ ("02","مسكة عروس توليب أبيض بإطار كريستال"),
+ ("03","مسكة عروس توليب أبيض بالكريستال ومقبض ستراس"),
+ ("04","مسكة عروس كالا وجوري أزرق مع تعليقة بالأسماء"),
+ ("05","مسكة عروس كالا أبيض مع تعليقة بالأسماء"),
+ ("06","مسكة عروس توليب بالكريستال مع تعليقة بالأسماء"),
+ ("07","مسكة عروس بيوني أبيض باللولو"),
+ ("08","مسكة عروس توليب أبيض باللولو والجبسوفيل"),
+ ("09","مسكة عروس توليب مع بوتونيير للعريس"),
+ ("10","مسكة عروس كالا باللولو بمقبض كريستال"),
+ ("11","مسكة عروس كالا أبيض بمقبض ستراس"),
+ ("12","مسكة عروس كالا وتوليب بالكريستال"),
+ ("13","مسكة عروس كالا أبيض بمقبض دانتيل"),
+ ("14","مسكة عروس كالا أبيض مع أغصان ناعمة"),
+ ("15","مسكة عروس كالا وجوري أبيض"),
+ ("16","مسكة عروس جوري أبيض بفيونكة دانتيل"),
+ ("17","مسكة عروس توليب باللولو مع تعليقة بالأسماء"),
+ ("18","مسكة عروس كالا وجوري زهري"),
+ ("19","مسكة عروس توليب أبيض ناعمة باللولو"),
+ ("20","مسكة عروس جربيرا وجوري بألوان ناعمة مع تعليقة"),
+ ("21","مسكة عروس قوس التوليب باللولو"),
+ ("22","مسكة عروس توليب أبيض بمقبض لولو"),
+ ("23","مسكة عروس جوري أحمر بمقبض لولو"),
+ ("24","مسكة عروس بألوان ناعمة باللولو"),
+ ("25","مسكة عروس بيوني أبيض بمقبض دانتيل"),
+]
+
+def build_sowar():
+    trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("صور مسكات عروس 2026", SOWAR_PATH)]
+    head, bsch = page_intro(trail, "صور مسكات عروس 2026",
+        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل وتعليقة بالأسماء. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
+    cards = "".join(f'<li><figure>{img("sowar/maska-"+n+".webp", name+" — هدايا سلمى، الأردن", w=900, h=1200)}<figcaption class="label"><b>{E(name)}</b><span>{P["masaka"]} دينار</span></figcaption></figure></li>' for n, name in SOWAR)
+    body = head + f"""
+<section class="section"><div class="container">
+  <h2>اختاري المسكة اللي بتشبهك</h2>
+  <p class="section-intro">ابعتيلنا صورة المسكة اللي عجبتك برسالة على إنستغرام، ومنجهزها بلون يناسب فستانك.</p>
+  <ul class="rail rail-grid gallery">{cards}</ul>
+  <p><a class="btn btn-quiet" href="{MODELS_PATH}">شوفي الموديلات بأرقامها</a></p>
+</div></section>
+{section("قبل الحجز", promise_list(), cls="tint")}
+<section class="section"><div class="container narrow">
+  <h2>أسئلة عن مسكات العروس</h2>
+  {faq_html([FAQ[1], FAQ[13], FAQ[14], FAQ[7]])}
+  {related("masakat")}
+</div></section>"""
+    gallery = {"@type": "ImageGallery", "name": "صور مسكات عروس 2026 — هدايا سلمى", "url": SITE + SOWAR_PATH,
+               "image": [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/sowar/maska-" + n + ".webp", "name": name} for n, name in SOWAR]}
+    write(SOWAR_PATH, layout("style-sowar", SOWAR_PATH,
+        f"صور مسكات عروس 2026: {len(SOWAR)} صورة مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
+        f"صور مسكات عروس 2026 من هدايا سلمى: توليب أبيض، كالا، جوري، بيوني وكريستال باللولو والدانتيل. ورد صناعي لا يذبل بـ{P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل الأردن.",
+        body, [bsch, gallery, faq_schema([FAQ[1], FAQ[13], FAQ[14], FAQ[7]])], og_img="sowar/maska-02.webp"))
+
 if __name__ == "__main__":
     build_home(); build_masakat()
     for s in STYLES:
         build_style(s)
-    build_models_index()
+    build_models_index(); build_sowar()
     for m in MODELS:
         build_model(m)
     build_articles_index()
