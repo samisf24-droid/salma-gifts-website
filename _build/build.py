@@ -539,7 +539,7 @@ def bouquet_hero():
     slides = "".join(f'''<li class="mslide">
   <a class="mphoto" href="{SOWAR_PATH}">{img("sowar/maska-" + n + ".webp", names[n] + " — هدايا سلمى، الأردن", lazy=(i > 1), w=900, h=1200)}</a>
   <div class="minfo">
-    <span class="mnum">مسكات عروس 2026</span>
+    <span class="mnum">عرض خاص</span>
     <h3><a href="{SOWAR_PATH}">{E(names[n].replace("مسكة عروس ", ""))}</a></h3>
     <p>ورد صناعي عالي الجودة لا يذبل · <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s></p>
     <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(names[n])}">{IG_ICON}<span>احجزي هاي المسكة</span></a>
