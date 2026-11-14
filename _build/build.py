@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "22"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "23"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -847,6 +847,7 @@ def build_style(s):
 {models_block}<section class="section"><div class="container narrow">
   <h2>أسئلة عن مسكة ال{E(s['name'])}</h2>
   {faq_html(faqs)}
+  {('<p><a class="text-link" href="' + MAQALAT_PATH + {"khotoba": "maskat-khotoba-2026/", "tulip": "maskat-arous-tulip/"}.get(s["key"], "ajmal-maskat-arous-2026/") + '">' + {"khotoba": "أفكار مسكات خطوبة 2026", "tulip": "مسكة عروس توليب: أشكالها وسعرها"}.get(s["key"], "أجمل مسكات عروس 2026") + ' ' + ARROW + '</a></p>')}
   <nav class="related" aria-label="أنواع أخرى"><p>أنواع أخرى</p><div class="chips">{others}<a href="{PAGES['masakat']['path']}#peony">مسكة عروس بيوني</a></div></nav>
 </div></section>"""
     sch = [bsch, faq_schema(faqs),
@@ -1236,7 +1237,102 @@ def _art_price():
 </ul>
 <p><a class="btn btn-quiet" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>"""
 
+
+def _cat(slugs): return [m for m in CATALOG if m["slug"] in slugs]
+
+def _art_best2026():
+    groups = [
+        ("التوليب الأبيض باللولو والكريستال", "الأكثر طلبًا هذا الموسم: توليب أبيض ناعم يحيط به إطار من اللولو أو حبّات الكريستال، ومسكة ستراس أو لولو. يليق بالفستان المنفوش والمطرّز.", ["toulib-crystal", "toulib-lulu", "toulib-lulu-crystal"]),
+        ("الكالا الطويلة الأنيقة", "خطوط الكالا الطويلة تعطي إطلالة ملكية هادئة، وتناسب الفستان الضيق والساتان. أجملها مع مقبض ستراس أو دانتيل.", ["kala-classic-strass", "kala-abyad", "kala-dantel"]),
+        ("البيوني الممتلئ", "زهور كبيرة ومفتوحة بتنسيق دائري، ناعمة جدًا في الصور، وتناسب ستايل البوهو والدانتيل.", ["peony-lulu", "peony-dantel"]),
+        ("المسكة المنسدلة (القوس)", "توليب ينسدل على شكل قوس مع خيوط اللولو، لعروس تحب التصميم المختلف، وتناسب فستان الحورية.", ["qaws-toulib", "toulib-halaqa-lulu"]),
+        ("لمسة لون للخطوبة والحنّة", "الأزرق الفاتح، والزهري، والخوخي: ألوان هادئة تكمّل فستان الخطوبة أو الحنّة.", ["kala-jouri-azraq", "kala-zahr-wardi", "zahri-naem"]),
+        ("الجوري الكلاسيكي", "الجوري الأبيض مع الجبسوفيل لا يخرج من الموضة، والأحمر لعروس جريئة ورومانسية.", ["jouri-abyad", "jouri-ahmar"]),
+    ]
+    blocks = "".join(f"<h2>{i}. {E(t)}</h2>\n<p>{E(d)}</p>\n<ul class=\"pgrid\">{model_cards(_cat(xs))}</ul>" for i, (t, d, xs) in enumerate(groups, 1))
+    return f"""
+<p>هذه أجمل مسكات العروس لموسم 2026 في الأردن، بصور حقيقية من شغلنا. كلها ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى بعد العرس، ونجهّز أي موديل بلون يناسب فستانك.</p>
+{blocks}
+<h2>كيف تختارين بين هذه الأفكار؟</h2>
+<p>ابدئي من الفستان: المنفوش تناسبه المسكة الدائرية الممتلئة، والضيق تناسبه المنسدلة أو الكالا الطويلة، والمطرّز يناسبه الكريستال. وللتفاصيل اقرئي <a href="{MAQALAT_PATH}ikhtiyar-maskat-al-arous/">كيف تختارين مسكة العروس حسب فستانك</a>.</p>
+<p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>"""
+
+def _art_khotoba():
+    return f"""
+<p>مسكة الخطوبة تختلف عن مسكة العرس: الفستان غالبًا ملوّن، والجو أخفّ، فتحتمل المسكة الألوان واللمسات المرحة. هذه أفكار لمسكات خطوبة 2026 من شغلنا، وكلها ورد صناعي عالي الجودة لا يذبل.</p>
+<h2>1. ألوان ناعمة: خوخي وزهري</h2>
+<p>جربيرا وجوري بدرجات الخوخي والزهري الفاتح مع الجبسوفيل، تناسب فساتين البيج والزهري والأوف وايت.</p>
+<ul class="pgrid">{model_cards(_cat(["zahri-naem", "naem-lulu"]))}</ul>
+<h2>2. أبيض مع لمسة لون</h2>
+<p>كالا أو توليب أبيض مع جوري أزرق أو زهري في الوسط: أنيقة وتظهر جميلة في الصور، وتناسب فستان الخطوبة بلون مطابق.</p>
+<ul class="pgrid">{model_cards(_cat(["kala-jouri-azraq", "kala-zahr-wardi"]))}</ul>
+<h2>3. الأبيض الكلاسيكي</h2>
+<p>كثير من العرائس يفضّلن الأبيض حتى في الخطوبة، خصوصًا إذا كانت الخطوبة وكتب الكتاب في يوم واحد.</p>
+<ul class="pgrid">{model_cards(_cat(["toulib-crystal", "jouri-abyad"]))}</ul>
+<h2>كيف تختارين لون مسكة الخطوبة؟</h2>
+<ul>
+<li><b>فستان سادة:</b> مسكة بلون من نفس درجة الفستان أو أفتح بقليل.</li>
+<li><b>فستان مطرّز أو لامع:</b> مسكة بيضاء أو بلون هادئ حتى لا تتزاحم التفاصيل.</li>
+<li><b>أرسلي لنا صورة الفستان</b> على إنستغرام، ونقترح لك الألوان المناسبة.</li>
+</ul>
+<p>سعر مسكة الخطوبة عندنا مثل كل المسكات: {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل لأي محافظة.</p>
+<p class="center"><a class="btn btn-primary" href="/masakat-arayes/khotoba/">مسكات الخطوبة</a></p>"""
+
+def _art_tulip():
+    return f"""
+<p>مسكة العروس التوليب من أكثر المسكات طلبًا في الأردن: ناعمة وأنيقة، وتليق بالخطوبة وكتب الكتاب والعرس. هذه أشكالها عندنا وسعرها.</p>
+<h2>أشكال مسكة التوليب</h2>
+<h3>توليب باللولو والجبسوفيل</h3>
+<p>إطار من اللولو والجبسوفيل حول التوليب، مع كشكش من التل. فخامة هادئة.</p>
+<h3>توليب بالكريستال</h3>
+<p>حبّات كريستال حول التوليب ومسكة ستراس فضية، لعروس تحب اللمعة.</p>
+<h3>قوس التوليب</h3>
+<p>توليب ينسدل على شكل قوس مع خيوط اللولو، تصميم مختلف يناسب الفستان الضيق.</p>
+<ul class="pgrid">{model_cards([m for m in CATALOG if m["style"] in ("tulip", "crystal")])}</ul>
+<h2>كم سعر مسكة العروس التوليب؟</h2>
+<p>عند هدايا سلمى سعر مسكة التوليب {P['masaka']} دينارًا لكل الأشكال، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. والتوليب صناعي عالي الجودة يشبه الطبيعي ولا يذبل.</p>
+<h2>التوليب أبيض فقط؟</h2>
+<p>الأبيض هو الأكثر طلبًا، ونجهّز التوليب بالوردي أو بأي لون يناسب فستانك.</p>
+<p class="center"><a class="btn btn-primary" href="/masakat-arayes/tulip/">مسكات التوليب</a></p>"""
+
+AMMAN_AREAS = "عبدون، دابوق، خلدا، تلاع العلي، الجبيهة، صويلح، الشميساني، جبل عمّان، الصويفية، أم أذينة، طبربور، ماركا، المقابلين، الياسمين، خريبة السوق، أبو نصير، شفا بدران، مرج الحمام، ناعور، سحاب"
+def _art_amman():
+    return f"""
+<p>تبحثين عن مسكة عروس في عمّان؟ نجهّز مسكات العروس في ورشتنا، ونوصلها لكل مناطق عمّان خلال يومين، وتعاينينها قبل أن تدفعي.</p>
+<h2>التوصيل داخل عمّان</h2>
+<ul>
+<li><b>المدة:</b> خلال يومين من تأكيد الطلب، ويُفضَّل الحجز قبل المناسبة بثلاثة أيام.</li>
+<li><b>السعر:</b> {DELIVERY} دينار للتوصيل.</li>
+<li><b>الدفع:</b> عند الاستلام، نقدًا أو كليك، بعد المعاينة.</li>
+</ul>
+<p>نوصل لكل أحياء عمّان، منها: {AMMAN_AREAS}، وغيرها. ونوصل كذلك لإربد والزرقاء والسلط ومادبا وجرش وعجلون وكل المحافظات.</p>
+<h2>سعر مسكة العروس في عمّان</h2>
+<p>{P['masaka']} دينارًا لكل الموديلات، و{withdel('masaka')} دينارًا شاملة التوصيل لأي منطقة في عمّان.</p>
+<h2>الأكثر طلبًا في عمّان</h2>
+<ul class="pgrid">{model_cards(_cat(["toulib-crystal", "toulib-lulu", "kala-classic-strass", "peony-lulu"]))}</ul>
+<p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>"""
+
 ARTICLES = [
+    {"slug": "ajmal-maskat-arous-2026", "date": "2026-11-14", "title": "أجمل مسكات عروس 2026 في الأردن: أفكار بصور حقيقية",
+     "desc": f"أجمل مسكات العروس لموسم 2026: توليب باللولو والكريستال، كالا طويلة، بيوني، مسكة القوس، ولمسات لون للخطوبة. صور حقيقية وسعر {P['masaka']} دينار.",
+     "img": "sowar/maska-02.webp", "body": _art_best2026,
+     "faq": [("ما أكثر مسكات العروس طلبًا في 2026؟", "التوليب الأبيض باللولو أو بالكريستال، ثم الكالا الطويلة بمقبض ستراس، والبيوني الممتلئ."),
+             ("هل أجد هذه المسكات في الأردن؟", f"نعم، عند هدايا سلمى بسعر {P['masaka']} دينارًا لكل الموديلات، مع توصيل لكل المحافظات خلال يومين.")]},
+    {"slug": "maskat-khotoba-2026", "date": "2026-11-14", "title": "مسكات خطوبة 2026: ألوان وأفكار تناسب فستان الخطوبة",
+     "desc": f"أفكار مسكات خطوبة 2026 بألوان ناعمة: خوخي وزهري وأزرق، أو أبيض مع لمسة لون. كيف تختارين لون المسكة حسب الفستان، وسعرها {P['masaka']} دينار.",
+     "img": "sowar/maska-24.webp", "body": _art_khotoba,
+     "faq": [("ما لون مسكة الخطوبة المناسب؟", "لون من نفس درجة الفستان أو أفتح بقليل للفستان السادة، وأبيض أو لون هادئ للفستان المطرّز."),
+             ("كم سعر مسكة الخطوبة؟", f"{P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل لأي محافظة.")]},
+    {"slug": "maskat-arous-tulip", "date": "2026-11-14", "title": "مسكة عروس توليب: أشكالها وسعرها في الأردن",
+     "desc": f"مسكة العروس التوليب: باللولو والجبسوفيل، بالكريستال، أو على شكل قوس. صور حقيقية، وسعرها {P['masaka']} دينار مع توصيل لكل الأردن.",
+     "img": "sowar/maska-08.webp", "body": _art_tulip,
+     "faq": [("كم سعر مسكة العروس التوليب في الأردن؟", f"عند هدايا سلمى {P['masaka']} دينارًا لكل الأشكال، و{withdel('masaka')} مع التوصيل."),
+             ("هل التوليب طبيعي؟", "لا، توليب صناعي عالي الجودة يشبه الطبيعي ولا يذبل.")]},
+    {"slug": "maskat-arous-amman", "date": "2026-11-14", "title": "مسكة عروس في عمّان: توصيل خلال يومين لكل المناطق",
+     "desc": f"مسكات عروس في عمّان بسعر {P['masaka']} دينار، توصيل خلال يومين لكل أحياء عمّان بـ{DELIVERY} دينار، ومعاينة ودفع عند الاستلام.",
+     "img": "sowar/maska-17.webp", "body": _art_amman,
+     "faq": [("هل توصلون مسكة العروس داخل عمّان؟", f"نعم، لكل مناطق عمّان خلال يومين، بسعر توصيل {DELIVERY} دينار."),
+             ("كم سعر مسكة العروس في عمّان؟", f"{P['masaka']} دينارًا، و{withdel('masaka')} شاملة التوصيل.")]},
     {"slug": "ikhtiyar-maskat-al-arous", "title": "كيف تختارين مسكة العروس حسب فستانك؟",
      "desc": "دليل اختيار مسكة العروس حسب قَصّة الفستان وتفاصيله ولونه وطولك: منفوش، حورية، ساتان، دانتيل، كريستال، وفساتين الخطوبة الملوّنة، مع موديلات حقيقية.",
      "img": "model-turkish-qaws.webp", "body": _art_dress,
@@ -1269,7 +1365,7 @@ def build_article(a):
   <nav class="related"><p>مقالات أخرى</p><ul>{others}</ul></nav>
 </div></article>"""
     art = {"@type": "Article", "headline": a["title"], "description": a["desc"], "inLanguage": "ar",
-           "image": SITE + "/assets/img/" + a["img"], "datePublished": "2026-10-25", "dateModified": TODAY,
+           "image": SITE + "/assets/img/" + a["img"], "datePublished": a.get("date", "2026-10-25"), "dateModified": TODAY,
            "author": {"@id": STORE_ID}, "publisher": {"@id": STORE_ID}, "mainEntityOfPage": SITE + art_path(a)}
     write(art_path(a), layout("style-article", art_path(a), f"{a['title']} | هدايا سلمى", a["desc"], body,
           [bsch, art, faq_schema(a["faq"])], og_img=a["img"]))
@@ -1298,9 +1394,16 @@ def all_paths():
     return [PAGES[k]["path"] for k in ["home"] + NAV_ORDER] + [s["path"] for s in STYLES] + [MODELS_PATH, SOWAR_PATH] + [model_path(m) for m in MODELS] + [MAQALAT_PATH] + [art_path(a) for a in ARTICLES]
 
 def build_sitemap():
-    urls = "".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY}</lastmod></url>\n" for p in all_paths())
+    imgs = {model_path(m): [m["img"]] for m in MODELS}
+    imgs[SOWAR_PATH] = [c["img"] for c in CATALOG]
+    imgs[MODELS_PATH] = [c["img"] for c in CATALOG]
+    for st in STYLES: imgs[st["path"]] = [ph[0] for ph in st["photos"]]
+    def entry(p):
+        im = "".join(f"<image:image><image:loc>{SITE}/assets/img/{x}</image:loc></image:image>" for x in imgs.get(p, []))
+        return f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY}</lastmod>{im}</url>\n"
+    urls = "".join(entry(p) for p in all_paths())
     with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
-        f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+        f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n{urls}</urlset>\n')
 
 def build_llms():
     lines = [
