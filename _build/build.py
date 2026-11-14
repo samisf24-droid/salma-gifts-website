@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "21"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "22"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -41,6 +41,7 @@ PRICES = {
 }
 P = PRICES
 def withdel(k): return P[k] + DELIVERY
+SALE_PCT = round((P["masaka_old"] - P["masaka"]) * 100 / P["masaka_old"])
 
 # =====================================================================
 # الصفحات — لا تغيّر أي رابط موجود (بنخسر ترتيب جوجل)
@@ -263,10 +264,10 @@ def model_path(m): return MODELS_PATH + m["slug"] + "/"
 def model_img(m): return m["img"]
 def model_cards(items, eager=0):
     return "".join(f'''<li><a class="pcard" href="{model_path(m)}">
-  <span class="pc-img">{img(m["img"], m["h1"] + " — هدايا سلمى", lazy=(i >= eager), w=m["w"], h=m["h"])}</span>
+  <span class="pc-img">{img(m["img"], m["h1"] + " — هدايا سلمى", lazy=(i >= eager), w=m["w"], h=m["h"])}<em class="pc-sale">خصم {SALE_PCT}%</em></span>
   <b>{E(m["name"])}</b>
   <span class="pc-desc">{E(m["lead"])}</span>
-  <span class="pc-price"><strong>{P['masaka']}</strong> دينار <s>{P['masaka_old']}</s></span>
+  <span class="pc-price"><strong>{P['masaka']}</strong> دينار <s>{P['masaka_old']} دينار</s></span>
 </a></li>''' for i, m in enumerate(items))
 PEONY = ("sowar/maska-07.webp", "مسكة عروس بيوني أبيض باللولو", "بيوني أبيض باللولو")
 
@@ -277,7 +278,7 @@ FAQ = [
     ("من أين أشتري مسكة عروس في الأردن؟",
      f"من هدايا سلمى، حيث نجهّز مسكات العرائس من التوليب والكريستال والكالا والجوري والبيوني بسعر {P['masaka']} دينارًا، ونوصلها إلى جميع محافظات الأردن مقابل {DELIVERY} دينار. يتم الطلب برسالة على إنستغرام salma.gifts1."),
     ("كم سعر مسكة العروس؟",
-     f"سعرها {P['masaka']} دينارًا بدل {P['masaka_old']} (عرض خاص) لجميع الأنواع، و{withdel('masaka')} دينارًا شاملة التوصيل."),
+     f"سعرها الحالي {P['masaka']} دينارًا لجميع الأنواع (عرض خاص، والسعر الأصلي {P['masaka_old']})، و{withdel('masaka')} دينارًا شاملة التوصيل."),
     ("هل ورد المسكة طبيعي أم صناعي؟",
      "ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى دائمة. وتضم كل مسكة ما بين 20 و25 وردة."),
     ("كم سعر صينية الخطوبة؟",
@@ -313,7 +314,7 @@ FAQ = [
 ]
 FAQ += [
     ("وين ألاقي مسكة عروس بأقل من 20 دينار في الأردن؟",
-     f"عند هدايا سلمى، سعر مسكة العروس {P['masaka']} دينارًا بدل {P['masaka_old']} كعرض خاص، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، مع معاينة ودفع عند الاستلام. الطلب برسالة على إنستغرام salma.gifts1."),
+     f"عند هدايا سلمى، سعر مسكة العروس حاليًا {P['masaka']} دينارًا (عرض خاص)، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، مع معاينة ودفع عند الاستلام. الطلب برسالة على إنستغرام salma.gifts1."),
     ("مين عامل عروض على مسكات العرايس في الأردن؟",
      f"هدايا سلمى عندها عرض خاص على كل موديلات مسكات العرايس: {P['masaka']} دينارًا بدل {P['masaka_old']}، لكل الأنواع (توليب، كالا، جوري، بيوني، كريستال)، والتوصيل لكل المحافظات بـ{DELIVERY} دينار."),
 ]
@@ -579,11 +580,14 @@ def section(title, inner, cls="", intro=""):
 def includes(items):
     return '<ul class="includes">' + "".join(f"<li>{E(x)}</li>" for x in items) + "</ul>"
 
+SALE_PCT = round((P["masaka_old"] - P["masaka"]) * 100 / P["masaka_old"])
 def price_line(k, note=None):
     note = note or f"{withdel(k)} دينارًا شاملة التوصيل إلى أي محافظة"
-    old = f'<s class="was">{P["masaka_old"]}</s>' if k == "masaka" else ""
-    tag = '<em class="offer">عرض خاص</em>' if k == "masaka" else ""
-    return f'<p class="p-price">{tag}<b>{P[k]} <small>دينار</small></b>{old}<span>{E(note)}</span></p>'
+    if k == "masaka":
+        return (f'<div class="p-price sale"><span class="pp-label">السعر الحالي</span>'
+                f'<p class="pp-row"><b>{P[k]} <small>دينار</small></b><s class="was">{P["masaka_old"]} دينار</s><em class="offer">خصم {SALE_PCT}%</em></p>'
+                f'<span>{E(note)}</span></div>')
+    return f'<p class="p-price"><b>{P[k]} <small>دينار</small></b><span>{E(note)}</span></p>'
 
 def page_intro(trail, h1, lead, k=None, note=None, extra=""):
     """رأس صفحة المنتج: العنوان والسعر والزر — الصور تحته مباشرة."""
@@ -603,7 +607,7 @@ def page_intro(trail, h1, lead, k=None, note=None, extra=""):
 def name_preview():
     g, b = "سيف", "نور"
     return f"""
-<section class="section maker-sec" id="asmaa">
+<section class="section maker-sec sec-blush" id="asmaa">
   <div class="container hero-inner">
     <h2>جرّبي أسماءكم <span>قبل الحجز</span></h2>
     <p class="section-intro">اكتبي اسم العريس والعروس، وشوفيها على تعليقة المسكة أو على صينية الخطوبة.</p>
@@ -684,7 +688,7 @@ def build_home():
     <p class="hx-pill">{STAR}<span>أول موقع أردني مختص بمسكات العرايس</span>{STAR}</p>
     <h1><span class="hx-t">مسكات عروس 2026</span><span class="hx-s">مسكتك جاهزة باسمك وتاريخك، ورد صناعي فاخر لا يذبل</span></h1>
     <div class="hx-bot">
-      <p class="hx-price"><em>عرض خاص</em><b>{P['masaka']}</b><em>دينار</em><s>{P['masaka_old']}</s></p>
+      <p class="hx-price"><span class="hx-sale">خصم {SALE_PCT}%</span><b>{P['masaka']}</b><em>دينار</em><s>{P['masaka_old']}</s></p>
       <div class="hx-btns">
         <a class="btn btn-light" href="#mawdeelat" data-event="cta_hero_models">اختاري مسكتك</a>
         {cta("احجزي بالإنستغرام", "btn btn-glass", "cta_hero")}
@@ -692,7 +696,7 @@ def build_home():
     </div>
   </div>
 </section>
-<div class="stats container">{"".join(f'<div><b>{n}</b><span>{t}</span></div>' for n, t in STATS)}</div>"""
+<div class="stats container">{"".join(f'<div><b data-count="{n.lstrip("+")}" data-prefix="{"+" if n.startswith("+") else ""}">{n}</b><span>{t}</span></div>' for n, t in STATS)}</div>"""
     types = [(STYLES[0], "08"), (STYLES[2], "11"), (STYLES[3], "01"), (next(x for x in STYLES if x["key"] == "khotoba"), "24")]
     type_html = "".join(f'<li><a href="{st["path"]}"><i>{img("sowar/maska-" + n + ".webp", st["nav"] + " من هدايا سلمى", w=900, h=1200)}</i><span>{E("مسكات خطوبة" if st["key"] == "khotoba" else st["name"])}</span></a></li>' for st, n in types)
     best = [CAT_BY_N[n] for n in ["02", "07", "08", "21", "23", "01", "03", "25"]]
@@ -716,19 +720,22 @@ def build_home():
     faqs = [FAQ[17], FAQ[18], FAQ[1], FAQ[19], FAQ[2], FAQ[14], FAQ[9]]
     body = hero + f"""
 <section class="section" id="anwaa"><div class="container">
+  <p class="kicker">ابدئي من هنا</p>
   <div class="section-head"><h2>تسوّقي حسب النوع</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
   <ul class="types">{type_html}</ul>
 </div></section>
 
 <section class="section" id="mawdeelat"><div class="container">
+  <p class="kicker">مجموعة 2026</p>
   <div class="section-head"><h2>الأكثر طلبًا</h2><a href="{MODELS_PATH}">جميع الموديلات {ARROW}</a></div>
-  <p class="section-intro">كل الموديلات بـ{P['masaka']} دينار بدل {P['masaka_old']}. ونجهّز أي موديل بلون يناسب فستانك.</p>
+  <p class="section-intro">ورد صناعي فاخر لا يذبل، ونجهّز أي موديل بلون يناسب فستانك.</p>
   <ul class="pgrid">{best_html}</ul>
   <p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>
 </div></section>
 
 """ + name_preview() + f"""
-<section class="section"><div class="container">
+<section class="section sec-sage"><div class="container">
+  <p class="kicker">للخطوبة وكتب الكتاب</p>
   <div class="section-head"><h2>منتجاتنا الثانية</h2><a href="{PAGES['tawseel']['path']}">كل الأسعار {ARROW}</a></div>
   <ul class="others">{others_html}</ul>
 </div></section>
@@ -738,7 +745,8 @@ def build_home():
   <ol class="steps">{st}</ol>
 </div></section>
 
-<section class="section"><div class="container">
+<section class="section sec-cocoa"><div class="container">
+  <p class="kicker">ثقة أكثر من 1500 عروس</p>
   <h2>لماذا هدايا سلمى؟</h2>
   <p class="section-intro">أنجزنا أكثر من 1500 طلب، وكل طلب يُجهَّز في ورشتنا على حدة كأنه الوحيد.</p>
   <ul class="trust">{trust_html}</ul>
@@ -1075,7 +1083,7 @@ def build_models_index():
     body = bc + f"""
 <section class="p-head container">
   <h1>جميع موديلات مسكات العروس</h1>
-  <p class="lead">{len(CATALOG)} موديلًا بصور حقيقية، كلها ورد صناعي عالي الجودة لا يذبل، وكلها بـ{P['masaka']} دينار بدل {P['masaka_old']}. ونجهّز أي موديل بلون يناسب فستانك.</p>
+  <p class="lead">{len(CATALOG)} موديلًا بصور حقيقية، كلها ورد صناعي عالي الجودة لا يذبل، ونجهّز أي موديل بلون يناسب فستانك.</p>
   <div class="chips">{chips}</div>
 </section>
 <section class="section flush"><div class="container">
@@ -1215,7 +1223,7 @@ def _art_price():
 </ol>
 <h2>سعر مسكة العروس عند هدايا سلمى</h2>
 <div class="table-wrap"><table class="cmp"><tbody>
-<tr><th>المسكة، كل الموديلات ({len(CATALOG)} موديل)</th><td>{P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)</td></tr>
+<tr><th>المسكة، كل الموديلات ({len(CATALOG)} موديل)</th><td>{P['masaka']} دينار (عرض خاص، السعر الأصلي {P['masaka_old']})</td></tr>
 <tr><th>مع التوصيل لأي محافظة</th><td>{withdel('masaka')} دينار</td></tr>
 </tbody></table></div>
 <p>ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، وبأي لون يناسب الفستان. السعر واحد سواء كانت المسكة توليب أو كالا أو جوري أو بيوني أو كريستال.</p>
@@ -1377,7 +1385,7 @@ SOWAR = [
 def build_sowar():
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("صور مسكات عروس 2026", SOWAR_PATH)]
     head, bsch = page_intro(trail, "صور مسكات عروس 2026",
-        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
+        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار حاليًا، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
     cards = model_cards(CATALOG, eager=2)
     body = head + f"""
 <section class="section"><div class="container">

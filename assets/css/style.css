@@ -721,3 +721,38 @@ body.menu-open { overflow: hidden; }
 .tag { top: 58%; width: 31%; }
 .tag .names { font-size: clamp(16px, 4.8vw, 24px); }
 .tag .names .amp { margin: .15em 0 .05em; }
+
+/* v22 — ألوان أكثر حياة: وردي غبار، ميرمية، كاكاو — حتى ما يكون الموقع لونين بس */
+:root { --rose: #B65C69; --rose-soft: #F8E9E7; --sage: #6F8466; --sage-soft: #EAEFE4; --cocoa: #4B3227; }
+.kicker { display: inline-block; margin: 0 0 6px; font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--rose); background: var(--rose-soft); padding: 3px 12px; border-radius: 999px; }
+.sec-blush { background: linear-gradient(180deg, var(--rose-soft), #FBF3F0); }
+.sec-sage { background: var(--sage-soft); }
+.sec-sage .kicker { color: var(--sage); background: #fff; }
+.sec-sage .others a { border-color: #DCE4D3; }
+.sec-sage .oc-t em { color: var(--sage); }
+.sec-cocoa { background: var(--cocoa); color: #F5EBE1; }
+.sec-cocoa h2 { color: #FFF6EC; }
+.sec-cocoa .section-intro { color: #D9C6B5; }
+.sec-cocoa .kicker { background: rgba(255,255,255,.1); color: #F0C9A8; }
+.sec-cocoa .trust li { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); }
+.sec-cocoa .trust b { color: #FFF6EC; }
+.sec-cocoa .trust span { color: #CDB9A7; }
+.sec-cocoa .trust svg { color: #E7B48D; }
+.steps li::before { background: var(--rose-soft); color: var(--rose); }
+.stats b { background: linear-gradient(135deg, #B65C69, #A3744F); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+.types i { box-shadow: 0 0 0 1.5px #E9CFC9, 0 10px 24px -16px rgba(62,44,34,.5); }
+
+/* السعر: سعر حالي واضح + خصم حقيقي */
+.pc-sale { position: absolute; top: 10px; left: 10px; font-style: normal; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: var(--rose); color: #fff; }
+.pc-price strong { color: var(--rose); }
+.pc-price s { color: #A99A90; font-size: 12px; }
+.p-price.sale { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 14px; padding: 12px 16px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.pp-label { font-size: 12.5px; color: var(--muted); }
+.pp-row { display: flex; align-items: baseline; gap: 10px; margin: 0; flex-wrap: wrap; }
+.p-price.sale b { color: var(--rose); font-size: 36px; }
+.p-price.sale .was { font-size: 15px; color: #A99A90; text-decoration-color: #A99A90; text-decoration-thickness: 1px; }
+.p-price.sale .offer { background: var(--rose-soft); color: var(--rose); font-size: 12.5px; font-weight: 500; padding: 3px 10px; border-radius: 999px; align-self: center; font-style: normal; }
+.p-price.sale > span:last-child { font-size: 13px; color: var(--muted); }
+.hx-sale { align-self: center; font-size: 12px; font-weight: 500; background: var(--rose); color: #fff; padding: 3px 10px; border-radius: 999px; }
+.hx-price s { font-size: 15px; opacity: .7; }
+.btn-primary { background: linear-gradient(135deg, #C08A69 0%, #A06B4C 55%, #7A4E37 100%); }

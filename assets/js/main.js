@@ -19,6 +19,29 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
   if (nav) nav.addEventListener('click', function (e) { if (e.target.closest('a[href^="#"], a[href^="/#"]')) setMenu(false); });
 
+
+  // عدّاد الأرقام: بيعدّ من صفر لحد الرقم أول ما يبين الشريط
+  var counters = document.querySelectorAll('[data-count]');
+  var noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (counters.length && 'IntersectionObserver' in window && !noMotion) {
+    counters.forEach(function (el) { el.textContent = (el.getAttribute('data-prefix') || '') + '0'; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        var el = en.target, to = parseInt(el.getAttribute('data-count'), 10), pre = el.getAttribute('data-prefix') || '', t0 = null, dur = 1800;
+        function step(t) {
+          if (t0 === null) t0 = t;
+          var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+          el.textContent = pre + Math.round(to * e);
+          if (k < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { io.observe(el); });
+  }
+
   // قياس الضغط على أزرار الحجز (Google Analytics) — كل زر إله اسم بـ data-event
   document.addEventListener('click', function (e) {
     var el = e.target.closest && e.target.closest('[data-event]');
