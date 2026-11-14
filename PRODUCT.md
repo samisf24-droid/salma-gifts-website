@@ -34,7 +34,8 @@ Every piece is prepared one by one with the couple's names and date; best qualit
 - Slogan: «لتبقى ذكرياتكم الجميلة، خالدة» — shown prominently.
 - Voice: calm, classy, story-like, not pushy sales; short text, not a photo dump.
 - Visual identity (project doc salma-brand-identity.md, used in reels): ivory ground, gold accent, warm dark-brown text (never black); no dark backgrounds; no white fog overlays on photos; text on photos sits in small ivory cards. Fonts: Aref Ruqaa (celebratory headings), El Messiri (body, prices), Tajawal (small text). Prices shown clearly in Western digits.
-- Owner feedback on the site: no arch frames around photos, not a photo gallery, no huge hero photo, modern and middle-ground.
+- Owner feedback on the site: no arch frames around photos, not a photo gallery, modern and middle-ground.
+- Redesign 14/11/2026 (owner-approved, inspired by rayanhbouqet-sa.com): soft beige ground with white cards, Aref Ruqaa headings, full-width hero photo with text on it, Jordanian seven-pointed star around the «أول موقع أردني» badge, stats (+1500 orders, +25 models, 12 governorates — no Google rating, no weekly count), shop by type (توليب، كالا، جوري، مسكات خطوبة), side drawer menu with all products, app-style bottom tab bar. No WhatsApp button (owner keeps his phone number private).
 
 ## Evidence on Hand
 - Real product photos in `assets/img/` (bouquets incl. tulip, calla, pink; trays; packages; mahr box; graduation).

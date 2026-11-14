@@ -2,14 +2,22 @@
 // 1) فتح القائمة على الموبايل.  2) معاينة الأسماء على الصينية بالرئيسية.
 // كل محتوى الموقع مكتوب بالـHTML؛ إذا ما اشتغل السكربت، الزر بيفتح إنستغرام عادي.
 (function () {
-  var btn = document.querySelector('.menu-btn');
   var nav = document.getElementById('mobile-nav');
-  if (btn && nav) {
-    btn.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+  var veil = document.querySelector('.drawer-veil');
+  var btns = document.querySelectorAll('.menu-btn, .tab-menu');
+  function setMenu(open) {
+    if (!nav) return;
+    nav.classList.toggle('open', open);
+    if (veil) veil.hidden = !open;
+    document.body.classList.toggle('menu-open', open);
+    btns.forEach(function (b) { b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   }
+  btns.forEach(function (b) { b.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); }); });
+  if (veil) veil.addEventListener('click', function () { setMenu(false); });
+  var dc = document.querySelector('.d-close');
+  if (dc) dc.addEventListener('click', function () { setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  if (nav) nav.addEventListener('click', function (e) { if (e.target.closest('a[href^="#"], a[href^="/#"]')) setMenu(false); });
 
   // قياس الضغط على أزرار الحجز (Google Analytics) — كل زر إله اسم بـ data-event
   document.addEventListener('click', function (e) {

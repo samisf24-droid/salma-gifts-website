@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "17"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "18"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -98,6 +98,15 @@ STYLES = [
      "photos": [("sowar/maska-01.webp", "مسكة عروس جوري أبيض مع جبسوفيل وفيونكة دانتيل", "جوري مع جبسوفيل"), ("masaka-arous-jouri.webp", "مسكات عروس جوري أبيض مع جبسوفيل", "جوري مع جبسوفيل"),
                 ("masaka-arous-calla-blue.webp", "مسكة عروس جوري أزرق مع كالا", "جوري أزرق مع كالا")],
      "faq": [("كم سعر مسكة العروس الجوري؟", None), ("هل يتوفر الجوري بألوان؟", "نعم، الأبيض هو الأكثر طلبًا، ونجهّز الأزرق والوردي وأي لون يناسب فستانكم.")]},
+    {"key": "khotoba", "path": "/masakat-arayes/khotoba/", "name": "خطوبة", "nav": "مسكة خطوبة",
+     "h1": "مسكة خطوبة",
+     "lead": "مسكات خطوبة بالأبيض أو بألوان ناعمة تناسب فستان الخطوبة: زهري، أزرق، وألوان هادئة، مع لولو أو دانتيل وتعليقة بأسمائكم.",
+     "about": ["نجهّز مسكة الخطوبة من نفس ورد مسكات العروس: توليب وكالا وجوري وبيوني، ونختار معكم الألوان لتتناسق مع فستان الخطوبة.",
+               "الورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى من يوم الخطوبة. ويمكن إضافة تعليقة بأسماء الخطيبين وتاريخ الخطوبة."],
+     "photos": [("sowar/maska-24.webp", "مسكة خطوبة بألوان ناعمة باللولو", "ألوان ناعمة باللولو"), ("sowar/maska-20.webp", "مسكة خطوبة جربيرا وجوري بألوان ناعمة مع تعليقة", "جربيرا وجوري مع تعليقة"),
+                ("sowar/maska-18.webp", "مسكة خطوبة كالا وجوري زهري", "كالا وجوري زهري"),
+                ("sowar/maska-04.webp", "مسكة خطوبة كالا وجوري أزرق مع تعليقة بالأسماء", "كالا وجوري أزرق")],
+     "faq": [("كم سعر مسكة الخطوبة؟", None), ("هل يمكن اختيار لون مسكة الخطوبة؟", "نعم، نجهّزها بالأبيض أو بأي لون يناسب فستان الخطوبة، بالسعر نفسه.")]},
 ]
 # =====================================================================
 # موديلات المسكات — كل موديل صفحة (الأسماء والصور من ملف سامي 23/10، 18 موديل)
@@ -319,7 +328,22 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
     nav = "".join(
         f'<a href="{PAGES[k]["path"]}"' + (' aria-current="page"' if k == nav_key else "") + f'>{E(PAGES[k]["nav"])}</a>'
         for k in NAV_ORDER)
-    mnav = '<a href="/"' + (' aria-current="page"' if key == "home" else "") + '>الرئيسية</a>' + nav
+    cur = lambda p: ' aria-current="page"' if p == path else ""
+    def grp(title, links):
+        return f'<p class="d-title">{title}</p>' + "".join(f'<a href="{h}"{cur(h)}>{E(t)}</a>' for t, h in links)
+    drawer = (f'<div class="d-head"><span class="brand-name">هدايا سلمى</span><button class="d-close" type="button" aria-label="إغلاق القائمة">×</button></div>'
+        + grp("مسكات العروس", [(s_["nav"], s_["path"]) for s_ in STYLES] + [("كل موديلات المسكات بأرقامها", MODELS_PATH), ("صور مسكات عروس 2026", SOWAR_PATH), ("كل أنواع المسكات", PAGES["masakat"]["path"])])
+        + grp("منتجاتنا الثانية", [(PAGES[k]["nav"], PAGES[k]["path"]) for k in ["sawani", "bakjat", "mahr", "grad"]])
+        + grp("معلومات", [("الرئيسية", "/"), (PAGES["tawseel"]["nav"], PAGES["tawseel"]["path"]), (PAGES["faq"]["nav"], PAGES["faq"]["path"]), ("نصائح للعروس", MAQALAT_PATH)])
+        + f'<div class="d-cta">{cta("احجزي على إنستغرام", "btn btn-primary btn-block", "cta_drawer")}</div>')
+    tab = lambda h, t, ico: f'<a href="{h}"{cur(h)}>{ico}<span>{t}</span></a>'
+    tabbar = ('<nav class="tabbar" aria-label="تنقل سريع">'
+        + tab("/", "الرئيسية", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg>')
+        + tab(MODELS_PATH, "الموديلات", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>')
+        + f'<a class="tab-cta" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_tabbar"><span class="tab-ig">{IG_ICON}</span><span>احجزي</span></a>'
+        + tab(PAGES["tawseel"]["path"], "الأسعار", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>')
+        + '<button class="tab-menu" type="button" aria-label="القائمة" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>القائمة</span></button>'
+        + '</nav>')
     graph = [STORE, {"@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/",
                      "name": "هدايا سلمى - Salma Gifts", "inLanguage": "ar", "publisher": {"@id": STORE_ID}}]
     graph += [s for s in schemas if s]
@@ -353,12 +377,12 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}/assets/img/{og_img}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F6F0E8">
+<meta name="theme-color" content="#FAF5EF">
 <meta name="p:domain_verify" content="10f3786eb5995c7295863fef211ec348"/>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/el-messiri-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/aref-ruqaa-700-arabic.woff2" as="font" type="font/woff2" crossorigin>
 {extra_preload}
 <link rel="stylesheet" href="/assets/css/style.css?v={VERSION}">{ga}
 <script type="application/ld+json">
@@ -370,18 +394,19 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
 
 <header class="site-header">
   <div class="header-row">
+    <button class="menu-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
     <a class="brand" href="/" aria-label="هدايا سلمى - الرئيسية">
       <img src="/assets/img/logo.webp" alt="شعار هدايا سلمى Salma Gifts" width="105" height="120">
-      <span class="brand-name">هدايا سلمى</span>
+      <span class="brand-text"><span class="brand-name">هدايا سلمى</span><span class="brand-en">SALMA GIFTS</span></span>
     </a>
     <nav class="main-nav" aria-label="القائمة الرئيسية">{nav}</nav>
-    {cta("احجزوا الآن", "btn btn-primary btn-sm header-cta", "cta_header")}
-    <button class="menu-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobile-nav">
-      <span></span><span></span>
-    </button>
+    <a class="ig-btn" href="{IG}" target="_blank" rel="noopener" aria-label="إنستغرام هدايا سلمى">{IG_ICON}</a>
   </div>
-  <nav class="mobile-nav" id="mobile-nav" aria-label="القائمة">{mnav}</nav>
 </header>
+<div class="drawer-veil" hidden></div>
+<nav class="mobile-nav drawer" id="mobile-nav" aria-label="القائمة">{drawer}</nav>
 
 <main id="main">
 {body}
@@ -408,6 +433,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
     </ul>
     <ul>
       {"".join(f'<li><a href="{s["path"]}">{E(s["nav"])}</a></li>' for s in STYLES)}
+      <li><a href="{MODELS_PATH}">موديلات المسكات</a></li>
       <li><a href="{IG}" target="_blank" rel="noopener">إنستغرام: salma.gifts1</a></li>
       <li><a href="{FB}" target="_blank" rel="noopener">فيسبوك</a> · <a href="{MESSENGER}" target="_blank" rel="noopener">ماسنجر</a></li>
     </ul>
@@ -415,7 +441,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
   <p class="copy">© {datetime.date.today().year} Salma Gifts - هدايا سلمى (سلمى جيفتس)، الأردن</p>
 </footer>
 
-<div class="sticky-cta">{cta("احجزوا عبر إنستغرام", "btn btn-primary btn-block", "cta_sticky")}</div>
+{tabbar}
 <div class="toast" role="status" aria-live="polite"></div>
 <script src="/assets/js/main.js?v={VERSION}" defer></script>
 </body>
@@ -586,48 +612,85 @@ def menu_list(rows):
 </a></li>""")
     return '<ul class="menu">' + "".join(out) + "</ul>"
 
+STAR = '<svg class="star7" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12.00,2.00 14.00,7.86 19.82,5.77 16.48,10.98 21.75,14.23 15.60,14.87 16.34,21.01 12.00,16.60 7.66,21.01 8.40,14.87 2.25,14.23 7.52,10.98 4.18,5.77 10.00,7.86"/></svg>'
+STATS = [("+1500", "طلب جهّزناه"), ("+25", "موديل مسكة"), ("12", "محافظة نوصل لها")]
+
 def build_home():
-    rows = [
-        (PAGES["sawani"]["path"], "صينية الخطوبة والدبل", "مرآة بأسمائكم بظهر خشبي، مع علب الخواتم", "saniya", "saniyet-khotoba-1.webp"),
-        (PAGES["bakjat"]["path"], "البكج الأساسي لكتب الكتاب", "صينية وكتاب توقيع وبصمات ورسالة العمر", "bakj_asasi", "bakj-katb-ktab-2.webp"),
-        (PAGES["bakjat"]["path"], "بكج البرواز", "صينية وبرواز بصمات بالأسماء", "bakj_berwaz", "bakj-berwaz-1.webp"),
-        (PAGES["bakjat"]["path"], "البكج الشامل", "الأساسي مع الفناجين والقصاصات", "bakj_shamel", "bakj-berwaz-3.webp"),
-        (PAGES["bakjat"]["path"], "كتاب التوقيع والبصمات", "بالأسماء وتاريخ كتب الكتاب، وحده", "kitab", "bakj-katb-ktab-1.webp"),
-        (PAGES["mahr"]["path"], "صندوق المهر", "لتقديم المهر للعروس، حسب التوفر", "mahr", "sandouq-mahr-1.webp"),
-        (PAGES["grad"]["path"], "صينية التخرج", "باسم الخريج أو الخريجة والتخصص", "takharroj", "hadiyet-takharroj-1.webp"),
+    names = dict(SOWAR)
+    hero = f"""
+<section class="hx">
+  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو مع تعليقة بالأسماء — هدايا سلمى، الأردن", lazy=False, w=900, h=1200)}
+  <div class="hx-in">
+    <p class="hx-pill">{STAR}<span>أول موقع أردني مختص بمسكات العرايس</span>{STAR}</p>
+    <h1><span class="hx-t">مسكات عروس 2026</span><span class="hx-s">مسكتك جاهزة باسمك وتاريخك، ورد صناعي فاخر لا يذبل</span></h1>
+    <div class="hx-bot">
+      <p class="hx-price"><em>عرض خاص</em><b>{P['masaka']}</b><em>دينار</em><s>{P['masaka_old']}</s></p>
+      <div class="hx-btns">
+        <a class="btn btn-light" href="#mawdeelat" data-event="cta_hero_models">اختاري مسكتك</a>
+        {cta("احجزي بالإنستغرام", "btn btn-glass", "cta_hero")}
+      </div>
+    </div>
+  </div>
+</section>
+<div class="stats container">{"".join(f'<div><b>{n}</b><span>{t}</span></div>' for n, t in STATS)}</div>"""
+    types = [(STYLES[0], "08"), (STYLES[2], "05"), (STYLES[3], "01"), (next(x for x in STYLES if x["key"] == "khotoba"), "24")]
+    type_html = "".join(f'<li><a href="{st["path"]}"><i>{img("sowar/maska-" + n + ".webp", st["nav"] + " من هدايا سلمى", w=900, h=1200)}</i><span>{E("مسكات خطوبة" if st["key"] == "khotoba" else st["name"])}</span></a></li>' for st, n in types)
+    best = [("02", "الأكثر طلبًا"), ("05", ""), ("07", "جديد"), ("04", ""), ("21", ""), ("23", ""), ("17", ""), ("03", "")]
+    best_html = "".join(f"""<li><a href="{SOWAR_PATH}#m{n}" class="pcard">
+  <span class="pc-img">{img("sowar/maska-" + n + ".webp", names[n] + " — هدايا سلمى", w=900, h=1200)}{f'<em class="pc-tag">{t}</em>' if t else ''}<i class="pc-no">#{n}</i></span>
+  <b>{E(names[n].replace("مسكة عروس ", ""))}</b>
+  <span class="pc-price"><strong>{P['masaka']}</strong> دينار <s>{P['masaka_old']}</s></span>
+</a></li>""" for n, t in best)
+    others = [
+        (PAGES["sawani"]["path"], "صواني الخطوبة والدبل", "مرآة بأسمائكم وعلب الخواتم", "saniya", "saniyet-khotoba-1.webp"),
+        (PAGES["bakjat"]["path"], "بكجات كتب الكتاب", "صينية وكتاب توقيع وبصمات", "bakj_berwaz", "bakj-katb-ktab-2.webp"),
+        (PAGES["mahr"]["path"], "صندوق المهر", "لتقديم المهر للعروس", "mahr", "sandouq-mahr-1.webp"),
+        (PAGES["grad"]["path"], "هدايا التخرج", "باسم الخريج والتخصص", "takharroj", "hadiyet-takharroj-1.webp"),
     ]
-    steps = [("اكتبوا الأسماء", "واختاروا التصميم من الموقع أو من إنستغرام."),
-             ("أرسلوا الرسالة", "مع العنوان ورقم الهاتف."),
-             ("استلموا وعاينوا", "خلال يومين، وادفعوا عند الاستلام.")]
+    others_html = "".join(f"""<li><a href="{h}">{img(im, t + " من هدايا سلمى", w=720, h=900)}<span class="oc-t"><b>{E(t)}</b><span>{E(d)}</span><em>من {P[k]} دينار</em></span></a></li>""" for h, t, d, k, im in others)
+    steps = [("اختاري الموديل", "أرسلي لنا رقم المسكة أو صورتها على إنستغرام."),
+             ("اكتبي الأسماء والتاريخ", "للتعليقة، وحدّدي يوم التوصيل."),
+             ("استلمي وعايني قبل الدفع", f"توصيل لكل المحافظات بـ{DELIVERY} دينار خلال يومين.")]
     st = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in steps)
+    trust = [("معاينة قبل الدفع", "والدفع عند الاستلام نقدًا أو كليك", '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="m9 12 2 2 4-4"/>'),
+             ("توصيل خلال يومين", "إلى جميع محافظات الأردن", '<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>'),
+             ("ورد لا يذبل", "تبقى المسكة ذكرى بعد المناسبة", '<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>'),
+             ("كل قطعة على حدة", "بأسمائكم ونراجعها قبل أن تخرج", '<path d="M4 20h16M6 16l3-9 3 5 3-7 3 11"/>')]
+    trust_html = "".join(f'<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">{ic}</svg><b>{t}</b><span>{d}</span></li>' for t, d, ic in trust)
     faqs = [FAQ[17], FAQ[18], FAQ[1], FAQ[19], FAQ[2], FAQ[14], FAQ[9]]
-    body = bouquet_hero() + f"""
-<section class="section styles tint" id="masakat"><div class="container">
-  <div class="section-head"><h2>اختاري حسب نوع الورد</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
-  <p class="section-intro">ورد صناعي لا يذبل، من 20 إلى 25 وردة. كل الأنواع بسعر واحد: {P['masaka']} دينارًا، وبأي لون يناسب فستانك.</p>
-  {style_rail()}
-</div></section>
-""" + name_preview() + f"""
-<section class="section"><div class="container narrow-wide">
-  <div class="section-head"><h2>منتجات ثانية للخطوبة وكتب الكتاب</h2><a href="{PAGES['tawseel']['path']}">الأسعار والتوصيل {ARROW}</a></div>
-  {menu_list(rows)}
+    body = hero + f"""
+<section class="section" id="anwaa"><div class="container">
+  <div class="section-head"><h2>تسوّقي حسب النوع</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
+  <ul class="types">{type_html}</ul>
 </div></section>
 
-<section class="section story"><div class="container story-inner">
-  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو مع تعليقة بالأسماء من هدايا سلمى", w=900, h=1200)}
-  <div>
-    <h2>كل قطعة تُجهَّز على حدة</h2>
-    <p>لا نعمل بالجملة. كل مسكة وكل صينية تُجهَّز في ورشتنا بأسمائكم وتاريخ مناسبتكم، ونراجعها قبل أن تخرج إليكم.</p>
-    <p>أنجزنا أكثر من <b>1500</b> طلب، ونجهّز أكثر من <b>120</b> طلبًا كل أسبوع، ولا يزال كل طلب يُعامل كأنه الوحيد. هدفنا أفضل جودة بأفضل سعر.</p>
-    {promise_list()}
-  </div>
+<section class="section" id="mawdeelat"><div class="container">
+  <div class="section-head"><h2>الأكثر طلبًا</h2><a href="{SOWAR_PATH}">كل الصور {ARROW}</a></div>
+  <p class="section-intro">كل الموديلات بـ{P['masaka']} دينار بدل {P['masaka_old']}. أرسلي رقم المسكة على إنستغرام ونجهّزها بلون يناسب فستانك.</p>
+  <ul class="pgrid">{best_html}</ul>
+  <p class="center"><a class="btn btn-quiet" href="{MODELS_PATH}">الموديلات بأرقامها</a></p>
+</div></section>
+
+<a class="promo container" href="#asmaa">
+  {img("sowar/maska-05.webp", "مسكة عروس كالا مع تعليقة محفورة بالأسماء", w=900, h=1200)}
+  <span class="promo-in"><b>اسمكم وتاريخكم على التعليقة</b><span>تعليقة محفورة بالأسماء +{P['taliqa']} دينار</span><em>صمّمي تعليقتك</em></span>
+</a>
+""" + name_preview() + f"""
+<section class="section"><div class="container">
+  <div class="section-head"><h2>منتجاتنا الثانية</h2><a href="{PAGES['tawseel']['path']}">كل الأسعار {ARROW}</a></div>
+  <ul class="others">{others_html}</ul>
 </div></section>
 
 <section class="section"><div class="container">
-  <h2>كيف تطلبون</h2>
+  <h2>كيف تطلبين مسكتك؟</h2>
   <ol class="steps">{st}</ol>
 </div></section>
 
+<section class="section"><div class="container">
+  <h2>لماذا هدايا سلمى؟</h2>
+  <p class="section-intro">أنجزنا أكثر من 1500 طلب، وكل طلب يُجهَّز في ورشتنا على حدة كأنه الوحيد.</p>
+  <ul class="trust">{trust_html}</ul>
+</div></section>
 """ + articles_block() + f"""
 <section class="section"><div class="container narrow">
   <div class="section-head"><h2>أسئلة متكررة</h2><a href="{PAGES['faq']['path']}">كل الأسئلة {ARROW}</a></div>
@@ -635,7 +698,7 @@ def build_home():
 </div></section>
 """
     title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار: مسكة عروس بصور حقيقية | هدايا سلمى"
-    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، المسكة التركية وغيرها، مع تعليقة بأسمائكم. وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
+    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب، كالا، جوري ومسكات خطوبة، مع تعليقة بأسمائكم. أكثر من 1500 طلب، وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
     write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)], og_img="sowar/maska-02.webp"))
 
 # =====================================================================
@@ -1268,7 +1331,7 @@ def build_sowar():
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("صور مسكات عروس 2026", SOWAR_PATH)]
     head, bsch = page_intro(trail, "صور مسكات عروس 2026",
         f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل وتعليقة بالأسماء. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
-    cards = "".join(f'<li><figure>{img("sowar/maska-"+n+".webp", name+" — هدايا سلمى، الأردن", w=900, h=1200)}<figcaption class="label"><b>{E(name)}</b><span>{P["masaka"]} دينار</span></figcaption></figure></li>' for n, name in SOWAR)
+    cards = "".join(f'<li id="m{n}"><figure>{img("sowar/maska-"+n+".webp", name+" — هدايا سلمى، الأردن", w=900, h=1200)}<figcaption class="label"><b>{E(name)}</b><span>{P["masaka"]} دينار</span></figcaption></figure></li>' for n, name in SOWAR)
     body = head + f"""
 <section class="section"><div class="container">
   <h2>اختاري المسكة اللي بتشبهك</h2>
