@@ -125,8 +125,9 @@
     var names = box.querySelector('.names');
     if (!names) return;
     names.style.fontSize = '';
-    var max = box.clientWidth * 0.8, w = 0;
-    names.querySelectorAll('[data-out]').forEach(function (s) { w = Math.max(w, s.scrollWidth); });
+    var max = box.clientWidth * (names.classList.contains('row') ? 0.86 : 0.8), w = 0;
+    if (names.classList.contains('row')) w = names.scrollWidth;
+    else names.querySelectorAll('[data-out]').forEach(function (s) { w = Math.max(w, s.scrollWidth); });
     if (w > max) names.style.fontSize = (parseFloat(getComputedStyle(names).fontSize) * max / w) + 'px';
   }
   function fit() { fitIn(form.querySelector('.mirror')); fitIn(form.querySelector('.tag')); }

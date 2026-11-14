@@ -642,3 +642,39 @@ body.menu-open { overflow: hidden; }
 .star7 { width: 17px; height: 17px; }
 #anwaa { padding-bottom: 8px; }
 .choice label:only-of-type { grid-column: 1 / -1; }
+
+/* v20 — صينية المرآة أقرب للحقيقية: انعكاس غرفة، حلقة ذهبية، ورد لولو، علب دبل ثلاثية الأبعاد */
+.stage { width: min(84vw, 340px); }
+.tray { background: radial-gradient(circle, #F4E9D6 70%, #D9BC8C 86%, #A8834F 100%); }
+.mirror {
+  inset: 7.2%;
+  background:
+    linear-gradient(118deg, transparent 20%, rgba(255,255,255,.28) 21%, rgba(255,255,255,.12) 27%, transparent 28%, transparent 64%, rgba(255,255,255,.16) 65%, rgba(255,255,255,.06) 69%, transparent 70%),
+    radial-gradient(ellipse 55% 40% at 22% 12%, rgba(255, 232, 200, .65), transparent 70%),
+    linear-gradient(90deg, transparent 8%, rgba(22, 40, 58, .55) 16%, rgba(22, 40, 58, .62) 30%, transparent 40%),
+    radial-gradient(ellipse 70% 45% at 70% 92%, rgba(190, 160, 120, .45), transparent 70%),
+    linear-gradient(172deg, #E3E8EA 0%, #AEB8BE 30%, #7E8A92 55%, #9AA5AB 78%, #D6DCDF 100%);
+  box-shadow: inset 0 0 0 3px #D7B36C, inset 0 0 0 4.5px rgba(255,255,255,.55), inset 0 10px 30px rgba(0,0,0,.25);
+  text-shadow: 0 1px 3px rgba(20, 24, 30, .55);
+}
+.mirror::before { display: none; }
+.verse { font-family: var(--font-display); font-size: clamp(15px, 4.6vw, 21px); opacity: 1; margin-bottom: .5em; }
+.boxes { gap: 9%; width: 46%; margin-bottom: .55em; }
+.boxes span { position: relative; width: 38%; border-radius: 16%; color: #B8893F; font-family: var(--font-body); font-size: clamp(14px, 4.2vw, 20px);
+  background: linear-gradient(180deg, #FFFFFF 0 34%, #E9E3DA 34% 38%, #FBF8F3 38% 82%, #E7E0D5 82% 100%);
+  box-shadow: 0 10px 14px -6px rgba(20, 20, 20, .5), inset 0 -2px 0 rgba(0,0,0,.05); padding-top: 12%; }
+.boxes span::after { content: ""; position: absolute; left: 50%; top: 34%; width: 14%; height: 9%; transform: translate(-50%, -30%); background: linear-gradient(#E6C77F, #B08A45); border-radius: 2px; }
+.names.row { flex-direction: row; align-items: center; justify-content: center; gap: .18em; font-size: clamp(30px, 9.6vw, 46px); }
+.names.row .amp { font-size: .5em; color: #fff; opacity: .95; margin: 0 .1em; line-height: 1; }
+.date { font-weight: 700; font-size: clamp(14px, 4vw, 18px); letter-spacing: .08em; margin-top: .35em; }
+.pf { position: absolute; z-index: 3; height: auto; filter: drop-shadow(0 2px 2px rgba(80, 60, 30, .35)); }
+.pf ellipse { fill: #FFFBF4; stroke: #E9DCC8; stroke-width: .8; }
+.pf .c { fill: #E3C27E; }
+.pf .h { fill: #fff; opacity: .9; }
+.real-inset { width: 30%; left: -6px; bottom: -8px; }
+.real-inset .cap { font-size: 10px; }
+@media (min-width: 900px) { .stage { width: 460px; } }
+.pf ellipse { fill: url(#pg); fill: #FFF8EE; stroke: #E2D2BA; }
+.names.row .amp { align-self: center; transform: translateY(.15em); }
+.boxes span { color: #A87B34; }
+.names.row .amp { transform: translateY(.38em); }
