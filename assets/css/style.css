@@ -641,3 +641,4 @@ body.menu-open { overflow: hidden; }
 .hx { height: min(600px, calc(100svh - 190px)); }
 .star7 { width: 17px; height: 17px; }
 #anwaa { padding-bottom: 8px; }
+.choice label:only-of-type { grid-column: 1 / -1; }

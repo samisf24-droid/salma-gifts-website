@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "18"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "19"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -66,10 +66,10 @@ STYLES = [
      "h1": "مسكة عروس توليب",
      "lead": "التوليب الأبيض أكثر ما تطلبه العرائس عندنا: ناعم وأنيق، ويليق بالخطوبة وعقد القران والزفاف.",
      "about": ["نجهّز مسكة التوليب بثلاث طرق: توليب مع لولو، أو توليب مع جبسوفيل (بيبي بريث)، أو توليب بحبّات الكريستال. وكلها بالسعر نفسه.",
-               "الورد صناعي عالي الجودة فلا يذبل، وتبقى المسكة ذكرى في بيتكم بعد المناسبة. ويمكن إضافة تعليقة بأسمائكم وتاريخ المناسبة."],
+               "الورد صناعي عالي الجودة فلا يذبل، وتبقى المسكة ذكرى في بيتكم بعد المناسبة."],
      "photos": [("sowar/maska-03.webp", "مسكة عروس توليب أبيض بالكريستال ومقبض ستراس", "توليب بالكريستال"), ("masaka-arous-tulip.webp", "مسكة عروس توليب أبيض بقاعدة ستراس ولولو", "توليب بقاعدة ستراس"),
                 ("masaka-arous-trend.webp", "مسكة عروس توليب مع لولو", "توليب مع لولو"),
-                ("masaka-arous-4.webp", "مسكة عروس توليب مع تعليقة أكريليك بالأسماء", "توليب مع تعليقة بالأسماء")],
+                ("masaka-arous-4.webp", "مسكة عروس توليب أبيض", "توليب أبيض")],
      "faq": [("كم سعر مسكة العروس التوليب؟", None), ("هل التوليب طبيعي؟", "لا، توليب صناعي عالي الجودة يشبه الطبيعي ولا يذبل، فيبقى بحالته بعد المناسبة.")]},
     {"key": "crystal", "path": "/masakat-arayes/crystal/", "name": "كريستال", "nav": "مسكة عروس كريستال",
      "h1": "مسكة عروس كريستال",
@@ -85,7 +85,7 @@ STYLES = [
      "lead": "زهر الكالا الأبيض بخطوطه الطويلة يعطي المسكة أناقة ملكية، وحده أو مع الجوري الملوّن.",
      "about": ["نجهّز الكالا بقاعدة من اللولو أو الستراس، أو نمزجه مع الجوري الأزرق أو بلون يناسب فستانكم.",
                "والكالا صناعي عالي الجودة لا يذبل، فيمكن الاحتفاظ بالمسكة بعد المناسبة."],
-     "photos": [("sowar/maska-05.webp", "مسكة عروس كالا أبيض مع تعليقة بالأسماء", "كالا مع تعليقة"), ("masaka-arous-calla.webp", "مسكة عروس كالا بيضاء مع لولو", "كالا أبيض مع لولو"),
+     "photos": [("sowar/maska-05.webp", "مسكة عروس كالا أبيض", "كالا أبيض"), ("masaka-arous-calla.webp", "مسكة عروس كالا بيضاء مع لولو", "كالا أبيض مع لولو"),
                 ("masaka-arous-calla-blue.webp", "مسكة عروس كالا مع جوري أزرق وجبسوفيل", "كالا مع جوري أزرق"),
                 ("masaka-arous-3.webp", "مسكة عروس كالا طويلة بقاعدة ستراس", "كالا طويلة"),
                 ("masaka-arous-2.webp", "مسكات عروس كالا بقاعدة لولو", "كالا بقاعدة لولو")],
@@ -100,12 +100,12 @@ STYLES = [
      "faq": [("كم سعر مسكة العروس الجوري؟", None), ("هل يتوفر الجوري بألوان؟", "نعم، الأبيض هو الأكثر طلبًا، ونجهّز الأزرق والوردي وأي لون يناسب فستانكم.")]},
     {"key": "khotoba", "path": "/masakat-arayes/khotoba/", "name": "خطوبة", "nav": "مسكة خطوبة",
      "h1": "مسكة خطوبة",
-     "lead": "مسكات خطوبة بالأبيض أو بألوان ناعمة تناسب فستان الخطوبة: زهري، أزرق، وألوان هادئة، مع لولو أو دانتيل وتعليقة بأسمائكم.",
+     "lead": "مسكات خطوبة بالأبيض أو بألوان ناعمة تناسب فستان الخطوبة: زهري، أزرق، وألوان هادئة، مع لولو أو دانتيل.",
      "about": ["نجهّز مسكة الخطوبة من نفس ورد مسكات العروس: توليب وكالا وجوري وبيوني، ونختار معكم الألوان لتتناسق مع فستان الخطوبة.",
-               "الورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى من يوم الخطوبة. ويمكن إضافة تعليقة بأسماء الخطيبين وتاريخ الخطوبة."],
-     "photos": [("sowar/maska-24.webp", "مسكة خطوبة بألوان ناعمة باللولو", "ألوان ناعمة باللولو"), ("sowar/maska-20.webp", "مسكة خطوبة جربيرا وجوري بألوان ناعمة مع تعليقة", "جربيرا وجوري مع تعليقة"),
+               "الورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى من يوم الخطوبة."],
+     "photos": [("sowar/maska-24.webp", "مسكة خطوبة بألوان ناعمة باللولو", "ألوان ناعمة باللولو"), ("sowar/maska-20.webp", "مسكة خطوبة جربيرا وجوري بألوان ناعمة", "جربيرا وجوري"),
                 ("sowar/maska-18.webp", "مسكة خطوبة كالا وجوري زهري", "كالا وجوري زهري"),
-                ("sowar/maska-04.webp", "مسكة خطوبة كالا وجوري أزرق مع تعليقة بالأسماء", "كالا وجوري أزرق")],
+                ("sowar/maska-04.webp", "مسكة خطوبة كالا وجوري أزرق", "كالا وجوري أزرق")],
      "faq": [("كم سعر مسكة الخطوبة؟", None), ("هل يمكن اختيار لون مسكة الخطوبة؟", "نعم، نجهّزها بالأبيض أو بأي لون يناسب فستان الخطوبة، بالسعر نفسه.")]},
 ]
 # =====================================================================
@@ -183,7 +183,7 @@ FAQ = [
     ("من أين أشتري مسكة عروس في الأردن؟",
      f"من هدايا سلمى، حيث نجهّز مسكات العرائس من التوليب والكريستال والكالا والجوري والبيوني بسعر {P['masaka']} دينارًا، ونوصلها إلى جميع محافظات الأردن مقابل {DELIVERY} دينار. يتم الطلب برسالة على إنستغرام salma.gifts1."),
     ("كم سعر مسكة العروس؟",
-     f"سعرها {P['masaka']} دينارًا بدل {P['masaka_old']} (عرض خاص) لجميع الأنواع، و{withdel('masaka')} دينارًا شاملة التوصيل. ويمكن إضافة تعليقة تحمل اسمَي العروسين والتاريخ مقابل {P['taliqa']} دينار."),
+     f"سعرها {P['masaka']} دينارًا بدل {P['masaka_old']} (عرض خاص) لجميع الأنواع، و{withdel('masaka')} دينارًا شاملة التوصيل."),
     ("هل ورد المسكة طبيعي أم صناعي؟",
      "ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى دائمة. وتضم كل مسكة ما بين 20 و25 وردة."),
     ("كم سعر صينية الخطوبة؟",
@@ -511,11 +511,11 @@ def name_preview():
     return f"""
 <section class="section maker-sec" id="asmaa">
   <div class="container hero-inner">
-    <h2>اكتبي أسماءكم على <span>تعليقة المسكة</span></h2>
-    <p class="section-intro">تعليقة من الأكريليك بأسماء العريس والعروس وتاريخ المناسبة: +{P['taliqa']} دينار.</p>
+    <h2>اكتبي أسماءكم على <span>صينية الخطوبة</span></h2>
+    <p class="section-intro">صينية مرآة بظهر خشبي، بأسماء العريس والعروس وتاريخ المناسبة ومعها علب الخواتم: {P['saniya']} دينارًا.</p>
 
     <form class="maker" id="maker" action="{IG_DM}" target="_blank" novalidate>
-      <div class="stage" data-mode="tag">
+      <div class="stage" data-mode="tray">
         <div class="tray" aria-hidden="true">
           <svg class="pearls" viewBox="0 0 200 200"><circle cx="100" cy="100" r="95.5"/><circle class="pearl-shine" cx="100" cy="100" r="95.5"/></svg>
           <div class="mirror">
@@ -527,7 +527,7 @@ def name_preview():
         </div>
         <a class="real-inset" href="/sawani-khotoba/" aria-label="شاهدوا صواني الخطوبة الحقيقية">{img("saniyet-khotoba-real.webp", "صينية دبل خطوبة حقيقية من طلبات هدايا سلمى بالأسماء والتاريخ وعلب الخواتم", w=600, h=600)}<span class="cap">من طلباتنا</span></a>
         <div class="tag-scene" aria-hidden="true">
-          {img("masaka-arous-tulip.webp", "مسكة عروس توليب مع تعليقة أكريليك بأسماء العروسين", w=720, h=900)}
+          {img("masaka-arous-tulip.webp", "مسكة عروس توليب", w=720, h=900)}
           <div class="tag">
             <p class="names"><span data-out="g">{kashida(g)}</span><span class="amp">&amp;</span><span data-out="b">{kashida(b)}</span></p>
             <p class="date" data-out="d">12.12.2026</p>
@@ -542,8 +542,7 @@ def name_preview():
 
       <fieldset class="choice">
         <legend class="sr">ماذا تريدون بهذه الأسماء؟</legend>
-        <label><input type="radio" name="item" value="tag" checked data-price="{P['masaka'] + P['taliqa']}" data-label="مسكة عروس مع تعليقة بالأسماء"><span>مسكة مع تعليقة <b>{P['masaka'] + P['taliqa']} دينار</b></span></label>
-        <label><input type="radio" name="item" value="tray" data-price="{P['saniya']}" data-label="صينية خطوبة بالأسماء"><span>صينية خطوبة <b>{P['saniya']} دينار</b></span></label>
+        <label><input type="radio" name="item" value="tray" checked data-price="{P['saniya']}" data-label="صينية خطوبة بالأسماء"><span>صينية خطوبة <b>{P['saniya']} دينار</b></span></label>
       </fieldset>
 
       <button class="btn btn-primary btn-lg" type="submit" data-event="cta_maker">{IG_ICON}<span>احجزوا بهذه الأسماء</span></button>
@@ -559,41 +558,6 @@ def name_preview():
 # =====================================================================
 # الرئيسية
 # =====================================================================
-def bouquet_hero():
-    names = dict(SOWAR)
-    pick = ["02", "04", "07", "05", "17", "21", "03", "20", "23", "08", "18", "25"]
-    slides = "".join(f'''<li class="mslide">
-  <a class="mphoto" href="{SOWAR_PATH}">{img("sowar/maska-" + n + ".webp", names[n] + " — هدايا سلمى، الأردن", lazy=(i > 1), w=900, h=1200)}</a>
-  <div class="minfo">
-    <span class="mnum">عرض خاص</span>
-    <h3><a href="{SOWAR_PATH}">{E(names[n].replace("مسكة عروس ", ""))}</a></h3>
-    <p>ورد صناعي عالي الجودة لا يذبل · <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s></p>
-    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(names[n])}">{IG_ICON}<span>احجزي هاي المسكة</span></a>
-  </div>
-</li>''' for i, n in enumerate(pick))
-    return f"""
-<section class="hero bq-hero">
-  <div class="container">
-    <p class="trust-badge">أول موقع أردني مختص بمسكات العرايس</p>
-    <h1>مسكات عروس 2026 <span>بـ{P['masaka']} دينار</span></h1>
-    <p class="hero-offer">عرض خاص: <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s> لكل الموديلات</p>
-    <p class="slogan">{SLOGAN}</p>
-    <ul class="hero-facts">
-      <li><b>{P['masaka']} دينار</b><span>بدل {P['masaka_old']} · عرض خاص</span></li>
-      <li><b>تعليقة بأسمائكم</b><span>+{P['taliqa']} دينار</span></li>
-      <li><b>توصيل خلال يومين</b><span>لكل المحافظات</span></li>
-      <li><b>معاينة قبل الدفع</b><span>والدفع عند الاستلام</span></li>
-    </ul>
-    <p class="hero-sub">توليب، كالا، جوري، بيوني وكريستال، باللولو والدانتيل ومع تعليقة بأسمائكم. اختاري المسكة وابعتيلنا صورتها برسالة.</p>
-    <div class="mcar" data-carousel>
-      <button class="mnav prev" type="button" aria-label="المسكة السابقة">{ARROW}</button>
-      <ul class="mtrack">{slides}</ul>
-      <button class="mnav next" type="button" aria-label="المسكة التالية">{ARROW}</button>
-    </div>
-    <p class="hero-more"><a class="btn btn-quiet" href="{SOWAR_PATH}">شوفي كل صور المسكات</a> <a class="btn btn-quiet" href="{MODELS_PATH}">الموديلات بأرقامها</a></p>
-  </div>
-</section>"""
-
 def style_rail():
     items = [(s["path"], s["name"], s["photos"][0][0], s["photos"][0][1]) for s in STYLES]
     items.append((PAGES["masakat"]["path"] + "#peony", "بيوني", PEONY[0], PEONY[1]))
@@ -619,7 +583,7 @@ def build_home():
     names = dict(SOWAR)
     hero = f"""
 <section class="hx">
-  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو مع تعليقة بالأسماء — هدايا سلمى، الأردن", lazy=False, w=900, h=1200)}
+  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو والكريستال — هدايا سلمى، الأردن", lazy=False, w=900, h=1200)}
   <div class="hx-in">
     <p class="hx-pill">{STAR}<span>أول موقع أردني مختص بمسكات العرايس</span>{STAR}</p>
     <h1><span class="hx-t">مسكات عروس 2026</span><span class="hx-s">مسكتك جاهزة باسمك وتاريخك، ورد صناعي فاخر لا يذبل</span></h1>
@@ -633,9 +597,9 @@ def build_home():
   </div>
 </section>
 <div class="stats container">{"".join(f'<div><b>{n}</b><span>{t}</span></div>' for n, t in STATS)}</div>"""
-    types = [(STYLES[0], "08"), (STYLES[2], "05"), (STYLES[3], "01"), (next(x for x in STYLES if x["key"] == "khotoba"), "24")]
+    types = [(STYLES[0], "08"), (STYLES[2], "11"), (STYLES[3], "01"), (next(x for x in STYLES if x["key"] == "khotoba"), "24")]
     type_html = "".join(f'<li><a href="{st["path"]}"><i>{img("sowar/maska-" + n + ".webp", st["nav"] + " من هدايا سلمى", w=900, h=1200)}</i><span>{E("مسكات خطوبة" if st["key"] == "khotoba" else st["name"])}</span></a></li>' for st, n in types)
-    best = [("02", "الأكثر طلبًا"), ("05", ""), ("07", "جديد"), ("04", ""), ("21", ""), ("23", ""), ("17", ""), ("03", "")]
+    best = [("02", "الأكثر طلبًا"), ("07", "جديد"), ("08", ""), ("21", ""), ("23", ""), ("01", ""), ("03", ""), ("25", "")]
     best_html = "".join(f"""<li><a href="{SOWAR_PATH}#m{n}" class="pcard">
   <span class="pc-img">{img("sowar/maska-" + n + ".webp", names[n] + " — هدايا سلمى", w=900, h=1200)}{f'<em class="pc-tag">{t}</em>' if t else ''}<i class="pc-no">#{n}</i></span>
   <b>{E(names[n].replace("مسكة عروس ", ""))}</b>
@@ -649,7 +613,7 @@ def build_home():
     ]
     others_html = "".join(f"""<li><a href="{h}">{img(im, t + " من هدايا سلمى", w=720, h=900)}<span class="oc-t"><b>{E(t)}</b><span>{E(d)}</span><em>من {P[k]} دينار</em></span></a></li>""" for h, t, d, k, im in others)
     steps = [("اختاري الموديل", "أرسلي لنا رقم المسكة أو صورتها على إنستغرام."),
-             ("اكتبي الأسماء والتاريخ", "للتعليقة، وحدّدي يوم التوصيل."),
+             ("أرسلي تاريخ المناسبة", "ولون الفستان إن أردتِ، وحدّدي يوم التوصيل."),
              ("استلمي وعايني قبل الدفع", f"توصيل لكل المحافظات بـ{DELIVERY} دينار خلال يومين.")]
     st = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in steps)
     trust = [("معاينة قبل الدفع", "والدفع عند الاستلام نقدًا أو كليك", '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="m9 12 2 2 4-4"/>'),
@@ -671,10 +635,6 @@ def build_home():
   <p class="center"><a class="btn btn-quiet" href="{MODELS_PATH}">الموديلات بأرقامها</a></p>
 </div></section>
 
-<a class="promo container" href="#asmaa">
-  {img("sowar/maska-05.webp", "مسكة عروس كالا مع تعليقة محفورة بالأسماء", w=900, h=1200)}
-  <span class="promo-in"><b>اسمكم وتاريخكم على التعليقة</b><span>تعليقة محفورة بالأسماء +{P['taliqa']} دينار</span><em>صمّمي تعليقتك</em></span>
-</a>
 """ + name_preview() + f"""
 <section class="section"><div class="container">
   <div class="section-head"><h2>منتجاتنا الثانية</h2><a href="{PAGES['tawseel']['path']}">كل الأسعار {ARROW}</a></div>
@@ -698,7 +658,7 @@ def build_home():
 </div></section>
 """
     title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار: مسكة عروس بصور حقيقية | هدايا سلمى"
-    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب، كالا، جوري ومسكات خطوبة، مع تعليقة بأسمائكم. أكثر من 1500 طلب، وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
+    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب، كالا، جوري ومسكات خطوبة. أكثر من 1500 طلب، وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
     write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)], og_img="sowar/maska-02.webp"))
 
 # =====================================================================
@@ -742,19 +702,10 @@ def build_masakat():
   <figure class="photo">{img("masaka-arous-pink-soft.webp", "مسكة عروس بألوان ناعمة وردية حسب الطلب")}</figure>
 </div></section>
 
-<section class="section"><div class="container split">
-  <div>
-    <h2>تعليقة بأسمائكم</h2>
-    <p>يمكن إضافة تعليقة من الأكريليك إلى المسكة، تحمل اسمَي العريس والعروس وتاريخ المناسبة.</p>
-    <p class="p-price"><b>+{P['taliqa']} <small>دينار</small></b><span>المسكة مع التعليقة والتوصيل: {P['masaka'] + P['taliqa'] + DELIVERY} دينارًا</span></p>
-    <p><a class="btn btn-quiet" href="/#maker">جرّبوا أسماءكم على التعليقة</a></p>
-  </div>
-  <figure class="photo">{img("masaka-arous-4.webp", "مسكة عروس توليب مع تعليقة أكريليك بالأسماء")}</figure>
-</div></section>
 
 <section class="section"><div class="container narrow">
   <h2>أكثر مسكات العروس طلبًا في 2026</h2>
-  <p>العرايس بيسألونا أكثر شي عن: <strong>مسكة عروس توليب أبيض</strong> (<a href="{STYLES[0]['path']}">موديلات التوليب</a>)، <strong>مسكة عروس كريستال</strong>، <strong>مسكة عروس كالا</strong>، <strong>مسكة عروس جوري</strong>، و<strong>مسكة عروس بيوني</strong>. ومنها الناعمة للخطوبة وكتب الكتاب، والفخمة والملكية للزفاف، ومسكات عروس للحنّة بألوان، ومسكات عرايس بالأسماء مع تعليقة أكريليك.</p>
+  <p>العرايس بيسألونا أكثر شي عن: <strong>مسكة عروس توليب أبيض</strong> (<a href="{STYLES[0]['path']}">موديلات التوليب</a>)، <strong>مسكة عروس كريستال</strong>، <strong>مسكة عروس كالا</strong>، <strong>مسكة عروس جوري</strong>، و<strong>مسكة عروس بيوني</strong>. ومنها الناعمة للخطوبة وكتب الكتاب، والفخمة والملكية للزفاف، ومسكات عروس للحنّة بألوان.</p>
   <p>وكلها ورد صناعي عالي الجودة شكله طبيعي وما بيذبل، بسعر واحد {P['masaka']} دينار بدل 25 (عرض خاص)، و{withdel('masaka')} مع التوصيل لعمّان والزرقاء وإربد والسلط ومادبا وجرش وعجلون والكرك والعقبة وكل محافظات الأردن.</p>
 </div></section>
 
@@ -775,7 +726,7 @@ def build_masakat():
 def build_style(s):
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), (s["nav"], s["path"])]
     head, bsch = page_intro(trail, s["h1"], s["lead"], "masaka")
-    faqs = [(q, a or f"سعرها {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة. والتعليقة بالأسماء +{P['taliqa']} دينار.")
+    faqs = [(q, a or f"سعرها {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة.")
             for q, a in s["faq"]] + [FAQ[7], FAQ[9], FAQ[6]]
     others = "".join(f'<a href="{o["path"]}">{E(o["nav"])}</a>' for o in STYLES if o is not s)
     paras = "".join(f"<p>{E(p)}</p>" for p in s["about"])
@@ -959,7 +910,7 @@ def build_tawseel():
             ("البكج الشامل", "bakj_shamel", PAGES["bakjat"]["path"]), ("كتاب أو دفتر توقيع منفرد", "kitab", PAGES["bakjat"]["path"]),
             ("صندوق المهر (حسب التوفر)", "mahr", PAGES["mahr"]["path"]), ("صينية التخرج", "takharroj", PAGES["grad"]["path"])]
     tr = "".join(f'<tr><td><a href="{u}">{E(n)}</a></td><td>{P[k]} دينار</td><td>{withdel(k)} دينار</td></tr>' for n, k, u in rows)
-    adds = [("تعليقة للمسكة", "taliqa"), ("ستاند أسود", "stand"), ("قصاصات", "qassasat"), ("فناجين", "fanajin"), ("قصاصة التقويم أو رسالة العمر", "taqweem")]
+    adds = [("ستاند أسود", "stand"), ("قصاصات", "qassasat"), ("فناجين", "fanajin"), ("قصاصة التقويم أو رسالة العمر", "taqweem")]
     ta = "".join(f"<tr><td>{E(n)}</td><td>+{P[k]} دينار</td></tr>" for n, k in adds)
     govs = "عمّان، الزرقاء، إربد، السلط، مأدبا، جرش، عجلون، المفرق، الكرك، الطفيلة، معان، العقبة"
     body = bc + f"""
@@ -1057,7 +1008,7 @@ def build_model(m):
               "nav": "مسكة عروس بيوني" if m["style"] == "peony" else "مسكات العروس"}
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("موديلات المسكات", MODELS_PATH), (m["name"], model_path(m))]
     head, bsch = page_intro(trail, m["h1"], m["lead"], "masaka", extra=f'<p class="model-no">موديل رقم {m["n"]} من {len(MODELS)}</p>')
-    faqs = [(f"كم سعر {m['h1']}؟", f"سعرها {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن. والتعليقة بالأسماء والتاريخ +{P['taliqa']} دينار."),
+    faqs = [(f"كم سعر {m['h1']}؟", f"سعرها {P['masaka']} دينارًا، و{withdel('masaka')} دينارًا شاملة التوصيل إلى أي محافظة في الأردن."),
             ("هل يمكن تغيير لون الموديل؟", "نعم، نجهّز الموديل نفسه بلون يناسب فستانكم، للزفاف أو الخطوبة أو الحنّة أو كتب الكتاب. أرسلوا لنا اللون مع الطلب."),
             ("كيف أطلب هذا الموديل؟", f"أرسلوا لنا رسالة على إنستغرام salma.gifts1 فيها «موديل رقم {m['n']}» أو اسمه «{m['name']}»، وتاريخ المناسبة، ونؤكد لكم الطلب."),
             FAQ[7], FAQ[9]]
@@ -1068,7 +1019,7 @@ def build_model(m):
   <div>
     <h2>تفاصيل الموديل</h2>
     {includes(m["inc"])}
-    <p>ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى في بيتكم بعد المناسبة. ويمكن إضافة تعليقة من الأكريليك بأسمائكم وتاريخ المناسبة (+{P['taliqa']} دينار).</p>
+    <p>ورد صناعي عالي الجودة لا يذبل، فتبقى المسكة ذكرى في بيتكم بعد المناسبة.</p>
     <p><a class="text-link" href="{st['path']}">كل أنواع {E(st['nav'])} {ARROW}</a></p>
   </div>
 </div></section>
@@ -1124,7 +1075,7 @@ def _art_dress():
 <h2>الحجم حسب طولك</h2>
 <p>العروس الناعمة أو القصيرة تناسبها مسكة متوسطة الحجم حتى لا تغطيها. والعروس الطويلة تحتمل المسكة المنسدلة على شكل قوس.</p>
 <h2>المسكة بعد المناسبة</h2>
-<p>إذا كانت المسكة من ورد صناعي عالي الجودة، فهي لا تذبل وتبقى ذكرى في البيت، ويمكن إضافة تعليقة عليها بأسمائكم وتاريخ المناسبة (+{P['taliqa']} دينار).</p>
+<p>إذا كانت المسكة من ورد صناعي عالي الجودة، فهي لا تذبل وتبقى ذكرى في البيت.</p>
 <p>إذا ما عرفتي أي موديل يناسبك، أرسلي لنا صورة الفستان برسالة على إنستغرام ونساعدك تختاري.</p>
 <ul class="rail rail-grid">{model_cards(picks)}</ul>"""
 
@@ -1162,14 +1113,12 @@ def _art_price():
 <li><b>طبيعي أو صناعي:</b> الورد الطبيعي يُجهَّز يوم المناسبة ويذبل بعدها بأيام، وسعره يتغير حسب الموسم. الصناعي عالي الجودة يُجهَّز مسبقًا ويبقى ذكرى.</li>
 <li><b>عدد الورد وحجم المسكة:</b> المسكة الممتلئة أو المنسدلة تحتاج وردًا أكثر.</li>
 <li><b>الإكسسوارات:</b> اللولو، والكريستال، والستراس على المسكة، والتول والدانتيل.</li>
-<li><b>الإضافات:</b> مثل تعليقة بالأسماء والتاريخ.</li>
 <li><b>التوصيل:</b> هل السعر شامل التوصيل لمحافظتك أم لا.</li>
 </ol>
 <h2>سعر مسكة العروس عند هدايا سلمى</h2>
 <div class="table-wrap"><table class="cmp"><tbody>
 <tr><th>المسكة، كل الموديلات ({len(MODELS)} موديل)</th><td>{P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)</td></tr>
 <tr><th>مع التوصيل لأي محافظة</th><td>{withdel('masaka')} دينار</td></tr>
-<tr><th>تعليقة بأسماء العروسين والتاريخ</th><td>+{P['taliqa']} دينار</td></tr>
 </tbody></table></div>
 <p>ورد صناعي عالي الجودة لا يذبل، من 20 إلى 25 وردة، وبأي لون يناسب الفستان. السعر واحد سواء كانت المسكة توليب أو كالا أو جوري أو بيوني أو كريستال.</p>
 <h2>قبل أن تحجزي من أي مكان، تأكدي من:</h2>
@@ -1256,7 +1205,7 @@ def build_llms():
         "Salma Gifts is an online gift shop in Jordan making personalized engagement and wedding items: artificial-flower bridal bouquets (tulip, crystal, calla, rose/jouri, peony; any color to match the dress), mirror engagement ring trays with the couple's names (wooden back against breaking), marriage-contract (katb el-kitab) signature book packages, dowry (mahr) boxes and graduation gifts. 1500+ orders completed, 120+ orders a week. Delivery to all governorates of Jordan for 2 JOD within two days. Cash on delivery with inspection before paying. Orders via Instagram DM @salma.gifts1.",
         "",
         "## الأسعار (دينار أردني، بدون التوصيل)",
-        f"- مسكة العروس، كل الأنواع: {P['masaka']} بدل {P['masaka_old']} (عرض خاص) — {withdel('masaka')} مع التوصيل (ورد صناعي عالي الجودة، 20–25 وردة). تعليقة بالأسماء والتاريخ: +{P['taliqa']}",
+        f"- مسكة العروس، كل الأنواع: {P['masaka']} بدل {P['masaka_old']} (عرض خاص) — {withdel('masaka')} مع التوصيل (ورد صناعي عالي الجودة، 20–25 وردة).",
         f"- صينية الخطوبة / الدبل (مرآة بظهر خشبي، بالأسماء والتاريخ، مع علب الخواتم): {P['saniya']}",
         f"- بكج البرواز (صينية + برواز بصمات): {P['bakj_berwaz']}",
         f"- البكج الأساسي (صينية + كتاب توقيع وبصمات + رسالة العمر + حبر): {P['bakj_asasi']}",
@@ -1303,9 +1252,9 @@ SOWAR = [
  ("01","مسكة عروس جوري أبيض مع جبسوفيل وفيونكة دانتيل"),
  ("02","مسكة عروس توليب أبيض بإطار كريستال"),
  ("03","مسكة عروس توليب أبيض بالكريستال ومقبض ستراس"),
- ("04","مسكة عروس كالا وجوري أزرق مع تعليقة بالأسماء"),
- ("05","مسكة عروس كالا أبيض مع تعليقة بالأسماء"),
- ("06","مسكة عروس توليب بالكريستال مع تعليقة بالأسماء"),
+ ("04","مسكة عروس كالا وجوري أزرق"),
+ ("05","مسكة عروس كالا أبيض"),
+ ("06","مسكة عروس توليب بالكريستال"),
  ("07","مسكة عروس بيوني أبيض باللولو"),
  ("08","مسكة عروس توليب أبيض باللولو والجبسوفيل"),
  ("09","مسكة عروس توليب مع بوتونيير للعريس"),
@@ -1316,10 +1265,10 @@ SOWAR = [
  ("14","مسكة عروس كالا أبيض مع أغصان ناعمة"),
  ("15","مسكة عروس كالا وجوري أبيض"),
  ("16","مسكة عروس جوري أبيض بفيونكة دانتيل"),
- ("17","مسكة عروس توليب باللولو مع تعليقة بالأسماء"),
+ ("17","مسكة عروس توليب باللولو والكريستال"),
  ("18","مسكة عروس كالا وجوري زهري"),
  ("19","مسكة عروس توليب أبيض ناعمة باللولو"),
- ("20","مسكة عروس جربيرا وجوري بألوان ناعمة مع تعليقة"),
+ ("20","مسكة عروس جربيرا وجوري بألوان ناعمة"),
  ("21","مسكة عروس قوس التوليب باللولو"),
  ("22","مسكة عروس توليب أبيض بمقبض لولو"),
  ("23","مسكة عروس جوري أحمر بمقبض لولو"),
@@ -1330,7 +1279,7 @@ SOWAR = [
 def build_sowar():
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("صور مسكات عروس 2026", SOWAR_PATH)]
     head, bsch = page_intro(trail, "صور مسكات عروس 2026",
-        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل وتعليقة بالأسماء. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
+        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار بدل {P['masaka_old']} (عرض خاص)، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
     cards = "".join(f'<li id="m{n}"><figure>{img("sowar/maska-"+n+".webp", name+" — هدايا سلمى، الأردن", w=900, h=1200)}<figcaption class="label"><b>{E(name)}</b><span>{P["masaka"]} دينار</span></figcaption></figure></li>' for n, name in SOWAR)
     body = head + f"""
 <section class="section"><div class="container">
