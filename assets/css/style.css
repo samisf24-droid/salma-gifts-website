@@ -462,3 +462,5 @@ h1,h2,.label b,.brand-name,.footer-brand{font-weight:700}
 .gallery figure{margin:0}
 .gallery img{aspect-ratio:3/4;border-radius:22px}
 .gallery .label{position:static;margin-top:8px;box-shadow:none;background:transparent;padding:2px 4px}
+
+.rail img[src*="/sowar/"],.mphoto img[src*="/sowar/"]{object-position:center 35%}

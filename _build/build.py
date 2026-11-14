@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "16"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "17"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -67,7 +67,7 @@ STYLES = [
      "lead": "التوليب الأبيض أكثر ما تطلبه العرائس عندنا: ناعم وأنيق، ويليق بالخطوبة وعقد القران والزفاف.",
      "about": ["نجهّز مسكة التوليب بثلاث طرق: توليب مع لولو، أو توليب مع جبسوفيل (بيبي بريث)، أو توليب بحبّات الكريستال. وكلها بالسعر نفسه.",
                "الورد صناعي عالي الجودة فلا يذبل، وتبقى المسكة ذكرى في بيتكم بعد المناسبة. ويمكن إضافة تعليقة بأسمائكم وتاريخ المناسبة."],
-     "photos": [("masaka-arous-tulip.webp", "مسكة عروس توليب أبيض بقاعدة ستراس ولولو", "توليب بقاعدة ستراس"),
+     "photos": [("sowar/maska-03.webp", "مسكة عروس توليب أبيض بالكريستال ومقبض ستراس", "توليب بالكريستال"), ("masaka-arous-tulip.webp", "مسكة عروس توليب أبيض بقاعدة ستراس ولولو", "توليب بقاعدة ستراس"),
                 ("masaka-arous-trend.webp", "مسكة عروس توليب مع لولو", "توليب مع لولو"),
                 ("masaka-arous-4.webp", "مسكة عروس توليب مع تعليقة أكريليك بالأسماء", "توليب مع تعليقة بالأسماء")],
      "faq": [("كم سعر مسكة العروس التوليب؟", None), ("هل التوليب طبيعي؟", "لا، توليب صناعي عالي الجودة يشبه الطبيعي ولا يذبل، فيبقى بحالته بعد المناسبة.")]},
@@ -76,7 +76,7 @@ STYLES = [
      "lead": "توليب أبيض تحيطه حبّات كريستال ولولو، تلمع مع كل حركة. لمن تريد مسكة فخمة دون مبالغة.",
      "about": ["تُلفّ المسكة بتل شفاف ناعم، وتتوزّع حبّات الكريستال واللولو بين الورد بتنسيق متناسق. ويمكن اختيار كمية الكريستال وتوزيعه حسب رغبتكم.",
                "مثل باقي مسكاتنا، تُجهَّز كل واحدة على حدة وتصلكم خلال يومين، وتعاينونها قبل الدفع."],
-     "photos": [("masaka-arous-crystal.webp", "مسكة عروس توليب بالكريستال", "توليب بالكريستال"),
+     "photos": [("sowar/maska-02.webp", "مسكة عروس توليب أبيض بإطار كريستال", "توليب بإطار كريستال"), ("masaka-arous-crystal.webp", "مسكة عروس توليب بالكريستال", "توليب بالكريستال"),
                 ("masaka-arous-crystal-2.webp", "مسكة عروس توليب بحبات الكريستال على السيقان", "حبّات الكريستال على السيقان"),
                 ("masaka-arous-crystal-detail.webp", "تفاصيل مسكة عروس بالكريستال واللولو والتل", "كريستال ولولو وتل")],
      "faq": [("كم سعر مسكة العروس الكريستال؟", None), ("هل يمكن زيادة الكريستال؟", "نعم، أخبرونا عند الطلب بالكمية والتوزيع الذي تفضّلونه، ونجهّزها على هذا الأساس.")]},
@@ -85,7 +85,7 @@ STYLES = [
      "lead": "زهر الكالا الأبيض بخطوطه الطويلة يعطي المسكة أناقة ملكية، وحده أو مع الجوري الملوّن.",
      "about": ["نجهّز الكالا بقاعدة من اللولو أو الستراس، أو نمزجه مع الجوري الأزرق أو بلون يناسب فستانكم.",
                "والكالا صناعي عالي الجودة لا يذبل، فيمكن الاحتفاظ بالمسكة بعد المناسبة."],
-     "photos": [("masaka-arous-calla.webp", "مسكة عروس كالا بيضاء مع لولو", "كالا أبيض مع لولو"),
+     "photos": [("sowar/maska-05.webp", "مسكة عروس كالا أبيض مع تعليقة بالأسماء", "كالا مع تعليقة"), ("masaka-arous-calla.webp", "مسكة عروس كالا بيضاء مع لولو", "كالا أبيض مع لولو"),
                 ("masaka-arous-calla-blue.webp", "مسكة عروس كالا مع جوري أزرق وجبسوفيل", "كالا مع جوري أزرق"),
                 ("masaka-arous-3.webp", "مسكة عروس كالا طويلة بقاعدة ستراس", "كالا طويلة"),
                 ("masaka-arous-2.webp", "مسكات عروس كالا بقاعدة لولو", "كالا بقاعدة لولو")],
@@ -95,7 +95,7 @@ STYLES = [
      "lead": "الجوري مع الجبسوفيل: رقّة وأنوثة، بالأبيض أو بلون تختارونه.",
      "about": ["نجهّز مسكة الجوري بالأبيض الكلاسيكي مع الجبسوفيل، أو بالأزرق مع الكالا، أو بلون يناسب فستانكم.",
                "تُلفّ القاعدة بالستراس أو التل أو اللولو حسب رغبتكم، وتُجهَّز كل مسكة على حدة."],
-     "photos": [("masaka-arous-jouri.webp", "مسكات عروس جوري أبيض مع جبسوفيل", "جوري مع جبسوفيل"),
+     "photos": [("sowar/maska-01.webp", "مسكة عروس جوري أبيض مع جبسوفيل وفيونكة دانتيل", "جوري مع جبسوفيل"), ("masaka-arous-jouri.webp", "مسكات عروس جوري أبيض مع جبسوفيل", "جوري مع جبسوفيل"),
                 ("masaka-arous-calla-blue.webp", "مسكة عروس جوري أزرق مع كالا", "جوري أزرق مع كالا")],
      "faq": [("كم سعر مسكة العروس الجوري؟", None), ("هل يتوفر الجوري بألوان؟", "نعم، الأبيض هو الأكثر طلبًا، ونجهّز الأزرق والوردي وأي لون يناسب فستانكم.")]},
 ]
@@ -165,7 +165,7 @@ def model_path(m): return MODELS_PATH + m["slug"] + "/"
 def model_img(m): return "model-" + m["slug"] + ".webp"
 def model_cards(items):
     return "".join(f'''<li><a href="{model_path(m)}">{img(model_img(m), m["h1"] + " من هدايا سلمى", w=m["w"], h=m["h"])}<span class="label"><b><i class="no">{m["n"]}</i> {E(m["name"])}</b><span>{P['masaka']} دينار</span></span></a></li>''' for m in items)
-PEONY = ("masaka-arous-1.webp", "مسكة عروس بيوني أبيض مع جبسوفيل", "بيوني أبيض مع جبسوفيل")
+PEONY = ("sowar/maska-07.webp", "مسكة عروس بيوني أبيض باللولو", "بيوني أبيض باللولو")
 
 # =====================================================================
 # الأسئلة الشائعة — نفس صيغة سؤال الناس
@@ -534,20 +534,22 @@ def name_preview():
 # الرئيسية
 # =====================================================================
 def bouquet_hero():
+    names = dict(SOWAR)
+    pick = ["02", "04", "07", "05", "17", "21", "03", "20", "23", "08", "18", "25"]
     slides = "".join(f'''<li class="mslide">
-  <a class="mphoto" href="{model_path(m)}">{img(model_img(m), m["h1"] + " — صورة حقيقية من هدايا سلمى", lazy=(i > 1), w=m["w"], h=m["h"])}</a>
+  <a class="mphoto" href="{SOWAR_PATH}">{img("sowar/maska-" + n + ".webp", names[n] + " — هدايا سلمى، الأردن", lazy=(i > 1), w=900, h=1200)}</a>
   <div class="minfo">
-    <span class="mnum">موديل {m["n"]}</span>
-    <h3><a href="{model_path(m)}">{E(m["name"])}</a></h3>
-    <p>{E(m["lead"])}</p>
-    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(m["name"])}" data-n="{m["n"]}">{IG_ICON}<span>احجزي موديل {m["n"]}</span></a>
+    <span class="mnum">مسكات عروس 2026</span>
+    <h3><a href="{SOWAR_PATH}">{E(names[n].replace("مسكة عروس ", ""))}</a></h3>
+    <p>ورد صناعي عالي الجودة لا يذبل · <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s></p>
+    <a class="btn btn-primary" href="{IG_DM}" target="_blank" rel="noopener" data-event="cta_model" data-model="{E(names[n])}">{IG_ICON}<span>احجزي هاي المسكة</span></a>
   </div>
-</li>''' for i, m in enumerate(MODELS))
+</li>''' for i, n in enumerate(pick))
     return f"""
 <section class="hero bq-hero">
   <div class="container">
     <p class="trust-badge">أول موقع أردني مختص بمسكات العرايس</p>
-    <h1>مسكات عرايس <span>بـ{P['masaka']} دينار</span></h1>
+    <h1>مسكات عروس 2026 <span>بـ{P['masaka']} دينار</span></h1>
     <p class="hero-offer">عرض خاص: <b>{P['masaka']} دينار</b> بدل <s>{P['masaka_old']}</s> لكل الموديلات</p>
     <p class="slogan">{SLOGAN}</p>
     <ul class="hero-facts">
@@ -556,13 +558,13 @@ def bouquet_hero():
       <li><b>توصيل خلال يومين</b><span>لكل المحافظات</span></li>
       <li><b>معاينة قبل الدفع</b><span>والدفع عند الاستلام</span></li>
     </ul>
-    <p class="hero-sub">{len(MODELS)} موديل بصور حقيقية من شغلنا، ورد صناعي لا يذبل. اختاري الموديل وابعتيلنا رقمه برسالة.</p>
+    <p class="hero-sub">توليب، كالا، جوري، بيوني وكريستال، باللولو والدانتيل ومع تعليقة بأسمائكم. اختاري المسكة وابعتيلنا صورتها برسالة.</p>
     <div class="mcar" data-carousel>
-      <button class="mnav prev" type="button" aria-label="الموديل السابق">{ARROW}</button>
+      <button class="mnav prev" type="button" aria-label="المسكة السابقة">{ARROW}</button>
       <ul class="mtrack">{slides}</ul>
-      <button class="mnav next" type="button" aria-label="الموديل التالي">{ARROW}</button>
+      <button class="mnav next" type="button" aria-label="المسكة التالية">{ARROW}</button>
     </div>
-    <p class="hero-more"><a class="btn btn-quiet" href="{MODELS_PATH}">شوفي كل الموديلات</a></p>
+    <p class="hero-more"><a class="btn btn-quiet" href="{SOWAR_PATH}">شوفي كل صور المسكات</a> <a class="btn btn-quiet" href="{MODELS_PATH}">الموديلات بأرقامها</a></p>
   </div>
 </section>"""
 
@@ -612,7 +614,7 @@ def build_home():
 </div></section>
 
 <section class="section story"><div class="container story-inner">
-  {img("masaka-arous-crystal-detail.webp", "تفاصيل مسكة عروس بالكريستال واللولو من تجهيز هدايا سلمى")}
+  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو مع تعليقة بالأسماء من هدايا سلمى", w=900, h=1200)}
   <div>
     <h2>كل قطعة تُجهَّز على حدة</h2>
     <p>لا نعمل بالجملة. كل مسكة وكل صينية تُجهَّز في ورشتنا بأسمائكم وتاريخ مناسبتكم، ونراجعها قبل أن تخرج إليكم.</p>
@@ -634,7 +636,7 @@ def build_home():
 """
     title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار: مسكة عروس بصور حقيقية | هدايا سلمى"
     desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب باللولو، كالا وتوليب بالكريستال، جوري زهري، المسكة التركية وغيرها، مع تعليقة بأسمائكم. وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
-    write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)]))
+    write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)], og_img="sowar/maska-02.webp"))
 
 # =====================================================================
 # مسكات العروس (الصفحة الرئيسية للمسكات)
