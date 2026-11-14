@@ -678,3 +678,46 @@ body.menu-open { overflow: hidden; }
 .names.row .amp { align-self: center; transform: translateY(.15em); }
 .boxes span { color: #A87B34; }
 .names.row .amp { transform: translateY(.38em); }
+
+/* v21 — كتالوج بسيط مثل المواقع الفخمة: صورة كبيرة، اسم، سطرين وصف، سعر — بدون أرقام */
+.pgrid { gap: 26px 14px; }
+.pcard > b { font-size: 15.5px; margin-top: 10px; }
+.pc-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 12.5px; line-height: 1.6; color: var(--muted); margin: 2px 0 4px; }
+.pc-img { border-radius: 16px; }
+.pc-img img { object-position: center 40%; }
+@media (min-width: 760px) { .pgrid { gap: 34px 22px; } .pc-desc { font-size: 13.5px; } }
+.p-head .chips { margin-top: 12px; }
+
+/* صفحة المسكة */
+.pd { display: grid; gap: 18px; padding-top: 8px; padding-bottom: 26px; }
+.pd-img { margin: 0 -20px; }
+.pd-img img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.pd-info h1 { font-size: clamp(30px, 8vw, 44px); line-height: 1.3; margin-bottom: .1em; }
+.pd-info .lead { font-size: 16px; }
+.pd-info .actions { margin: 6px 0 18px; }
+.pd-h { font-size: 24px; margin: 6px 0 4px; }
+@media (min-width: 900px) {
+  .pd { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; padding-top: 18px; }
+  .pd-img { margin: 0; position: sticky; top: 90px; }
+  .pd-img img { border-radius: 24px; }
+}
+
+/* بطاقات الأنواع على صفحة المسكات: الاسم تحت الصورة بدل ما يغطيها */
+.rail .label, .rail-grid .label { position: static; inset: auto; background: transparent; box-shadow: none; padding: 8px 2px 0; flex-direction: column; align-items: flex-start; gap: 0; }
+.rail a { border-radius: 0; overflow: visible; }
+.rail img { border-radius: 16px; }
+
+/* تعليقة المسكة: صورة حقيقية مكبّرة على التعليقة، والأسماء فوقها */
+.tag-scene { overflow: hidden; border-radius: 28px; box-shadow: var(--shadow-soft); background: #EDE4DA; }
+.tag-scene img { position: absolute; width: 170%; height: auto; max-width: none; left: -42%; top: -89.8%; border-radius: 0; box-shadow: none; object-fit: initial; }
+.tag { inset-inline-start: auto; left: 50%; top: 60%; bottom: auto; width: 36%; transform: translate(-50%, -50%); background: radial-gradient(circle at 35% 30%, #FFFFFF, #F1EFEC 70%, #E4E1DC); border: 0; box-shadow: 0 0 0 2px rgba(255,255,255,.7), 0 10px 22px -10px rgba(40,30,20,.55); color: #8F8F8F; }
+.tag .names { font-size: clamp(18px, 5.6vw, 27px); line-height: 1.15; color: #8C8C8C; text-shadow: 0 1px 0 #fff; }
+.tag .names .amp { font-size: .55em; line-height: 1.2; color: #9C9C9C; }
+.tag .date { color: #8F8F8F; font-size: 10px; margin-top: .2em; text-shadow: none; }
+.stage[data-mode="tag"] .tray { opacity: 0; }
+.stage[data-mode="tray"] .tag-scene { opacity: 0; transform: scale(.96); }
+.stage[data-mode="tag"] .real-inset { opacity: 0; pointer-events: none; }
+.tag-scene img { width: 150%; left: -31.2%; top: -74.2%; }
+.tag { top: 58%; width: 31%; }
+.tag .names { font-size: clamp(16px, 4.8vw, 24px); }
+.tag .names .amp { margin: .15em 0 .05em; }

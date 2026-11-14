@@ -192,7 +192,8 @@
     e.preventDefault();
     var item = form.querySelector('input[name="item"]:checked');
     var g = (groomIn.value || '').trim(), b = (brideIn.value || '').trim();
-    var lines = ['مرحبًا، أودّ حجز: ' + item.getAttribute('data-label') + ' (' + item.getAttribute('data-price') + ' دينار)'];
+    var pr = item.getAttribute('data-price');
+    var lines = ['مرحبًا، أودّ حجز: ' + item.getAttribute('data-label') + (pr ? ' (' + pr + ' دينار)' : '')];
     if (g) lines.push('اسم العريس: ' + g);
     if (b) lines.push('اسم العروس: ' + b);
     if (dateIn.value.trim()) lines.push('التاريخ: ' + cleanDate(dateIn.value));

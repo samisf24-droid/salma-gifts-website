@@ -52,3 +52,5 @@ Every piece is prepared one by one with the couple's names and date; best qualit
 
 ## Accessibility & Inclusion
 Arabic RTL, mobile-first (most visitors arrive from Instagram on phones), fast on slow mobile connections.
+- Catalog rule (owner, 14/11/2026): one path only — «تسوّقي حسب النوع» (توليب، كالا، جوري، مسكات خطوبة) + «عرض جميع الموديلات» (/masakat-arayes/mawdeelat/). Cards = big studio photo, name, 2-line description, price. No model numbers anywhere. Each bouquet has its own page.
+- Name tag (تعليقة): can appear (preview tool, photos) but never state it is an add-on, its price, or «مع الأسماء» in bouquet names.
