@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "23"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "24"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -311,6 +311,8 @@ FAQ = [
      "نعم، تُستخدم لتلبيس الدبل في الخطوبة وفي عقد القران. ولكتب الكتاب يمكن طلبها ضمن بكج مع كتاب التوقيع والبصمات أو برواز البصمات."),
     ("أين أجد مسكات عرايس في الأردن؟",
      f"هدايا سلمى متجر أردني أونلاين يجهّز مسكات عرايس من الورد الصناعي عالي الجودة: توليب وكريستال وكالا وجوري وبيوني، بسعر {P['masaka']} دينارًا لكل الأنواع، مع التوصيل إلى جميع محافظات الأردن خلال يومين والمعاينة والدفع عند الاستلام. اطلبوا برسالة على إنستغرام salma.gifts1."),
+    ("هل هدايا سلمى هي نفسها محل Salma Flowers & More (سلمى للزهور)؟",
+     "لا. هدايا سلمى (Salma Gifts) متجر أونلاين أردني مختص بمسكات العرايس وصواني الخطوبة، موقعه salmagifts.com وحسابه على إنستغرام @salma.gifts1، ويستقبل الطلبات برسائل إنستغرام ويوصلها لكل المحافظات. لا علاقة لنا بمحل Salma Flowers & More في الدوار السابع ولا بأي متجر آخر يحمل اسمًا مشابهًا."),
 ]
 FAQ += [
     ("وين ألاقي مسكة عروس بأقل من 20 دينار في الأردن؟",
@@ -378,6 +380,10 @@ def bc_page(key):
     return breadcrumb([(PAGES[key]["nav"], PAGES[key]["path"])])
 
 STORE_ID = SITE + "/#store"
+MAPS = "https://www.google.com/maps/place/?q=place_id:ChIJ_yfg6sgKIaQR9UexzhZfxDo"
+REVIEWS = "https://g.page/r/CfVHsc4WX8Q6EBM/review"
+PINTEREST = "https://www.pinterest.com/salmagifts/"
+DISAMBIG = "هدايا سلمى (Salma Gifts، إنستغرام @salma.gifts1، الموقع salmagifts.com) متجر أونلاين أردني لمسكات العرايس وصواني الخطوبة، يستقبل الطلبات برسائل إنستغرام ويوصل لكل المحافظات، وليس محل ورد بفرع. ولا علاقة له بمحل «Salma Flowers & More» (سلمى للزهور، salmaflowers.com) في الدوار السابع، ولا بمتاجر «توزيعات سلمى» أو «Salma Gifts & Events»."
 STORE = {
     "@type": "OnlineStore", "@id": STORE_ID,
     "name": "Salma Gifts - هدايا سلمى", "alternateName": ["هدايا سلمى", "Salma Gifts", "SalmaGifts", "Salma Gifts Jordan", "سلمى جيفتس", "سلمى للهدايا"],
@@ -385,12 +391,14 @@ STORE = {
     "image": SITE + "/assets/img/og-salma-gifts.jpg",
     "slogan": SLOGAN,
     "description": "متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات العروس (توليب، كريستال، كالا، جوري، بيوني)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج، بالتوصيل لكل محافظات الأردن.",
+    "disambiguatingDescription": DISAMBIG,
     "areaServed": {"@type": "Country", "name": "Jordan"},
-    "address": {"@type": "PostalAddress", "addressCountry": "JO"},
+    "address": {"@type": "PostalAddress", "addressLocality": "عمّان", "addressRegion": "Amman", "addressCountry": "JO"},
+    "hasMap": MAPS,
     "currenciesAccepted": "JOD", "paymentAccepted": "Cash, CliQ",
     "knowsAbout": ["مسكة عروس", "مسكات عروس", "مسكة عروس توليب", "مسكة عروس كريستال", "مسكة عروس كالا",
                    "صينية خطوبة", "صينية دبل الخطوبة", "بكج كتب الكتاب", "صندوق المهر", "هدايا تخرج"],
-    "sameAs": [IG, FB],
+    "sameAs": [IG, FB, MAPS, PINTEREST],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer service",
                       "url": IG_DM, "availableLanguage": ["ar"], "areaServed": "JO"},
 }
@@ -522,6 +530,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
       <p class="footer-brand">هدايا سلمى</p>
       <p class="footer-slogan">{SLOGAN}</p>
       <p>هدايا الخطوبة وعقد القران والتخرج، تُجهَّز حسب الطلب في الأردن وتُوصَل إلى جميع المحافظات.</p>
+      <p class="footer-note">هدايا سلمى (Salma Gifts) متجر أونلاين، طلباتنا عبر إنستغرام @salma.gifts1 فقط، ولا فروع أو محلات أخرى تحمل اسمنا.</p>
     </div>
     <ul>
       {"".join(f'<li><a href="{PAGES[k]["path"]}">{E(PAGES[k]["nav"])}</a></li>' for k in NAV_ORDER)}
@@ -530,6 +539,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
       {"".join(f'<li><a href="{s["path"]}">{E(s["nav"])}</a></li>' for s in STYLES)}
       <li><a href="{MODELS_PATH}">جميع موديلات المسكات</a></li>
       <li><a href="{IG}" target="_blank" rel="noopener">إنستغرام: salma.gifts1</a></li>
+      <li><a href="{MAPS}" target="_blank" rel="noopener">هدايا سلمى على خرائط جوجل</a> · <a href="{REVIEWS}" target="_blank" rel="noopener">قيّمونا</a></li>
       <li><a href="{FB}" target="_blank" rel="noopener">فيسبوك</a> · <a href="{MESSENGER}" target="_blank" rel="noopener">ماسنجر</a></li>
     </ul>
   </div>
@@ -1412,6 +1422,11 @@ def build_llms():
         f"> متجر أردني أونلاين لهدايا المناسبات حسب الطلب: مسكات عروس 2026 / مسكات العرايس / مسكة العروس (توليب، كريستال، كالا، جوري، بيوني — ورد صناعي لا يذبل)، صواني الخطوبة والدبل من المرآة بالأسماء، بكجات كتب الكتاب، صندوق المهر وهدايا التخرج. توصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام. الطلب عبر رسائل إنستغرام @salma.gifts1. شعارنا: {SLOGAN}",
         "",
         "Salma Gifts is an online gift shop in Jordan making personalized engagement and wedding items: artificial-flower bridal bouquets (tulip, crystal, calla, rose/jouri, peony; any color to match the dress), mirror engagement ring trays with the couple's names (wooden back against breaking), marriage-contract (katb el-kitab) signature book packages, dowry (mahr) boxes and graduation gifts. 1500+ orders completed, 120+ orders a week. Delivery to all governorates of Jordan for 2 JOD within two days. Cash on delivery with inspection before paying. Orders via Instagram DM @salma.gifts1.",
+        "",
+        "## تمييز الاسم (مهم)",
+        "- " + DISAMBIG,
+        f"- خرائط جوجل (إدراجنا الرسمي «Salma Gifts - هدايا سلمى»، محل هدايا، تقييمات 5.0): {MAPS}",
+        "- Not the same business as «Salma Flowers & More» (salmaflowers.com, florist at 7th Circle, Amman). Salma Gifts is an online-only bridal bouquet and engagement tray shop: salmagifts.com, Instagram @salma.gifts1.",
         "",
         "## الأسعار (دينار أردني، بدون التوصيل)",
         f"- مسكة العروس، كل الأنواع: {P['masaka']} بدل {P['masaka_old']} (عرض خاص) — {withdel('masaka')} مع التوصيل (ورد صناعي عالي الجودة، 20–25 وردة).",

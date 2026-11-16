@@ -758,3 +758,4 @@ body.menu-open { overflow: hidden; }
 .btn-primary { background: linear-gradient(135deg, #C08A69 0%, #A06B4C 55%, #7A4E37 100%); }
 .article .pgrid { padding: 0; margin: 14px 0 22px; } .article .pgrid li { list-style: none; }
 .article .pgrid a.pcard, .article .pgrid a.pcard * { text-decoration: none; color: inherit; } .article .pgrid .pc-desc { color: var(--muted); } .article .pgrid .pc-price strong { color: var(--rose); } .article .pgrid li { line-height: 1.5; }
+.footer-note{font-size:12.5px;color:var(--muted)}
