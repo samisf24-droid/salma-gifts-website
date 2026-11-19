@@ -759,3 +759,24 @@ body.menu-open { overflow: hidden; }
 .article .pgrid { padding: 0; margin: 14px 0 22px; } .article .pgrid li { list-style: none; }
 .article .pgrid a.pcard, .article .pgrid a.pcard * { text-decoration: none; color: inherit; } .article .pgrid .pc-desc { color: var(--muted); } .article .pgrid .pc-price strong { color: var(--rose); } .article .pgrid li { line-height: 1.5; }
 .footer-note{font-size:12.5px;color:var(--muted)}
+
+/* ===== v25: هيرو أقصر عشان الموديلات تبين بأول شاشة + معرض صور حقيقية ===== */
+.hx { height: min(540px, calc(100svh - 250px)); min-height: 430px; }
+.hx-in { padding: 22px 20px 40px; }
+.hx-t { font-size: clamp(38px, 11vw, 66px); }
+.hx-s { font-size: 15px; margin-top: 6px; }
+.hx-price { margin-bottom: 12px; }
+.hx-price b { font-size: 44px; }
+@media (min-width: 900px) { .hx { height: 540px; } }
+.sec-first { padding-top: 28px; }
+.realgal { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 720px) { .realgal { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+@media (min-width: 1040px) { .realgal { grid-template-columns: repeat(4, 1fr); } }
+.realgal figure { margin: 0; }
+.realgal img { width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 18px; background: var(--surface); box-shadow: var(--shadow-soft); }
+.realgal figcaption { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft, var(--ink)); margin-top: 8px; padding: 0 4px; text-align: center; }
+.realgal.rail-x { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 6px; margin-inline: -16px; padding-inline: 16px; scrollbar-width: none; }
+.realgal.rail-x::-webkit-scrollbar { display: none; }
+.realgal.rail-x li { flex: 0 0 44%; scroll-snap-align: start; }
+@media (min-width: 720px) { .realgal.rail-x li { flex-basis: 23%; } }
+@media (max-width: 899px) { .hx { height: min(450px, calc(100svh - 300px)); min-height: 400px; } .hx-s { display: none; } .stats { margin-top: -26px; padding: 12px 6px; } .stats b { font-size: 24px; } .sec-first { padding-top: 20px; } }

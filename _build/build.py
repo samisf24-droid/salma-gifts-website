@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "24"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "25"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -505,7 +505,7 @@ def layout(key, path, title, desc, body, schemas, og_img="og-salma-gifts.jpg"):
       <span class="brand-text"><span class="brand-name">هدايا سلمى</span><span class="brand-en">SALMA GIFTS</span></span>
     </a>
     <nav class="main-nav" aria-label="القائمة الرئيسية">{nav}</nav>
-    <a class="ig-btn" href="{IG}" target="_blank" rel="noopener" aria-label="إنستغرام هدايا سلمى">{IG_ICON}</a>
+    <a class="ig-btn" href="{IG}" target="_blank" rel="noopener" data-event="header_ig" aria-label="إنستغرام هدايا سلمى">{IG_ICON}</a>
   </div>
 </header>
 <div class="drawer-veil" hidden></div>
@@ -700,7 +700,7 @@ def build_home():
     <div class="hx-bot">
       <p class="hx-price"><span class="hx-sale">خصم {SALE_PCT}%</span><b>{P['masaka']}</b><em>دينار</em><s>{P['masaka_old']}</s></p>
       <div class="hx-btns">
-        <a class="btn btn-light" href="#mawdeelat" data-event="cta_hero_models">اختاري مسكتك</a>
+        <a class="btn btn-light" href="#mawdeelat" data-nav="hero_models">اختاري مسكتك</a>
         {cta("احجزي بالإنستغرام", "btn btn-glass", "cta_hero")}
       </div>
     </div>
@@ -729,18 +729,24 @@ def build_home():
     trust_html = "".join(f'<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">{ic}</svg><b>{t}</b><span>{d}</span></li>' for t, d, ic in trust)
     faqs = [FAQ[17], FAQ[18], FAQ[1], FAQ[19], FAQ[2], FAQ[14], FAQ[9]]
     body = hero + f"""
+<section class="section sec-first" id="mawdeelat"><div class="container">
+  <p class="kicker">مجموعة 2026</p>
+  <div class="section-head"><h2>الأكثر طلبًا</h2><a href="{MODELS_PATH}">جميع الموديلات {ARROW}</a></div>
+  <p class="section-intro">ورد صناعي فاخر لا يذبل، ونجهّز أي موديل بلون يناسب فستانك.</p>
+  <ul class="pgrid">{best_html}</ul>
+  <p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>
+</div></section>
+
 <section class="section" id="anwaa"><div class="container">
   <p class="kicker">ابدئي من هنا</p>
   <div class="section-head"><h2>تسوّقي حسب النوع</h2><a href="{PAGES['masakat']['path']}">كل المسكات {ARROW}</a></div>
   <ul class="types">{type_html}</ul>
 </div></section>
 
-<section class="section" id="mawdeelat"><div class="container">
-  <p class="kicker">مجموعة 2026</p>
-  <div class="section-head"><h2>الأكثر طلبًا</h2><a href="{MODELS_PATH}">جميع الموديلات {ARROW}</a></div>
-  <p class="section-intro">ورد صناعي فاخر لا يذبل، ونجهّز أي موديل بلون يناسب فستانك.</p>
-  <ul class="pgrid">{best_html}</ul>
-  <p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>
+<section class="section sec-blush" id="haqiqiya"><div class="container">
+  <p class="kicker">بدون فلاتر</p>
+  <div class="section-head"><h2>صور حقيقية باليد</h2><a href="{SOWAR_PATH}#haqiqiya">كل الصور {ARROW}</a></div>
+  <ul class="realgal rail-x">{haqiqi_grid(HAQIQI[:6])}</ul>
 </div></section>
 
 """ + name_preview() + f"""
@@ -1405,7 +1411,7 @@ def all_paths():
 
 def build_sitemap():
     imgs = {model_path(m): [m["img"]] for m in MODELS}
-    imgs[SOWAR_PATH] = [c["img"] for c in CATALOG]
+    imgs[SOWAR_PATH] = [haqiqi_img(sl) for sl, _ in HAQIQI] + [c["img"] for c in CATALOG]
     imgs[MODELS_PATH] = [c["img"] for c in CATALOG]
     for st in STYLES: imgs[st["path"]] = [ph[0] for ph in st["photos"]]
     def entry(p):
@@ -1500,12 +1506,39 @@ SOWAR = [
  ("25","مسكة عروس بيوني أبيض بمقبض دانتيل"),
 ]
 
+HAQIQI = [
+ ("tulip-lulu-crystal", "مسكة عروس توليب أبيض باللولو والكريستال"),
+ ("kala-abyad-dantel", "مسكة عروس كالا أبيض بمقبض دانتيل"),
+ ("peony-abyad-fyonka", "مسكة عروس بيوني أبيض بفيونكة دانتيل"),
+ ("jouri-alwan-naema", "مسكة عروس جوري بألوان ناعمة مع لولو"),
+ ("tulip-lulu-strass", "مسكة عروس توليب باللولو ومقبض ستراس"),
+ ("tulip-tul-fyonka", "مسكة عروس توليب أبيض بإطار تول وفيونكة"),
+ ("tulip-tul-lulu", "مسكة عروس توليب أبيض بإطار تول ولولو"),
+ ("kala-tulip-crystal", "مسكة عروس كالا وتوليب بالكريستال"),
+ ("tulip-jebsofil-lulu", "مسكة عروس توليب مع جبسوفيل ومقبض لولو"),
+ ("tulip-lulu-dantel", "مسكة عروس توليب باللولو وفيونكة دانتيل"),
+ ("peony-jebsofil", "مسكة عروس بيوني أبيض مع جبسوفيل"),
+ ("kala-jouri-alwan", "مسكة عروس كالا وجوري بألوان ناعمة"),
+ ("tulip-jebsofil-tul", "مسكة عروس توليب مع جبسوفيل بإطار تول"),
+]
+def haqiqi_img(slug): return "haqiqi/maskat-arous-" + slug + ".webp"
+
+def haqiqi_grid(items=HAQIQI, eager=0):
+    return "".join(f'<li><figure class="photo">{img(haqiqi_img(sl), al + " — صورة حقيقية من هدايا سلمى", lazy=i >= eager, w=900, h=1600)}<figcaption>{E(al.replace("مسكة عروس ", ""))}</figcaption></figure></li>' for i, (sl, al) in enumerate(items))
+
 def build_sowar():
     trail = [(PAGES["masakat"]["nav"], PAGES["masakat"]["path"]), ("صور مسكات عروس 2026", SOWAR_PATH)]
     head, bsch = page_intro(trail, "صور مسكات عروس 2026",
-        f"{len(SOWAR)} صورة لمسكات عروس من تصاميمنا: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار حاليًا، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
-    cards = model_cards(CATALOG, eager=2)
+        f"{len(SOWAR) + len(HAQIQI)} صورة لمسكات عروس من شغلنا، منها {len(HAQIQI)} صورة حقيقية باليد: توليب أبيض، كالا، جوري، بيوني وكريستال، بلولو ودانتيل. كلها ورد صناعي عالي الجودة لا يذبل، بسعر {P['masaka']} دينار حاليًا، و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.", "masaka")
+    cards = model_cards(CATALOG, eager=0)
     body = head + f"""
+<section class="section" id="haqiqiya"><div class="container">
+  <p class="kicker">صور حقيقية بدون فلاتر</p>
+  <h2>صور مسكات عرايس حقيقية باليد</h2>
+  <p class="section-intro">هيك بتطلع المسكة لما تستلميها: صوّرناها بالورشة بضوء النهار وبالحجم الحقيقي. اكبسي على أي صورة لتكبّريها.</p>
+  <ul class="realgal">{haqiqi_grid(eager=2)}</ul>
+</div></section>
+
 <section class="section"><div class="container">
   <h2>اختاري المسكة اللي بتشبهك</h2>
   <p class="section-intro">اضغطي على المسكة لتشوفي صورتها كبيرة وتفاصيلها، ونجهّزها بلون يناسب فستانك.</p>
@@ -1519,10 +1552,11 @@ def build_sowar():
   {related("masakat")}
 </div></section>"""
     gallery = {"@type": "ImageGallery", "name": "صور مسكات عروس 2026 — هدايا سلمى", "url": SITE + SOWAR_PATH,
-               "image": [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/sowar/maska-" + n + ".webp", "name": name} for n, name in SOWAR]}
+               "image": [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/" + haqiqi_img(sl), "name": al + " — صورة حقيقية", "creditText": "هدايا سلمى", "copyrightNotice": "هدايا سلمى Salma Gifts"} for sl, al in HAQIQI]
+                     + [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/sowar/maska-" + n + ".webp", "name": name} for n, name in SOWAR]}
     write(SOWAR_PATH, layout("style-sowar", SOWAR_PATH,
-        f"صور مسكات عروس 2026: {len(SOWAR)} صورة مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
-        f"صور مسكات عروس 2026 من هدايا سلمى: توليب أبيض، كالا، جوري، بيوني وكريستال باللولو والدانتيل. ورد صناعي لا يذبل بـ{P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل الأردن.",
+        f"صور مسكات عروس 2026 حقيقية: {len(SOWAR) + len(HAQIQI)} صورة مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
+        f"صور مسكات عروس 2026 حقيقية باليد ومن الاستوديو من هدايا سلمى: توليب أبيض، كالا، جوري، بيوني وكريستال باللولو والدانتيل. ورد صناعي لا يذبل بـ{P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل الأردن.",
         body, [bsch, gallery, faq_schema([FAQ[1], FAQ[13], FAQ[14], FAQ[7]])], og_img="sowar/maska-02.webp"))
 
 if __name__ == "__main__":

@@ -43,11 +43,21 @@
   }
 
   // قياس الضغط على أزرار الحجز (Google Analytics) — كل زر إله اسم بـ data-event
+  // أي ضغطة على رابط إنستغرام (حجز) تنحسب: حدث موحّد book_click + وسم للجلسة عشان نفلترها بـ Clarity
+  function markBooking(name) {
+    if (typeof window.clarity !== 'function') return;
+    window.clarity('event', 'book_click');
+    window.clarity('event', 'book_click_' + name);
+    window.clarity('set', 'booked', 'yes');
+    window.clarity('set', 'book_page', location.pathname);
+    window.clarity('upgrade', 'book_click');
+  }
+  window.salmaMarkBooking = markBooking;
   document.addEventListener('click', function (e) {
-    var el = e.target.closest && e.target.closest('[data-event]');
-    if (el && typeof window.clarity === 'function') {
-      window.clarity('event', 'book_click_' + el.getAttribute('data-event'));
-    }
+    if (!e.target.closest) return;
+    var el = e.target.closest('[data-event]');
+    var ig = e.target.closest('a[href*="ig.me"], a[href*="instagram.com"]');
+    if (el || ig) markBooking(el ? el.getAttribute('data-event') : 'ig_link');
     if (el && typeof window.gtag === 'function') {
       window.gtag('event', 'book_click', { button: el.getAttribute('data-event'), page: location.pathname });
     }
@@ -64,7 +74,7 @@
   }
 
   // تكبير صور المنتجات (الناس كانت تكبس عالصور وما يصير إشي — Clarity: dead clicks)
-  var zoomImgs = document.querySelectorAll('.mosaic img, figure.photo img');
+  var zoomImgs = document.querySelectorAll('.mosaic img, figure.photo img, .realgal img');
   if (zoomImgs.length) {
     var box = document.createElement('div');
     box.className = 'zoom';
