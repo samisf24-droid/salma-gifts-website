@@ -18,7 +18,7 @@ FB = "https://www.facebook.com/101132472391425"
 MESSENGER = "https://m.me/101132472391425"
 DELIVERY = 2
 TODAY = datetime.date.today().isoformat()
-VERSION = "25"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
+VERSION = "26"  # غيّره لما تعدّل style.css أو main.js عشان المتصفحات تجيب النسخة الجديدة
 SLOGAN = "لتبقى ذكرياتكم الجميلة، خالدة."
 GA_ID = ""  # Google Analytics 4 (G-XXXX). فاضي = بدون تتبّع
 CLARITY_ID = "z16hn3m2mn"  # Microsoft Clarity: الزوار، الكبسات، تسجيلات الجلسات
@@ -693,7 +693,7 @@ def build_home():
     names = dict(SOWAR)
     hero = f"""
 <section class="hx">
-  {img("sowar/maska-17.webp", "مسكة عروس توليب باللولو والكريستال — هدايا سلمى، الأردن", lazy=False, w=900, h=1200)}
+  <a class="hx-pic" href="{model_path(CAT_BY_N['17'])}" aria-label="مسكة عروس توليب باللولو والكريستال">{img("sowar/maska-17.webp", "مسكة عروس توليب باللولو والكريستال — هدايا سلمى، الأردن", lazy=False, w=900, h=1200)}</a>
   <div class="hx-in">
     <p class="hx-pill">{STAR}<span>أول موقع أردني مختص بمسكات العرايس</span>{STAR}</p>
     <h1><span class="hx-t">مسكات عروس 2026</span><span class="hx-s">مسكتك جاهزة باسمك وتاريخك، ورد صناعي فاخر لا يذبل</span></h1>
@@ -773,8 +773,8 @@ def build_home():
   {faq_html(faqs)}
 </div></section>
 """
-    title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار: مسكة عروس بصور حقيقية | هدايا سلمى"
-    desc = f"مسكات عروس 2026 (مسكات عرايس) ورد صناعي لا يذبل بـ{P['masaka']} دينار: توليب، كالا، جوري ومسكات خطوبة. أكثر من 1500 طلب، وصواني خطوبة بالأسماء {P['saniya']} دينار. معاينة ودفع عند الاستلام وتوصيل لكل محافظات الأردن."
+    title = f"مسكات عروس 2026 في الأردن بـ{P['masaka']} دينار | معاينة قبل الدفع – هدايا سلمى"
+    desc = f"شوفي {len(CATALOG)} موديل من مسكات عروس 2026 بصور حقيقية باليد: توليب، كريستال، كالا وجوري، من 25 إلى 30 وردة لا تذبل. {P['masaka']} دينار، توصيل لكل الأردن خلال يومين، وما بتدفعي إلا بعد ما تشوفيها."
     write("/", layout("home", "/", title, desc, body, [faq_schema(faqs)], og_img="sowar/maska-02.webp"))
 
 # =====================================================================
@@ -835,8 +835,8 @@ def build_masakat():
            product_schema("مسكة العروس", "مسكة عروس من الورد الصناعي عالي الجودة، 25 إلى 30 وردة: توليب، كريستال، كالا، جوري، بيوني، وألوان حسب الطلب.",
                           ["masaka-arous-crystal.webp", "masaka-arous-calla.webp", "masaka-arous-tulip.webp", "masaka-arous-1.webp"], P["masaka"], sku="masaka")]
     write(PAGES["masakat"]["path"], layout("masakat", PAGES["masakat"]["path"],
-        f"مسكات عروس 2026 في الأردن: مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
-        f"مسكات عروس 2026 ومسكات عرايس في الأردن: مسكة عروس توليب أبيض وكريستال وكالا وجوري وبيوني، ورد صناعي لا يذبل، {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن. معاينة ودفع عند الاستلام.",
+        f"مسكة عروس في الأردن بـ{P['masaka']} دينار: مسكات عرايس توليب وكالا وجوري | هدايا سلمى",
+        f"مسكة عروس ومسكات عرايس من ورد صناعي فاخر لا يذبل: توليب أبيض، كريستال، كالا، جوري وبيوني. {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام.",
         body, sch, og_img="masaka-arous-crystal.webp"))
 
 def build_style(s):
@@ -869,8 +869,8 @@ def build_style(s):
     sch = [bsch, faq_schema(faqs),
            product_schema(s["h1"], s["lead"], [p[0] for p in s["photos"]], P["masaka"], sku="masaka-" + s["key"])]
     write(s["path"], layout("style-" + s["key"], s["path"],
-        f"{s['h1']} بـ{P['masaka']} دينار | هدايا سلمى، الأردن",
-        f"{s['h1']}: {s['lead']} {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن.",
+        f"{s['h1']} في الأردن بـ{P['masaka']} دينار | صور حقيقية – هدايا سلمى",
+        f"{s['h1']}: {s['lead']} {P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل محافظات الأردن، ومعاينة ودفع عند الاستلام.",
         body, sch, og_img=s["photos"][0][0]))
 
 # =====================================================================
@@ -1116,8 +1116,8 @@ def build_models_index():
         {"@type": "ListItem", "position": i + 1, "url": SITE + model_path(m), "name": m["h1"]} for i, m in enumerate(CATALOG)]}
     sch = [bsch, itemlist, faq_schema([FAQ[13], FAQ[1], FAQ[14], FAQ[7]])]
     write(MODELS_PATH, layout("style-models", MODELS_PATH,
-        f"موديلات مسكات عروس 2026: {len(CATALOG)} موديل بصور حقيقية بـ{P['masaka']} دينار | هدايا سلمى",
-        f"جميع موديلات مسكات العروس 2026 بصور حقيقية: توليب، كالا، جوري، بيوني وكريستال باللولو والدانتيل. كل الموديلات {P['masaka']} دينار مع توصيل لكل الأردن.",
+        f"صور موديلات مسكات عروس: {len(CATALOG)} موديل حقيقي بـ{P['masaka']} دينار | هدايا سلمى",
+        f"قارني {len(CATALOG)} موديل مسكة عروس بالصور قبل ما تحجزي: توليب، كالا، جوري، بيوني وكريستال باللولو والدانتيل. كل الموديلات بنفس السعر {P['masaka']} دينار، وبأي لون يناسب فستانك.",
         body, sch, og_img=CATALOG[1]["img"]))
 
 def build_model(m):
@@ -1271,6 +1271,7 @@ def _art_best2026():
 {blocks}
 <h2>كيف تختارين بين هذه الأفكار؟</h2>
 <p>ابدئي من الفستان: المنفوش تناسبه المسكة الدائرية الممتلئة، والضيق تناسبه المنسدلة أو الكالا الطويلة، والمطرّز يناسبه الكريستال. وللتفاصيل اقرئي <a href="{MAQALAT_PATH}ikhtiyar-maskat-al-arous/">كيف تختارين مسكة العروس حسب فستانك</a>.</p>
+<p>شوفي كل <a href="/">مسكات عروس 2026</a> بصفحتنا الرئيسية، أو تصفّحي <a href="{SOWAR_PATH}#haqiqiya">صور مسكات عرايس حقيقية باليد</a>.</p>
 <p class="center"><a class="btn btn-primary" href="{MODELS_PATH}">عرض جميع الموديلات</a></p>"""
 
 def _art_khotoba():
@@ -1555,7 +1556,7 @@ def build_sowar():
                "image": [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/" + haqiqi_img(sl), "name": al + " — صورة حقيقية", "creditText": "هدايا سلمى", "copyrightNotice": "هدايا سلمى Salma Gifts"} for sl, al in HAQIQI]
                      + [{"@type": "ImageObject", "contentUrl": SITE + "/assets/img/sowar/maska-" + n + ".webp", "name": name} for n, name in SOWAR]}
     write(SOWAR_PATH, layout("style-sowar", SOWAR_PATH,
-        f"صور مسكات عروس 2026 حقيقية: {len(SOWAR) + len(HAQIQI)} صورة مسكة عروس بـ{P['masaka']} دينار | هدايا سلمى",
+        f"صور مسكات عرايس حقيقية باليد: {len(SOWAR) + len(HAQIQI)} صورة بدون فلاتر | هدايا سلمى",
         f"صور مسكات عروس 2026 حقيقية باليد ومن الاستوديو من هدايا سلمى: توليب أبيض، كالا، جوري، بيوني وكريستال باللولو والدانتيل. ورد صناعي لا يذبل بـ{P['masaka']} دينار و{withdel('masaka')} مع التوصيل لكل الأردن.",
         body, [bsch, gallery, faq_schema([FAQ[1], FAQ[13], FAQ[14], FAQ[7]])], og_img="sowar/maska-02.webp"))
 

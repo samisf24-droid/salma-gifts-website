@@ -780,3 +780,10 @@ body.menu-open { overflow: hidden; }
 .realgal.rail-x li { flex: 0 0 44%; scroll-snap-align: start; }
 @media (min-width: 720px) { .realgal.rail-x li { flex-basis: 23%; } }
 @media (max-width: 899px) { .hx { height: min(450px, calc(100svh - 300px)); min-height: 400px; } .hx-s { display: none; } .stats { margin-top: -26px; padding: 12px 6px; } .stats b { font-size: 24px; } .sec-first { padding-top: 20px; } }
+/* v26: صورة الهيرو صارت رابط للمسكة (كانت كبسة ميتة) */
+.hx > .hx-pic { position: absolute; inset: 0; z-index: 1; display: block; }
+.hx > .hx-pic img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+@media (min-width: 900px) { .hx > .hx-pic img { object-position: center 45%; } }
+.hx::after { pointer-events: none; z-index: 1; }
+.hx-in { pointer-events: none; }
+.hx-in a, .hx-in button, .hx-in .hx-pill { pointer-events: auto; }
